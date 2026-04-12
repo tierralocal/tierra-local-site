@@ -21,121 +21,92 @@
       background: var(--green-dark);
       min-height: 100vh;
       display: flex; flex-direction: column;
+      font-size: 16px;
     }
 
-    /* ── HEADER ── */
+    /* HEADER */
     header {
       background: #ffffff;
       padding: 18px 40px;
       display: flex; justify-content: space-between; align-items: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
       border-bottom: 2px solid var(--green-pale);
     }
     .header-left { display: flex; align-items: center; gap: 18px; }
-    .header-left img { height: 58px; }
+    .header-left img { height: 62px; }
     .header-title {
       border-left: 2px solid var(--green-pale);
       padding-left: 18px;
     }
     .header-title h1 {
       font-family: 'League Spartan', sans-serif;
-      font-size: 17px; font-weight: 700; color: var(--green-dark); line-height: 1.2;
+      font-size: 19px; font-weight: 700; color: var(--green-dark); line-height: 1.2;
     }
     .header-title p {
-      font-size: 12px; font-weight: 300; color: var(--green-mid);
-      margin-top: 3px;
+      font-size: 13px; font-weight: 400; color: var(--green-mid); margin-top: 3px;
     }
     .header-link {
       font-family: 'League Spartan', sans-serif;
-      font-size: 12px; font-weight: 600; letter-spacing: 0.08em;
+      font-size: 13px; font-weight: 600; letter-spacing: 0.08em;
       text-transform: uppercase; color: var(--green-dark);
-      text-decoration: none; padding: 8px 18px;
+      text-decoration: none; padding: 9px 20px;
       border: 1.5px solid rgba(26,51,40,0.3); border-radius: 100px;
       transition: all 0.2s;
     }
     .header-link:hover { background: var(--green-dark); color: #fff; border-color: var(--green-dark); }
 
-    /* ── MAIN LAYOUT ── */
+    /* MAIN */
     main {
-      flex: 1; display: grid; grid-template-columns: 270px 1fr;
-      gap: 20px; max-width: 1180px; width: 100%;
+      flex: 1; display: grid; grid-template-columns: 300px 1fr;
+      gap: 20px; max-width: 1240px; width: 100%;
       margin: 0 auto; padding: 24px 20px;
     }
 
-    /* ── SIDEBAR ── */
-    .sidebar { display: flex; flex-direction: column; gap: 14px; }
-
-    .sidebar-card {
-      background: var(--white);
-      border-radius: 10px;
-      overflow: hidden;
-    }
+    /* SIDEBAR */
+    .sidebar { display: flex; flex-direction: column; gap: 16px; }
+    .sidebar-card { background: #fff; border-radius: 10px; overflow: hidden; }
     .sidebar-card-header {
       background: var(--green-dark);
-      padding: 11px 16px;
+      padding: 12px 18px;
       font-family: 'League Spartan', sans-serif;
-      font-size: 11px; font-weight: 600;
+      font-size: 12px; font-weight: 600;
       letter-spacing: 0.12em; text-transform: uppercase;
       color: var(--green-light);
     }
-    .sidebar-card-body { padding: 14px 16px; background: var(--white); }
+    .sidebar-card-body { padding: 16px 18px; background: #fff; }
 
-    .meeting-item {
-      padding: 9px 0;
-      border-bottom: 1px solid var(--green-pale);
-    }
+    .meeting-item { padding: 10px 0; border-bottom: 1px solid var(--green-pale); }
     .meeting-item:last-child { border-bottom: none; padding-bottom: 0; }
     .meeting-date {
       font-family: 'League Spartan', sans-serif;
-      font-size: 13px; font-weight: 700; color: var(--green-mid);
+      font-size: 14px; font-weight: 700; color: var(--green-mid);
     }
     .meeting-desc {
-      font-size: 12px; font-weight: 400; color: var(--green-dark);
-      margin-top: 2px; line-height: 1.5;
+      font-size: 13px; font-weight: 400; color: var(--green-dark);
+      margin-top: 3px; line-height: 1.5;
     }
-    .meeting-link {
-      display: inline-block; margin-top: 4px;
-      font-size: 11px; font-weight: 600;
-      color: var(--green-mid); text-decoration: none;
-    }
-    .meeting-link:hover { text-decoration: underline; }
 
-    .resource-list { list-style: none; }
-    .resource-list li {
-      padding: 6px 0;
-      border-bottom: 1px solid var(--green-pale); font-size: 12px;
-    }
-    .resource-list li:last-child { border-bottom: none; }
-    .resource-list a {
-      color: var(--green-mid); text-decoration: none;
-      font-weight: 500; line-height: 1.4; display: block;
-    }
-    .resource-list a:hover { text-decoration: underline; }
-    .resource-date { font-size: 10px; color: #9ab5a8; margin-top: 1px; }
-    .resources-loading {
-      font-size: 12px; color: #9ab5a8; font-style: italic;
-    }
     .about-text {
-      font-size: 12px; font-weight: 400; line-height: 1.75; color: var(--green-dark);
+      font-size: 13px; font-weight: 400; line-height: 1.75; color: var(--green-dark);
     }
     .about-text a { color: var(--green-mid); text-decoration: none; }
     .about-text a:hover { text-decoration: underline; }
 
-    /* ── CHAT PANEL ── */
+    /* CHAT PANEL */
     .chat-panel {
       display: flex; flex-direction: column;
-      background: var(--white); border-radius: 10px;
-      overflow: hidden; min-height: 600px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+      background: #fff; border-radius: 10px;
+      overflow: hidden; min-height: 640px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.20);
     }
     .chat-header {
-      padding: 16px 22px;
+      padding: 18px 24px;
       border-bottom: 2px solid var(--green-pale);
-      display: flex; align-items: center; gap: 12px;
+      display: flex; align-items: center; gap: 14px;
       background: var(--green-dark);
     }
     .chat-header-icon {
-      width: 36px; height: 36px;
+      width: 40px; height: 40px;
       background: rgba(255,255,255,0.15);
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
@@ -144,61 +115,57 @@
     .chat-header-icon svg { color: #fff; }
     .chat-header-text h2 {
       font-family: 'League Spartan', sans-serif;
-      font-size: 16px; font-weight: 700; color: #fff;
+      font-size: 18px; font-weight: 700; color: #fff;
     }
     .chat-header-text p {
-      font-size: 12px; font-weight: 300;
-      color: rgba(255,255,255,0.60); margin-top: 2px;
+      font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.65); margin-top: 2px;
     }
 
-    /* ── SAMPLE PROMPTS ── */
+    /* SAMPLE PROMPTS */
     .sample-prompts {
-      padding: 14px 20px;
+      padding: 16px 22px;
       border-bottom: 1px solid var(--green-pale);
       background: var(--off-white);
     }
     .sample-prompts-label {
-      font-size: 11px; font-weight: 600;
+      font-size: 12px; font-weight: 600;
       letter-spacing: 0.1em; text-transform: uppercase;
       color: var(--green-mid); margin-bottom: 10px;
     }
     .prompts-grid { display: flex; flex-wrap: wrap; gap: 8px; }
     .prompt-chip {
-      background: var(--white);
+      background: #fff;
       color: var(--green-dark);
       border: 1.5px solid var(--green-pale);
       border-radius: 100px;
-      padding: 8px 16px;
+      padding: 9px 18px;
       font-family: 'Montserrat', sans-serif;
-      font-size: 12px; font-weight: 500;
+      font-size: 13px; font-weight: 500;
       cursor: pointer; transition: all 0.2s; line-height: 1.4;
     }
-    .prompt-chip:hover {
-      background: var(--green-dark); color: #fff;
-      border-color: var(--green-dark);
-    }
+    .prompt-chip:hover { background: var(--green-dark); color: #fff; border-color: var(--green-dark); }
 
-    /* ── MESSAGES ── */
+    /* MESSAGES */
     .chat-messages {
-      flex: 1; overflow-y: auto; padding: 20px;
-      display: flex; flex-direction: column; gap: 14px;
-      background: var(--white);
+      flex: 1; overflow-y: auto; padding: 22px;
+      display: flex; flex-direction: column; gap: 16px;
+      background: #fff;
     }
-    .message { display: flex; gap: 10px; align-items: flex-start; }
+    .message { display: flex; gap: 12px; align-items: flex-start; }
     .message.user { flex-direction: row-reverse; }
     .message-avatar {
-      width: 34px; height: 34px; border-radius: 50%;
+      width: 36px; height: 36px; border-radius: 50%;
       flex-shrink: 0; display: flex; align-items: center;
-      justify-content: center; font-size: 11px; font-weight: 700;
+      justify-content: center; font-size: 12px; font-weight: 700;
     }
     .message.user .message-avatar { background: var(--green-dark); color: #fff; }
     .message.assistant .message-avatar {
-      background: var(--white); color: var(--green-dark);
+      background: #fff; color: var(--green-dark);
       border: 2px solid var(--green-pale);
     }
     .message-bubble {
-      max-width: 82%; padding: 12px 16px; border-radius: 14px;
-      font-size: 14px; font-weight: 400; line-height: 1.75;
+      max-width: 80%; padding: 14px 18px; border-radius: 14px;
+      font-size: 15px; font-weight: 400; line-height: 1.75;
     }
     .message.user .message-bubble {
       background: var(--green-dark); color: #fff;
@@ -209,45 +176,44 @@
       border: 1px solid var(--green-pale);
       border-bottom-left-radius: 4px;
     }
-    .message-bubble p { margin-bottom: 8px; }
+    .message-bubble p { margin-bottom: 10px; }
     .message-bubble p:last-child { margin-bottom: 0; }
-    .message-bubble ul { padding-left: 18px; margin: 6px 0; }
-    .message-bubble li { margin-bottom: 4px; }
+    .message-bubble ul { padding-left: 20px; margin: 8px 0; }
+    .message-bubble li { margin-bottom: 6px; }
     .message-bubble strong { font-weight: 600; }
 
-    /* ── TYPING ── */
-    .typing-indicator { display: flex; gap: 4px; align-items: center; }
+    /* TYPING */
+    .typing-indicator { display: flex; gap: 5px; align-items: center; padding: 4px 0; }
     .typing-dot {
-      width: 7px; height: 7px; background: var(--green-mid);
+      width: 8px; height: 8px; background: var(--green-mid);
       border-radius: 50%; animation: typingBounce 1.2s infinite;
     }
     .typing-dot:nth-child(2) { animation-delay: 0.2s; }
     .typing-dot:nth-child(3) { animation-delay: 0.4s; }
     @keyframes typingBounce {
       0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
-      30% { transform: translateY(-6px); opacity: 1; }
+      30% { transform: translateY(-7px); opacity: 1; }
     }
 
-    /* ── INPUT ── */
+    /* INPUT */
     .chat-input-area {
-      padding: 14px 20px; border-top: 1px solid var(--green-pale);
-      display: flex; gap: 10px; align-items: flex-end;
-      background: var(--white);
+      padding: 16px 22px; border-top: 1px solid var(--green-pale);
+      display: flex; gap: 10px; align-items: flex-end; background: #fff;
     }
     .chat-input {
       flex: 1; resize: none;
       border: 1.5px solid var(--green-pale); border-radius: 10px;
-      padding: 11px 15px;
+      padding: 12px 16px;
       font-family: 'Montserrat', sans-serif;
-      font-size: 14px; font-weight: 400; color: var(--green-dark);
+      font-size: 15px; font-weight: 400; color: var(--green-dark);
       background: var(--off-white); outline: none;
       transition: border-color 0.2s;
-      min-height: 46px; max-height: 120px; line-height: 1.5;
+      min-height: 50px; max-height: 130px; line-height: 1.5;
     }
-    .chat-input:focus { border-color: var(--green-mid); background: var(--white); }
+    .chat-input:focus { border-color: var(--green-mid); background: #fff; }
     .chat-input::placeholder { color: #9ab5a8; }
     .send-btn {
-      width: 46px; height: 46px; background: var(--green-dark);
+      width: 50px; height: 50px; background: var(--green-dark);
       border: none; border-radius: 10px; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0; transition: background 0.2s;
@@ -256,26 +222,110 @@
     .send-btn:disabled { background: var(--green-pale); cursor: not-allowed; }
     .send-btn svg { color: #fff; }
     .chat-disclaimer {
-      padding: 6px 20px 12px; font-size: 11px; color: #9ab5a8;
-      text-align: center; font-weight: 300; background: var(--white);
+      padding: 6px 22px 14px; font-size: 12px; color: #9ab5a8;
+      text-align: center; font-weight: 300; background: #fff;
     }
 
-    /* ── FOOTER ── */
+    /* RESOURCES SECTION */
+    .resources-section {
+      max-width: 1240px; width: 100%;
+      margin: 0 auto; padding: 0 20px 28px;
+    }
+    .resources-header {
+      background: var(--green-dark);
+      border-radius: 10px 10px 0 0;
+      padding: 16px 22px;
+      font-family: 'League Spartan', sans-serif;
+      font-size: 13px; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--green-light);
+    }
+    .resources-body {
+      background: #fff;
+      border-radius: 0 0 10px 10px;
+      padding: 20px 22px;
+    }
+    .filter-bar {
+      display: flex; gap: 8px; margin-bottom: 18px; flex-wrap: wrap;
+    }
+    .filter-btn {
+      padding: 8px 18px; border-radius: 100px;
+      border: 1.5px solid var(--green-pale);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px; font-weight: 500;
+      cursor: pointer; transition: all 0.2s;
+      background: #fff; color: var(--green-dark);
+    }
+    .filter-btn.active { background: var(--green-dark); color: #fff; border-color: var(--green-dark); }
+    .filter-btn:hover:not(.active) { border-color: var(--green-dark); }
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px;
+    }
+    .resource-card {
+      background: var(--off-white);
+      border: 1px solid var(--green-pale);
+      border-radius: 10px;
+      padding: 16px 18px;
+      display: flex; flex-direction: column; gap: 8px;
+      cursor: pointer;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      text-decoration: none;
+    }
+    .resource-card:hover {
+      border-color: var(--green-mid);
+      box-shadow: 0 2px 8px rgba(26,51,40,0.10);
+    }
+    .resource-card-top {
+      display: flex; justify-content: space-between;
+      align-items: flex-start; gap: 8px;
+    }
+    .resource-name {
+      font-family: 'League Spartan', sans-serif;
+      font-size: 15px; font-weight: 700;
+      color: var(--green-dark); line-height: 1.35;
+    }
+    .resource-year {
+      font-size: 12px; color: #9ab5a8;
+      white-space: nowrap; margin-top: 2px; flex-shrink: 0;
+    }
+    .resource-desc {
+      font-size: 13px; font-weight: 400;
+      color: #3a5f4e; line-height: 1.7;
+    }
+    .resource-footer {
+      display: flex; justify-content: space-between;
+      align-items: center; margin-top: 4px;
+    }
+    .resource-tag {
+      font-size: 11px; padding: 4px 12px; border-radius: 100px;
+      font-weight: 600; border: 1px solid transparent;
+    }
+    .tag-network { background: #e1f5ee; color: #085041; border-color: #9fe1cb; }
+    .tag-muskegon { background: #e6f1fb; color: #0c447c; border-color: #b5d4f4; }
+    .tag-policy { background: #f1efe8; color: #444441; border-color: #d3d1c7; }
+    .resource-org { font-size: 11px; color: #9ab5a8; }
+
+    /* FOOTER */
     footer {
       background: #0f2119;
-      padding: 16px 40px;
+      padding: 18px 40px;
       display: flex; justify-content: space-between; align-items: center;
     }
-    .footer-left { font-size: 12px; color: rgba(255,255,255,0.35); }
-    .footer-right { font-size: 12px; }
-    .footer-right a { color: var(--green-light); text-decoration: none; }
+    .footer-left { font-size: 13px; color: rgba(255,255,255,0.40); }
+    .footer-right a { color: var(--green-light); text-decoration: none; font-size: 13px; }
     .footer-right a:hover { text-decoration: underline; }
 
-    @media (max-width: 768px) {
+    @media (max-width: 900px) {
       header { padding: 14px 18px; }
       main { grid-template-columns: 1fr; padding: 14px; }
       .sidebar { order: 2; }
-      .chat-panel { order: 1; min-height: 480px; }
+      .chat-panel { order: 1; min-height: 520px; }
+      .resources-section { padding: 0 14px 20px; }
+    }
+    @media (max-width: 580px) {
+      .resource-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -294,7 +344,6 @@
 
 <main>
   <aside class="sidebar">
-
     <div class="sidebar-card">
       <div class="sidebar-card-header">Upcoming Meetings</div>
       <div class="sidebar-card-body">
@@ -316,17 +365,9 @@
         </div>
         <div class="meeting-item">
           <div class="meeting-date">Thursday, December 10</div>
-          <div class="meeting-desc">Session 6 — Public Presentation &amp; Next Steps<br>6–8 PM · In-Person / Civic Presentation</div>
+          <div class="meeting-desc">Session 6 — Public Presentation &amp; Next Steps<br>6–8 PM · In-Person / Civic</div>
         </div>
-        <p style="font-size:11px;color:#9ab5a8;margin-top:12px;font-weight:300;">2026 Training &amp; Action Series</p>
-      </div>
-    </div>
-
-    <div class="sidebar-card">
-      <div class="sidebar-card-header">Documents &amp; Resources</div>
-      <div class="sidebar-card-body">
-        <p class="resources-loading" id="resources-status">Loading resources...</p>
-        <ul class="resource-list" id="resources-list"></ul>
+        <p style="font-size:12px;color:#9ab5a8;margin-top:12px;font-weight:400;">2026 Training &amp; Action Series</p>
       </div>
     </div>
 
@@ -334,16 +375,15 @@
       <div class="sidebar-card-header">About This Assistant</div>
       <div class="sidebar-card-body">
         <p class="about-text">This assistant knows about MCFPN documents and local food policy in Muskegon County. Ask it anything — it gives simple, clear answers.</p>
-        <p class="about-text" style="margin-top:10px;">For urgent matters contact <a href="/cdn-cgi/l/email-protection#355e5a514c75415c50474754595a5654591b5a4752"><span class="__cf_email__" data-cfemail="3b50545f427b4f525e49495a5754585a571554495c">[email&#160;protected]</span></a></p>
+        <p class="about-text" style="margin-top:10px;">Questions? Contact <a href="mailto:kody@tierralocal.org">kody@tierralocal.org</a></p>
       </div>
     </div>
-
   </aside>
 
   <div class="chat-panel">
     <div class="chat-header">
       <div class="chat-header-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
         </svg>
       </div>
@@ -385,7 +425,7 @@
         oninput="autoResize(this)"
       ></textarea>
       <button class="send-btn" id="send-btn" onclick="sendMessage()">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
           <line x1="22" y1="2" x2="11" y2="13"/>
           <polygon points="22 2 15 22 11 13 2 9 22 2"/>
         </svg>
@@ -393,71 +433,104 @@
     </div>
     <p class="chat-disclaimer">Answers are AI-generated. All questions are logged to help improve this tool.</p>
   </div>
-
 </main>
+
+<!-- RESOURCE LIBRARY -->
+<div class="resources-section">
+  <div class="resources-header">Documents &amp; Resources</div>
+  <div class="resources-body">
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filterDocs('all', this)">All resources</button>
+      <button class="filter-btn" onclick="filterDocs('network', this)">Network</button>
+      <button class="filter-btn" onclick="filterDocs('muskegon', this)">Muskegon</button>
+      <button class="filter-btn" onclick="filterDocs('policy', this)">Food Policy</button>
+    </div>
+    <div class="resource-grid" id="resource-grid"></div>
+  </div>
+</div>
 
 <footer>
   <span class="footer-left">Muskegon County Food Policy Network &nbsp;·&nbsp; Supported by Tierra Local</span>
-  <span class="footer-right"><a href="/cdn-cgi/l/email-protection#bed5d1dac7fecad7dbccccdfd2d1dddfd290d1ccd9"><span class="__cf_email__" data-cfemail="bbd0d4dfc2fbcfd2dec9c9dad7d4d8dad795d4c9dc">[email&#160;protected]</span></a></span>
+  <span class="footer-right"><a href="mailto:kody@tierralocal.org">kody@tierralocal.org</a></span>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwr0eKzpo3nV3frFoFNrgq55U5Zb_1jkHaT54y4xFHdb2ww1rH-x8plJXbL6L0FsIdL/exec';
 
-  let conversationHistory = [];
-  let isLoading = false;
+  const DOCS = [
+    { name: "2026 Training & Action Series Dates", org: "MCFPN", year: "2026", type: "network", url: "https://drive.google.com/file/d/1d-h6FzJCTAhZq8O2zchXunbEBxipkaTl/view", desc: "The schedule for all 6 MCFPN training sessions running March through December 2026. Each session builds skills in equity, food system analysis, advocacy, and campaign planning." },
+    { name: "Intro & Overview: Muskegon County Food Policy Network", org: "MCFPN", year: "2026", type: "network", url: "https://drive.google.com/file/d/1DEUIjFU3vD49Hub-edFCVuQ55a7DvqtZ/view", desc: "A 2026 orientation document explaining what the MCFPN is, why it exists, who is involved, and how the network operates. Great starting point for new members." },
+    { name: "Member Roster w/ Contact Info", org: "MCFPN", year: "2026", type: "network", url: "https://docs.google.com/spreadsheets/d/12D3F93tRQqASlS4iUGbiS5RwVEyhT6BkeNC9BetE6FY/edit", desc: "The current directory of MCFPN members with contact details. Members only." },
+    { name: "Community Health Needs Assessment", org: "Muskegon County", year: "2024", type: "muskegon", url: "https://drive.google.com/file/d/1HZCqbXTiRJP_oUt5kpZ0ChAQeFuR6I71/view", desc: "A comprehensive look at health conditions in Muskegon County, including food insecurity, nutrition, and access to healthy food. Used to guide local community health planning." },
+    { name: "Agriculture Cluster Impact Analysis", org: "Muskegon", year: "2026", type: "muskegon", url: "https://drive.google.com/file/d/1DRO5e3aLohfYDxmgqk1-SNlZ-n-uAUq4/view", desc: "An economic analysis showing the local jobs, revenue, and community value generated by farming and food production in the Muskegon area." },
+    { name: "West Michigan Ag Cluster Impact Analysis (Combined)", org: "West Michigan", year: "—", type: "muskegon", url: "https://drive.google.com/file/d/1OH86JY4Cnrc3_TKUmE-YZJeyHbj0oWYe/view", desc: "A broader regional version of the agriculture cluster analysis, covering farming's economic footprint across the entire West Michigan region." },
+    { name: "MSU Case Study: Lakeshore Flavor", org: "MSU", year: "—", type: "muskegon", url: "https://drive.google.com/file/d/14tZXez9DK7wVCcObdBRsRV9lss_e2cCH/view", desc: "A Michigan State University case study examining equitable access to local food — how local food networks can better reach underserved communities along Michigan's lakeshore." },
+    { name: "Feeding Michigan Families", org: "State of Michigan", year: "2024", type: "muskegon", url: "https://drive.google.com/file/d/1_Wgh0sRc9ieC8SeYYESQHef8hn2MokGU/view", desc: "A statewide report on food insecurity in Michigan — who is going hungry, what programs exist to help, and what gaps remain. Useful context for local food policy work." },
+    { name: "Feeding America West Michigan Annual Report", org: "Feeding America", year: "2023", type: "muskegon", url: "https://drive.google.com/file/d/15J0EnkRZKyCpSDcD_MAvnXSnPQR99JBR/view", desc: "2023 annual report from the regional food bank. Distributed 28 million pounds of food to over 1 million households across 40 Michigan counties. Includes Muskegon County impact data." },
+    { name: "Food Policy Council Census Results", org: "Johns Hopkins", year: "2023", type: "policy", url: "https://drive.google.com/file/d/1MpDCxIdwYnck2ok-cGRveDDTS3qnAg4Z/view", desc: "A national survey of food policy councils showing how they are structured, funded, staffed, and what policy areas they focus on. Great for benchmarking the MCFPN against peer councils." },
+    { name: "Characteristics of Regional Food Policy Councils in the US", org: "Research", year: "—", type: "policy", url: "https://drive.google.com/file/d/1DEfy7s4Lh4bm2twMK0YCdOlupp7UGMiG/view", desc: "Research examining what makes regional food policy councils effective, including governance models, geographic scope, stakeholder engagement, and long-term impact." },
+    { name: "Advocacy for Food Policy Councils Toolkit", org: "Harvard / Johns Hopkins", year: "2019", type: "policy", url: "https://drive.google.com/file/d/1v6JgUt3_Kn8BQJXKBpzFLPKel5dON3dG/view", desc: "A practical guide explaining the difference between advocacy and lobbying, and how food policy councils of different structures can legally influence government policy." },
+    { name: "Kent County Food Policy Council Food Plan", org: "Kent County", year: "—", type: "policy", url: "https://drive.google.com/file/d/1z-8LICRn-4LMou9ib8Ahta8BsgwaxRsH/view", desc: "A model local food plan from Kent County (Grand Rapids area) — a useful template and reference as MCFPN develops its own food policy priorities for Muskegon County." },
+    { name: "GARE Racial Equity Action Plans", org: "GARE", year: "—", type: "policy", url: "https://drive.google.com/file/d/18mkrDnLVY88615JTrS1FDlNRno-xPRoA/view", desc: "A guide from the Government Alliance on Race and Equity showing how organizations can build racial equity into their policies, plans, and decision-making — directly applicable to food system work." },
+    { name: "Food Loss & Waste Reduction Toolkit", org: "Harvard FLPC", year: "—", type: "policy", url: "https://drive.google.com/file/d/13-yJ0cA8vGPpOLN5KJ9CzG0X0Dwrj0y-/view", desc: "A practical toolkit from the Harvard Food Law & Policy Clinic with strategies and policy tools communities can use to reduce food loss and waste at every stage from farm to table." },
+    { name: "Shared Vocabulary & Narrative Change Guide", org: "Guide", year: "—", type: "policy", url: "https://docs.google.com/document/d/1EMrv5xrTS7hezJDcpRKtiNOWBiSUmhWO/edit", desc: "A guide to building shared language around food systems — why the words we use matter, and how shifting the narrative can change public understanding and policy outcomes." },
+  ];
 
-  window.addEventListener('DOMContentLoaded', () => { loadResources(); });
+  const TAG_STYLES = {
+    network:  { label: "Network",     cls: "tag-network"  },
+    muskegon: { label: "Muskegon",    cls: "tag-muskegon" },
+    policy:   { label: "Food Policy", cls: "tag-policy"   },
+  };
 
-  function loadResources() {
-    fetch(APPS_SCRIPT_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify({ action: 'resources' }),
-    })
-    .then(r => r.json())
-    .then(data => {
-      const status = document.getElementById('resources-status');
-      const list   = document.getElementById('resources-list');
-      if (data.ok && data.resources && data.resources.length > 0) {
-        status.style.display = 'none';
-        data.resources.forEach(r => {
-          const li = document.createElement('li');
-          li.innerHTML = '<a href="' + r.url + '" target="_blank">' + r.name + '</a><div class="resource-date">Updated ' + r.date + '</div>';
-          list.appendChild(li);
-        });
-      } else {
-        status.textContent = 'No documents loaded yet.';
-      }
-    })
-    .catch(() => {
-      document.getElementById('resources-status').textContent = 'Could not load resources.';
+  function renderDocs(filter) {
+    const grid = document.getElementById('resource-grid');
+    grid.innerHTML = '';
+    const list = filter === 'all' ? DOCS : DOCS.filter(d => d.type === filter);
+    list.forEach(d => {
+      const t = TAG_STYLES[d.type];
+      const a = document.createElement('a');
+      a.href = d.url;
+      a.target = '_blank';
+      a.className = 'resource-card';
+      a.innerHTML =
+        '<div class="resource-card-top">' +
+          '<span class="resource-name">' + d.name + '</span>' +
+          '<span class="resource-year">' + d.year + '</span>' +
+        '</div>' +
+        '<p class="resource-desc">' + d.desc + '</p>' +
+        '<div class="resource-footer">' +
+          '<span class="resource-tag ' + t.cls + '">' + t.label + '</span>' +
+          '<span class="resource-org">' + d.org + '</span>' +
+        '</div>';
+      grid.appendChild(a);
     });
   }
+
+  function filterDocs(type, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderDocs(type);
+  }
+
+  renderDocs('all');
+
+  // CHAT
+  let conversationHistory = [];
+  let isLoading = false;
 
   function sendMessage() {
     const input = document.getElementById('chat-input');
     const question = input.value.trim();
     if (!question || isLoading) return;
-
     appendMessage('user', question);
-    input.value = '';
-    autoResize(input);
-
+    input.value = ''; autoResize(input);
     const historySnapshot = conversationHistory.slice();
     conversationHistory.push({ question: question, answer: '' });
-
     const typingId = showTyping();
     setLoading(true);
-
     fetch(APPS_SCRIPT_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify({
-        action:   'chat',
-        question: question,
-        history:  historySnapshot,
-      }),
+      method: 'POST', headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify({ action: 'chat', question: question, history: historySnapshot }),
     })
     .then(r => r.json())
     .then(data => {
@@ -482,8 +555,8 @@
     const container = document.getElementById('chat-messages');
     const div = document.createElement('div');
     div.className = 'message ' + role;
-    const label = role === 'user' ? 'You' : 'AI';
-    div.innerHTML = '<div class="message-avatar">' + label + '</div><div class="message-bubble">' + formatMessage(text) + '</div>';
+    div.innerHTML = '<div class="message-avatar">' + (role === 'user' ? 'You' : 'AI') + '</div>' +
+                    '<div class="message-bubble">' + formatMessage(text) + '</div>';
     container.appendChild(div);
     container.scrollTop = container.scrollHeight;
   }
@@ -494,10 +567,9 @@
       .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
       .replace(/^- (.+)$/gm, '<li>$1</li>');
     html = html.replace(/(<li>[\s\S]*?<\/li>)/g, '<ul>$1</ul>');
-    const paras = html.split(/
+    return html.split(/
 
-+/);
-    return paras.map(p => p.startsWith('<ul>') ? p : '<p>' + p.replace(/
++/).map(p => p.startsWith('<ul>') ? p : '<p>' + p.replace(/
 /g,'<br>') + '</p>').join('');
   }
 
@@ -512,15 +584,15 @@
     return id;
   }
 
-  function removeTyping(id) {
-    const el = document.getElementById(id);
-    if (el) el.remove();
-  }
-
-  function setLoading(state) {
-    isLoading = state;
-    document.getElementById('send-btn').disabled = state;
-  }
+  function removeTyping(id) { const el = document.getElementById(id); if (el) el.remove(); }
+  function setLoading(state) { isLoading = state; document.getElementById('send-btn').disabled = state; }
 
   function usePrompt(btn) {
-    const input = doc
+    const input = document.getElementById('chat-input');
+    input.value = btn.textContent; autoResize(input); sendMessage();
+  }
+  function handleKeydown(e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); } }
+  function autoResize(el) { el.style.height = 'auto'; el.style.height = Math.min(el.scrollHeight, 130) + 'px'; }
+</script>
+</body>
+</html>
