@@ -551,24 +551,13 @@
     .finally(() => setLoading(false));
   }
 
-  function appendMessage(role, text) {
-    const container = document.getElementById('chat-messages');
-    const div = document.createElement('div');
-    div.className = 'message ' + role;
-    div.innerHTML = '<div class="message-avatar">' + (role === 'user' ? 'You' : 'AI') + '</div>' +
-                    '<div class="message-bubble">' + formatMessage(text) + '</div>';
-    container.appendChild(div);
-    container.scrollTop = container.scrollHeight;
-  }
-
-  function formatMessage(text) {
+ function formatMessage(text) {
     let html = text
       .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
       .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
       .replace(/^- (.+)$/gm, '<li>$1</li>');
     html = html.replace(/(<li>[\s\S]*?<\/li>)/g, '<ul>$1</ul>');
     return html.split(/
-
 +/).map(p => p.startsWith('<ul>') ? p : '<p>' + p.replace(/
 /g,'<br>') + '</p>').join('');
   }
