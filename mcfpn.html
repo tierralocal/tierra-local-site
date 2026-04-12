@@ -28,6 +28,57 @@
       color: var(--forest);
     }
 
+
+    /* NETWORK STRIP */
+    .network-strip {
+      background: var(--white);
+      border-radius: 12px;
+      border: 1px solid var(--tan);
+      overflow: hidden;
+    }
+    .network-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+    }
+    .net-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 20px;
+      text-decoration: none;
+      border-right: 1px solid var(--tan);
+      flex: 1;
+      min-width: 200px;
+      transition: background 0.18s;
+    }
+    .net-link:last-child { border-right: none; }
+    .net-link:hover { background: #faf8f4; }
+    .net-icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-size: 18px;
+    }
+    .net-icon.green { background: #e1f5ee; }
+    .net-icon.blue  { background: #e6f1fb; }
+    .net-icon.tan   { background: #f3efe5; }
+    .net-link-text strong {
+      display: block;
+      font-family: 'Fraunces', serif;
+      font-size: 14px; font-weight: 600;
+      color: var(--forest);
+    }
+    .net-link-text span {
+      font-size: 12px; color: #666; margin-top: 1px; display: block;
+    }
+    .net-badge {
+      margin-left: auto;
+      background: var(--pine); color: white;
+      font-size: 10px; font-weight: 600;
+      padding: 3px 8px; border-radius: 100px;
+      white-space: nowrap; flex-shrink: 0;
+    }
+
     /* HEADER */
     header {
       background: var(--forest);
@@ -77,11 +128,10 @@
     /* MEETINGS */
     .card { background: var(--white); border-radius: 12px; border: 1px solid var(--tan); overflow: hidden; }
     .card-head {
-      background: var(--forest); padding: 10px 18px;
+      background: var(--forest); padding: 12px 18px;
       font-family: 'Fraunces', serif;
-      font-size: 11px; font-weight: 600;
-      letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--mist);
+      font-size: 16px; font-weight: 700;
+      color: var(--white);
     }
     .meetings-scroll {
       display: flex; overflow-x: auto; -webkit-overflow-scrolling: touch;
@@ -199,7 +249,7 @@
       display: flex; justify-content: space-between; align-items: center;
       flex-wrap: wrap; gap: 10px;
     }
-    .res-title { font-family: 'Fraunces', serif; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--mist); }
+    .res-title { font-family: 'Fraunces', serif; font-size: 16px; font-weight: 700; color: var(--white); }
     .filters { display: flex; gap: 6px; flex-wrap: wrap; }
     .filt {
       padding: 5px 14px; border-radius: 100px;
@@ -269,6 +319,36 @@
 <div class="hero">
   <h2>Your Food Policy Resource Hub</h2>
   <p>Ask questions, explore documents, and stay connected with the network.</p>
+</div>
+
+<div class="page" style="padding-bottom:0; gap:0;">
+  <div class="network-strip" style="margin-bottom:0;">
+    <div class="card-head">Network Info</div>
+    <div class="network-links">
+      <a href="https://drive.google.com/file/d/1DEUIjFU3vD49Hub-edFCVuQ55a7DvqtZ/view" target="_blank" class="net-link">
+        <div class="net-icon green">📋</div>
+        <div class="net-link-text">
+          <strong>Intro &amp; Overview</strong>
+          <span>What MCFPN is and how it works</span>
+        </div>
+      </a>
+      <a href="https://docs.google.com/spreadsheets/d/12D3F93tRQqASlS4iUGbiS5RwVEyhT6BkeNC9BetE6FY/edit" target="_blank" class="net-link">
+        <div class="net-icon blue">👥</div>
+        <div class="net-link-text">
+          <strong>Member Roster</strong>
+          <span>Contact info for every member</span>
+        </div>
+        <span class="net-badge">Contact Info</span>
+      </a>
+      <a href="https://drive.google.com/file/d/1d-h6FzJCTAhZq8O2zchXunbEBxipkaTl/view" target="_blank" class="net-link">
+        <div class="net-icon tan">📅</div>
+        <div class="net-link-text">
+          <strong>2026 Meeting Schedule</strong>
+          <span>All session dates &amp; details</span>
+        </div>
+      </a>
+    </div>
+  </div>
 </div>
 
 <div class="page">
@@ -358,7 +438,7 @@
         <div class="card-head">About This Tool</div>
         <div class="card-body">
           <p class="about-txt">This assistant knows MCFPN documents and local food policy. Ask anything — it gives simple, clear answers written for everyone.</p>
-          <p class="about-txt" style="margin-top:10px;">Questions? <a href="mailto:kody@tierralocal.org">kody@tierralocal.org</a></p>
+          <p class="about-txt" style="margin-top:10px;">Questions? <a href="/cdn-cgi/l/email-protection#442f2b203d04302d21363625282b2725286a2b3623"><span class="__cf_email__" data-cfemail="711a1e1508310518140303101d1e12101d5f1e0316">[email&#160;protected]</span></a></p>
         </div>
       </div>
       <div class="card">
@@ -390,16 +470,13 @@
 
 <footer>
   <span class="fl">Muskegon County Food Policy Network &nbsp;·&nbsp; Supported by Tierra Local</span>
-  <span class="fr"><a href="mailto:kody@tierralocal.org">kody@tierralocal.org</a></span>
+  <span class="fr"><a href="/cdn-cgi/l/email-protection#1b70747f625b6f727e69697a7774787a773574697c"><span class="__cf_email__" data-cfemail="066d69627f46726f637474676a6965676a28697461">[email&#160;protected]</span></a></span>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwr0eKzpo3nV3frFoFNrgq55U5Zb_1jkHaT54y4xFHdb2ww1rH-x8plJXbL6L0FsIdL/exec';
 
   var DOCS = [
-    { name: "2026 Training & Action Series Dates", useful: "Understanding when the network meets this year", org: "MCFPN", year: "2026", type: "network", url: "https://drive.google.com/file/d/1d-h6FzJCTAhZq8O2zchXunbEBxipkaTl/view", desc: "The schedule for all 6 MCFPN training sessions running March through December 2026." },
-    { name: "Intro & Overview: MCFPN", useful: "New members getting started with the network", org: "MCFPN", year: "2026", type: "network", url: "https://drive.google.com/file/d/1DEUIjFU3vD49Hub-edFCVuQ55a7DvqtZ/view", desc: "Explains what MCFPN is, why it exists, who is involved, and how the network operates." },
-    { name: "Member Roster w/ Contact Info", useful: "Connecting with other network members", org: "MCFPN", year: "2026", type: "network", url: "https://docs.google.com/spreadsheets/d/12D3F93tRQqASlS4iUGbiS5RwVEyhT6BkeNC9BetE6FY/edit", desc: "Current directory of MCFPN members with contact details. Members only." },
     { name: "Community Health Needs Assessment", useful: "Understanding health and food access in Muskegon", org: "Muskegon County", year: "2024", type: "muskegon", url: "https://drive.google.com/file/d/1HZCqbXTiRJP_oUt5kpZ0ChAQeFuR6I71/view", desc: "A comprehensive look at health conditions including food insecurity and nutrition access." },
     { name: "Agriculture Cluster Impact Analysis", useful: "Learning how farming shapes our local economy", org: "Muskegon", year: "2026", type: "muskegon", url: "https://drive.google.com/file/d/1DRO5e3aLohfYDxmgqk1-SNlZ-n-uAUq4/view", desc: "Economic analysis of jobs and value generated by farming in the Muskegon area." },
     { name: "West Michigan Ag Cluster Impact (Combined)", useful: "Seeing the bigger regional farming picture", org: "West Michigan", year: "—", type: "muskegon", url: "https://drive.google.com/file/d/1OH86JY4Cnrc3_TKUmE-YZJeyHbj0oWYe/view", desc: "Regional version of the agriculture cluster analysis covering all of West Michigan." },
@@ -531,19 +608,4 @@
 
   window.usePrompt = function(btn) {
     var input = document.getElementById('chat-input');
-    input.value = btn.textContent.trim();
-    window.autoResize(input);
-    window.sendMessage();
-  };
-
-  window.handleKeydown = function(e) {
-    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); window.sendMessage(); }
-  };
-
-  window.autoResize = function(el) {
-    el.style.height = 'auto';
-    el.style.height = Math.min(el.scrollHeight, 120) + 'px';
-  };
-</script>
-</body>
-</html>
+    input.valu
