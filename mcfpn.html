@@ -22,79 +22,22 @@
       font-family: 'DM Sans', sans-serif;
       background: var(--cream);
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      font-size: 16px;
-      color: var(--forest);
-    }
-
-
-    /* NETWORK STRIP */
-    .network-strip {
-      background: var(--white);
-      border-radius: 12px;
-      border: 1px solid var(--tan);
-      overflow: hidden;
-    }
-    .network-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0;
-    }
-    .net-link {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 14px 20px;
-      text-decoration: none;
-      border-right: 1px solid var(--tan);
-      flex: 1;
-      min-width: 200px;
-      transition: background 0.18s;
-    }
-    .net-link:last-child { border-right: none; }
-    .net-link:hover { background: #faf8f4; }
-    .net-icon {
-      width: 36px; height: 36px; border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; font-size: 18px;
-    }
-    .net-icon.green { background: #e1f5ee; }
-    .net-icon.blue  { background: #e6f1fb; }
-    .net-icon.tan   { background: #f3efe5; }
-    .net-link-text strong {
-      display: block;
-      font-family: 'Fraunces', serif;
-      font-size: 14px; font-weight: 600;
-      color: var(--forest);
-    }
-    .net-link-text span {
-      font-size: 12px; color: #666; margin-top: 1px; display: block;
-    }
-    .net-badge {
-      margin-left: auto;
-      background: var(--pine); color: white;
-      font-size: 10px; font-weight: 600;
-      padding: 3px 8px; border-radius: 100px;
-      white-space: nowrap; flex-shrink: 0;
+      display: flex; flex-direction: column;
+      font-size: 16px; color: var(--forest);
     }
 
     /* HEADER */
     header {
       background: var(--forest);
       padding: 14px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
+      display: flex; justify-content: space-between; align-items: center; gap: 12px;
     }
     .header-left { display: flex; align-items: center; gap: 14px; }
     .header-left img { height: 50px; border-radius: 6px; background: white; padding: 2px; }
     .logo-div { width: 1px; height: 38px; background: rgba(255,255,255,0.2); }
     .header-title h1 {
       font-family: 'Fraunces', serif;
-      font-size: 15px; font-weight: 700;
-      color: var(--white); line-height: 1.3;
+      font-size: 15px; font-weight: 700; color: var(--white); line-height: 1.3;
     }
     .header-title p { font-size: 11px; color: var(--mist); margin-top: 2px; font-weight: 300; }
     .header-link {
@@ -106,42 +49,54 @@
     .header-link:hover { background: rgba(255,255,255,0.1); color: var(--white); }
 
     /* HERO */
-    .hero {
-      background: var(--pine);
-      padding: 22px 20px;
-      text-align: center;
-    }
-    .hero h2 {
-      font-family: 'Fraunces', serif;
-      font-size: 24px; font-weight: 700;
-      color: var(--white); line-height: 1.3;
-    }
+    .hero { background: var(--pine); padding: 22px 20px; text-align: center; }
+    .hero h2 { font-family: 'Fraunces', serif; font-size: 24px; font-weight: 700; color: var(--white); line-height: 1.3; }
     .hero p { font-size: 14px; color: rgba(255,255,255,0.7); margin-top: 6px; }
 
-    /* PAGE WRAP */
+    /* PAGE */
     .page {
       flex: 1; max-width: 1200px; width: 100%;
       margin: 0 auto; padding: 20px 16px 40px;
       display: flex; flex-direction: column; gap: 22px;
     }
 
-    /* MEETINGS */
+    /* CARDS */
     .card { background: var(--white); border-radius: 12px; border: 1px solid var(--tan); overflow: hidden; }
     .card-head {
       background: var(--forest); padding: 12px 18px;
-      font-family: 'Fraunces', serif;
-      font-size: 16px; font-weight: 700;
-      color: var(--white);
+      font-family: 'Fraunces', serif; font-size: 16px; font-weight: 700; color: var(--white);
     }
-    .meetings-scroll {
-      display: flex; overflow-x: auto; -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
+
+    /* NETWORK STRIP */
+    .network-links { display: flex; flex-wrap: wrap; }
+    .net-link {
+      display: flex; align-items: center; gap: 10px;
+      padding: 14px 20px; text-decoration: none;
+      border-right: 1px solid var(--tan); flex: 1; min-width: 200px;
+      transition: background 0.18s;
     }
+    .net-link:last-child { border-right: none; }
+    .net-link:hover { background: #faf8f4; }
+    .net-icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-size: 18px;
+    }
+    .ni-green { background: #e1f5ee; }
+    .ni-blue  { background: #e6f1fb; }
+    .ni-tan   { background: #f3efe5; }
+    .net-link-text strong { display: block; font-family: 'Fraunces', serif; font-size: 14px; font-weight: 600; color: var(--forest); }
+    .net-link-text span { font-size: 12px; color: #666; margin-top: 1px; display: block; }
+    .net-badge {
+      margin-left: auto; background: var(--pine); color: white;
+      font-size: 10px; font-weight: 600; padding: 3px 8px; border-radius: 100px;
+      white-space: nowrap; flex-shrink: 0;
+    }
+
+    /* MEETINGS */
+    .meetings-scroll { display: flex; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
     .meetings-scroll::-webkit-scrollbar { display: none; }
-    .meet {
-      flex-shrink: 0; padding: 13px 18px;
-      border-right: 1px solid var(--tan); min-width: 175px;
-    }
+    .meet { flex-shrink: 0; padding: 13px 18px; border-right: 1px solid var(--tan); min-width: 175px; }
     .meet:last-child { border-right: none; }
     .meet-date { font-family: 'Fraunces', serif; font-size: 13px; font-weight: 700; color: var(--pine); }
     .meet-desc { font-size: 12px; color: #555; margin-top: 3px; line-height: 1.5; }
@@ -154,46 +109,34 @@
       background: var(--white); border-radius: 12px; border: 1px solid var(--tan);
       display: flex; flex-direction: column; min-height: 500px; overflow: hidden;
     }
-    .chat-head {
-      background: var(--forest); padding: 14px 18px;
-      display: flex; align-items: center; gap: 12px;
-    }
+    .chat-head { background: var(--forest); padding: 14px 18px; display: flex; align-items: center; gap: 12px; }
     .chat-icon {
       width: 36px; height: 36px; background: rgba(255,255,255,0.15);
       border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
-    .chat-head-text h3 { font-family: 'Fraunces', serif; font-size: 16px; font-weight: 600; color: var(--white); }
+    .chat-head-text h3 { font-family: 'Fraunces', serif; font-size: 16px; font-weight: 700; color: var(--white); }
     .chat-head-text p { font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 2px; }
 
     .prompts-bar { padding: 12px 16px; background: #faf8f4; border-bottom: 1px solid var(--tan); }
     .prompts-lbl { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sage); margin-bottom: 8px; }
     .chips { display: flex; flex-wrap: wrap; gap: 6px; }
     .chip {
-      background: var(--white); color: var(--forest);
-      border: 1px solid var(--pale); border-radius: 100px;
-      padding: 7px 14px; font-family: 'DM Sans', sans-serif;
-      font-size: 12px; font-weight: 500; cursor: pointer;
-      transition: all 0.18s; text-align: left; line-height: 1.3;
+      background: var(--white); color: var(--forest); border: 1px solid var(--pale);
+      border-radius: 100px; padding: 7px 14px; font-family: 'DM Sans', sans-serif;
+      font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.18s; text-align: left;
     }
     .chip:hover { background: var(--forest); color: var(--white); border-color: var(--forest); }
 
-    .chat-msgs {
-      flex: 1; overflow-y: auto; padding: 16px;
-      display: flex; flex-direction: column; gap: 14px;
-    }
+    .chat-msgs { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 14px; }
     .msg { display: flex; gap: 10px; align-items: flex-start; }
     .msg.user { flex-direction: row-reverse; }
     .av {
       width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 11px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700;
     }
     .msg.user .av { background: var(--forest); color: var(--white); }
     .msg.assistant .av { background: var(--cream); color: var(--forest); border: 1.5px solid var(--pale); }
-    .bub {
-      max-width: 82%; padding: 12px 16px; border-radius: 12px;
-      font-size: 14px; line-height: 1.7;
-    }
+    .bub { max-width: 82%; padding: 12px 16px; border-radius: 12px; font-size: 14px; line-height: 1.7; }
     .msg.user .bub { background: var(--forest); color: var(--white); border-bottom-right-radius: 3px; }
     .msg.assistant .bub { background: #faf8f4; color: var(--forest); border: 1px solid var(--tan); border-bottom-left-radius: 3px; }
     .bub p { margin-bottom: 8px; }
@@ -211,23 +154,18 @@
       30% { transform: translateY(-6px); opacity: 1; }
     }
 
-    .input-row {
-      padding: 12px 16px; border-top: 1px solid var(--tan);
-      display: flex; gap: 8px; align-items: flex-end; background: var(--white);
-    }
+    .input-row { padding: 12px 16px; border-top: 1px solid var(--tan); display: flex; gap: 8px; align-items: flex-end; }
     .chat-input {
       flex: 1; resize: none; border: 1.5px solid var(--pale); border-radius: 10px;
-      padding: 10px 14px; font-family: 'DM Sans', sans-serif;
-      font-size: 14px; color: var(--forest); background: #faf8f4;
-      outline: none; transition: border-color 0.2s;
+      padding: 10px 14px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--forest);
+      background: #faf8f4; outline: none; transition: border-color 0.2s;
       min-height: 44px; max-height: 120px; line-height: 1.5;
     }
     .chat-input:focus { border-color: var(--pine); background: var(--white); }
     .chat-input::placeholder { color: #9ab5a8; }
     .send-btn {
-      width: 44px; height: 44px; background: var(--pine);
-      border: none; border-radius: 10px; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
+      width: 44px; height: 44px; background: var(--pine); border: none; border-radius: 10px;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
       flex-shrink: 0; transition: background 0.2s;
     }
     .send-btn:hover { background: var(--sage); }
@@ -246,17 +184,14 @@
     .resources { background: var(--white); border-radius: 12px; border: 1px solid var(--tan); overflow: hidden; }
     .res-head {
       background: var(--forest); padding: 14px 20px;
-      display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: 10px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
     }
     .res-title { font-family: 'Fraunces', serif; font-size: 16px; font-weight: 700; color: var(--white); }
     .filters { display: flex; gap: 6px; flex-wrap: wrap; }
     .filt {
-      padding: 5px 14px; border-radius: 100px;
-      border: 1px solid rgba(255,255,255,0.25);
+      padding: 5px 14px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.25);
       font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500;
-      cursor: pointer; transition: all 0.18s;
-      background: transparent; color: rgba(255,255,255,0.65);
+      cursor: pointer; transition: all 0.18s; background: transparent; color: rgba(255,255,255,0.65);
     }
     .filt.active, .filt:hover { background: rgba(255,255,255,0.18); color: var(--white); border-color: rgba(255,255,255,0.5); }
     .res-body { padding: 18px; }
@@ -310,10 +245,10 @@
     <img src="logo.png" alt="Tierra Local" onerror="this.style.display='none'">
     <div class="header-title">
       <h1>Muskegon County Food Policy Network</h1>
-      <p>Member Assistant &nbsp;·&nbsp; Powered by AI</p>
+      <p>Member Assistant &nbsp;&middot;&nbsp; Powered by AI</p>
     </div>
   </div>
-  <a href="https://tierralocal.org" class="header-link">← Tierra Local</a>
+  <a href="https://tierralocal.org" class="header-link">&larr; Tierra Local</a>
 </header>
 
 <div class="hero">
@@ -321,19 +256,21 @@
   <p>Ask questions, explore documents, and stay connected with the network.</p>
 </div>
 
-<div class="page" style="padding-bottom:0; gap:0;">
-  <div class="network-strip" style="margin-bottom:0;">
+<div class="page">
+
+  <!-- NETWORK INFO -->
+  <div class="card">
     <div class="card-head">Network Info</div>
     <div class="network-links">
       <a href="https://drive.google.com/file/d/1DEUIjFU3vD49Hub-edFCVuQ55a7DvqtZ/view" target="_blank" class="net-link">
-        <div class="net-icon green">📋</div>
+        <div class="net-icon ni-green">&#x1F4CB;</div>
         <div class="net-link-text">
           <strong>Intro &amp; Overview</strong>
           <span>What MCFPN is and how it works</span>
         </div>
       </a>
       <a href="https://docs.google.com/spreadsheets/d/12D3F93tRQqASlS4iUGbiS5RwVEyhT6BkeNC9BetE6FY/edit" target="_blank" class="net-link">
-        <div class="net-icon blue">👥</div>
+        <div class="net-icon ni-blue">&#x1F465;</div>
         <div class="net-link-text">
           <strong>Member Roster</strong>
           <span>Contact info for every member</span>
@@ -341,7 +278,7 @@
         <span class="net-badge">Contact Info</span>
       </a>
       <a href="https://drive.google.com/file/d/1d-h6FzJCTAhZq8O2zchXunbEBxipkaTl/view" target="_blank" class="net-link">
-        <div class="net-icon tan">📅</div>
+        <div class="net-icon ni-tan">&#x1F4C5;</div>
         <div class="net-link-text">
           <strong>2026 Meeting Schedule</strong>
           <span>All session dates &amp; details</span>
@@ -349,9 +286,6 @@
       </a>
     </div>
   </div>
-</div>
-
-<div class="page">
 
   <!-- MEETINGS -->
   <div class="card">
@@ -359,28 +293,28 @@
     <div class="meetings-scroll">
       <div class="meet">
         <div class="meet-date">Sun, May 3</div>
-        <div class="meet-desc">Session 2 — Food System Issues<br>9 AM–5 PM · In-Person</div>
+        <div class="meet-desc">Session 2 &mdash; Food System Issues<br>9 AM&ndash;5 PM &middot; In-Person</div>
       </div>
       <div class="meet">
         <div class="meet-date">Thu, June 11</div>
-        <div class="meet-desc">Session 3 — Moving to Action<br>6–8 PM · Virtual</div>
+        <div class="meet-desc">Session 3 &mdash; Moving to Action<br>6&ndash;8 PM &middot; Virtual</div>
       </div>
       <div class="meet">
         <div class="meet-date">Thu, Aug 20</div>
-        <div class="meet-desc">Session 4 — Campaign Planning<br>6–8 PM · In-Person</div>
+        <div class="meet-desc">Session 4 &mdash; Campaign Planning<br>6&ndash;8 PM &middot; In-Person</div>
       </div>
       <div class="meet">
         <div class="meet-date">Tue, Oct 13</div>
-        <div class="meet-desc">Session 5 — Campaign Rollout<br>6–8 PM · In-Person</div>
+        <div class="meet-desc">Session 5 &mdash; Campaign Rollout<br>6&ndash;8 PM &middot; In-Person</div>
       </div>
       <div class="meet">
         <div class="meet-date">Thu, Dec 10</div>
-        <div class="meet-desc">Session 6 — Public Presentation<br>6–8 PM · In-Person</div>
+        <div class="meet-desc">Session 6 &mdash; Public Presentation<br>6&ndash;8 PM &middot; In-Person</div>
       </div>
     </div>
   </div>
 
-  <!-- TWO COL: CHAT + SIDEBAR -->
+  <!-- TWO COL -->
   <div class="two-col">
 
     <!-- CHAT -->
@@ -404,7 +338,7 @@
           <button class="chip" onclick="window.usePrompt(this)">What food policies help local farmers?</button>
           <button class="chip" onclick="window.usePrompt(this)">How do organizations fight hunger in Muskegon?</button>
           <button class="chip" onclick="window.usePrompt(this)">What is my role as a network member?</button>
-          <button class="chip" onclick="window.usePrompt(this)">I keep hearing about a food club — what's that?</button>
+          <button class="chip" onclick="window.usePrompt(this)">I keep hearing about a food club -- what's that?</button>
           <button class="chip" onclick="window.usePrompt(this)">How can a food policy council get more food to local markets?</button>
         </div>
       </div>
@@ -437,8 +371,8 @@
       <div class="card">
         <div class="card-head">About This Tool</div>
         <div class="card-body">
-          <p class="about-txt">This assistant knows MCFPN documents and local food policy. Ask anything — it gives simple, clear answers written for everyone.</p>
-          <p class="about-txt" style="margin-top:10px;">Questions? <a href="/cdn-cgi/l/email-protection#442f2b203d04302d21363625282b2725286a2b3623"><span class="__cf_email__" data-cfemail="711a1e1508310518140303101d1e12101d5f1e0316">[email&#160;protected]</span></a></p>
+          <p class="about-txt">This assistant knows MCFPN documents and local food policy. Ask anything -- it gives simple, clear answers written for everyone.</p>
+          <p class="about-txt" style="margin-top:10px;">Questions? <a href="mailto:kody@tierralocal.org">kody@tierralocal.org</a></p>
         </div>
       </div>
       <div class="card">
@@ -450,7 +384,7 @@
     </div>
   </div>
 
-  <!-- RESOURCE LIBRARY -->
+  <!-- RESOURCES -->
   <div class="resources">
     <div class="res-head">
       <span class="res-title">Documents &amp; Resources</span>
@@ -469,33 +403,33 @@
 </div>
 
 <footer>
-  <span class="fl">Muskegon County Food Policy Network &nbsp;·&nbsp; Supported by Tierra Local</span>
-  <span class="fr"><a href="/cdn-cgi/l/email-protection#1b70747f625b6f727e69697a7774787a773574697c"><span class="__cf_email__" data-cfemail="066d69627f46726f637474676a6965676a28697461">[email&#160;protected]</span></a></span>
+  <span class="fl">Muskegon County Food Policy Network &nbsp;&middot;&nbsp; Supported by Tierra Local</span>
+  <span class="fr"><a href="mailto:kody@tierralocal.org">kody@tierralocal.org</a></span>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwr0eKzpo3nV3frFoFNrgq55U5Zb_1jkHaT54y4xFHdb2ww1rH-x8plJXbL6L0FsIdL/exec';
+<script>
+  var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzi-hTrbdz9rfqFCEtYW6m30OrkHd2ihkkLxa78rZEwM_nbx4DAI5qnyZCvzbrpdbwU/exec';
 
   var DOCS = [
     { name: "Community Health Needs Assessment", useful: "Understanding health and food access in Muskegon", org: "Muskegon County", year: "2024", type: "muskegon", url: "https://drive.google.com/file/d/1HZCqbXTiRJP_oUt5kpZ0ChAQeFuR6I71/view", desc: "A comprehensive look at health conditions including food insecurity and nutrition access." },
     { name: "Agriculture Cluster Impact Analysis", useful: "Learning how farming shapes our local economy", org: "Muskegon", year: "2026", type: "muskegon", url: "https://drive.google.com/file/d/1DRO5e3aLohfYDxmgqk1-SNlZ-n-uAUq4/view", desc: "Economic analysis of jobs and value generated by farming in the Muskegon area." },
-    { name: "West Michigan Ag Cluster Impact (Combined)", useful: "Seeing the bigger regional farming picture", org: "West Michigan", year: "—", type: "muskegon", url: "https://drive.google.com/file/d/1OH86JY4Cnrc3_TKUmE-YZJeyHbj0oWYe/view", desc: "Regional version of the agriculture cluster analysis covering all of West Michigan." },
-    { name: "MSU Case Study: Lakeshore Flavor", useful: "Exploring equitable access to local food", org: "MSU", year: "—", type: "muskegon", url: "https://drive.google.com/file/d/14tZXez9DK7wVCcObdBRsRV9lss_e2cCH/view", desc: "MSU case study on reaching underserved communities with local food along Michigan's lakeshore." },
+    { name: "West Michigan Ag Cluster Impact (Combined)", useful: "Seeing the bigger regional farming picture", org: "West Michigan", year: "N/A", type: "muskegon", url: "https://drive.google.com/file/d/1OH86JY4Cnrc3_TKUmE-YZJeyHbj0oWYe/view", desc: "Regional version of the agriculture cluster analysis covering all of West Michigan." },
+    { name: "MSU Case Study: Lakeshore Flavor", useful: "Exploring equitable access to local food", org: "MSU", year: "N/A", type: "muskegon", url: "https://drive.google.com/file/d/14tZXez9DK7wVCcObdBRsRV9lss_e2cCH/view", desc: "MSU case study on reaching underserved communities with local food along Michigan's lakeshore." },
     { name: "Feeding Michigan Families", useful: "Getting the statewide picture on food insecurity", org: "State of Michigan", year: "2024", type: "muskegon", url: "https://drive.google.com/file/d/1_Wgh0sRc9ieC8SeYYESQHef8hn2MokGU/view", desc: "Statewide report on who is going hungry, what programs exist, and what gaps remain." },
     { name: "Feeding America West Michigan Annual Report", useful: "Seeing the food bank's local impact", org: "Feeding America", year: "2023", type: "muskegon", url: "https://drive.google.com/file/d/15J0EnkRZKyCpSDcD_MAvnXSnPQR99JBR/view", desc: "28 million pounds of food distributed to 1M+ households across 40 Michigan counties." },
     { name: "Food Policy Council Census Results", useful: "Comparing MCFPN to other councils nationally", org: "Johns Hopkins", year: "2023", type: "policy", url: "https://drive.google.com/file/d/1MpDCxIdwYnck2ok-cGRveDDTS3qnAg4Z/view", desc: "National survey of how food policy councils are structured, funded, and what they focus on." },
-    { name: "Characteristics of Regional Food Policy Councils", useful: "What makes food policy councils effective", org: "Research", year: "—", type: "policy", url: "https://drive.google.com/file/d/1DEfy7s4Lh4bm2twMK0YCdOlupp7UGMiG/view", desc: "Research on governance models, stakeholder engagement, and long-term impact." },
+    { name: "Characteristics of Regional Food Policy Councils", useful: "What makes food policy councils effective", org: "Research", year: "N/A", type: "policy", url: "https://drive.google.com/file/d/1DEfy7s4Lh4bm2twMK0YCdOlupp7UGMiG/view", desc: "Research on governance models, stakeholder engagement, and long-term impact." },
     { name: "Advocacy for Food Policy Councils Toolkit", useful: "Learning how to legally influence policy", org: "Harvard / Johns Hopkins", year: "2019", type: "policy", url: "https://drive.google.com/file/d/1v6JgUt3_Kn8BQJXKBpzFLPKel5dON3dG/view", desc: "Explains the difference between advocacy and lobbying, and how councils can influence government." },
-    { name: "Kent County Food Policy Council Food Plan", useful: "Seeing a model food plan from a nearby county", org: "Kent County", year: "—", type: "policy", url: "https://drive.google.com/file/d/1z-8LICRn-4LMou9ib8Ahta8BsgwaxRsH/view", desc: "A model local food plan from Kent County — a useful template for Muskegon's own priorities." },
-    { name: "GARE Racial Equity Action Plans", useful: "Building racial equity into food policy work", org: "GARE", year: "—", type: "policy", url: "https://drive.google.com/file/d/18mkrDnLVY88615JTrS1FDlNRno-xPRoA/view", desc: "Guide for building racial equity into policies, plans, and decision-making." },
-    { name: "Food Loss & Waste Reduction Toolkit", useful: "Finding ways to reduce food waste locally", org: "Harvard FLPC", year: "—", type: "policy", url: "https://drive.google.com/file/d/13-yJ0cA8vGPpOLN5KJ9CzG0X0Dwrj0y-/view", desc: "Practical strategies and policy tools to reduce food loss and waste from farm to table." },
-    { name: "Shared Vocabulary & Narrative Change Guide", useful: "Talking about food systems in a way that resonates", org: "Guide", year: "—", type: "policy", url: "https://docs.google.com/document/d/1EMrv5xrTS7hezJDcpRKtiNOWBiSUmhWO/edit", desc: "Why the words we use matter, and how shifting the narrative can change policy outcomes." },
+    { name: "Kent County Food Policy Council Food Plan", useful: "Seeing a model food plan from a nearby county", org: "Kent County", year: "N/A", type: "policy", url: "https://drive.google.com/file/d/1z-8LICRn-4LMou9ib8Ahta8BsgwaxRsH/view", desc: "A model local food plan from Kent County -- a useful template for Muskegon's own priorities." },
+    { name: "GARE Racial Equity Action Plans", useful: "Building racial equity into food policy work", org: "GARE", year: "N/A", type: "policy", url: "https://drive.google.com/file/d/18mkrDnLVY88615JTrS1FDlNRno-xPRoA/view", desc: "Guide for building racial equity into policies, plans, and decision-making." },
+    { name: "Food Loss and Waste Reduction Toolkit", useful: "Finding ways to reduce food waste locally", org: "Harvard FLPC", year: "N/A", type: "policy", url: "https://drive.google.com/file/d/13-yJ0cA8vGPpOLN5KJ9CzG0X0Dwrj0y-/view", desc: "Practical strategies and policy tools to reduce food loss and waste from farm to table." },
+    { name: "Shared Vocabulary and Narrative Change Guide", useful: "Talking about food systems in a way that resonates", org: "Guide", year: "N/A", type: "policy", url: "https://docs.google.com/document/d/1EMrv5xrTS7hezJDcpRKtiNOWBiSUmhWO/edit", desc: "Why the words we use matter, and how shifting the narrative can change policy outcomes." }
   ];
 
   var TAG = {
     network:  { label: "Network",     cls: "tag-network"  },
     muskegon: { label: "Muskegon",    cls: "tag-muskegon" },
-    policy:   { label: "Food Policy", cls: "tag-policy"   },
+    policy:   { label: "Food Policy", cls: "tag-policy"   }
   };
 
   window.filterDocs = function(type, btn) {
@@ -549,7 +483,7 @@
     fetch(APPS_SCRIPT_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify({ action: 'chat', question: question, history: historySnapshot }),
+      body: JSON.stringify({ action: 'chat', question: question, history: historySnapshot })
     })
     .then(function(r) { return r.json(); })
     .then(function(data) {
@@ -572,7 +506,7 @@
 
   function formatMsg(text) {
     var html = text
-      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
       .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
       .replace(/^- (.+)$/gm, '<li>$1</li>');
     html = html.replace(/(<li>[\s\S]*?<\/li>)/g, '<ul>$1</ul>');
@@ -608,4 +542,19 @@
 
   window.usePrompt = function(btn) {
     var input = document.getElementById('chat-input');
-    input.valu
+    input.value = btn.textContent.trim();
+    window.autoResize(input);
+    window.sendMessage();
+  };
+
+  window.handleKeydown = function(e) {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); window.sendMessage(); }
+  };
+
+  window.autoResize = function(el) {
+    el.style.height = 'auto';
+    el.style.height = Math.min(el.scrollHeight, 120) + 'px';
+  };
+</script>
+</body>
+</html>
