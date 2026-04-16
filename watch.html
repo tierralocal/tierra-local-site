@@ -97,19 +97,149 @@ body{font-family:'DM Sans',sans-serif;background:var(--yellow);color:var(--dark)
 }
 .video-open-btn:hover{background:var(--yellow);color:var(--hot)}
 
-<!-- STEP 2: FORM -->
-<div class="step">
-  <div class="step-num sn2">2</div>
-  <div class="step-label">Enter Your Email to Get the Notes</div>
+/* EMAIL PANEL */
+.email-panel{
+  background:var(--white);border-radius:20px;overflow:hidden;
+  border:5px solid var(--dark);box-shadow:7px 7px 0 var(--dark);
+}
+.email-panel-head{
+  background:var(--hot);padding:16px 22px;
+  border-bottom:4px solid var(--yellow);
+}
+.email-panel-head h2{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:.06em;color:var(--yellow)}
+.email-panel-head p{font-size:13px;color:rgba(255,249,230,.75);margin-top:3px}
+.email-panel-body{padding:24px 22px;background:var(--cream)}
+
+.email-instruct{font-size:15px;color:var(--dark);line-height:1.7;margin-bottom:20px}
+.email-instruct strong{color:var(--hot);font-weight:700}
+
+.email-form{display:flex;gap:10px;align-items:stretch;flex-wrap:wrap}
+.email-input{
+  flex:1;min-width:220px;
+  border:3px solid var(--dark);border-radius:12px;
+  padding:12px 16px;font-family:'DM Sans',sans-serif;font-size:15px;
+  color:var(--dark);background:#fff;outline:none;
+  transition:border-color .2s;
+}
+.email-input:focus{border-color:var(--hot)}
+.email-input::placeholder{color:rgba(0,0,0,.35)}
+.email-btn{
+  background:var(--hot);color:var(--yellow);border:3px solid var(--dark);
+  border-radius:12px;padding:12px 24px;font-family:'Bebas Neue',sans-serif;
+  font-size:20px;letter-spacing:.06em;cursor:pointer;
+  transition:all .18s;white-space:nowrap;
+  box-shadow:3px 3px 0 var(--dark);
+}
+.email-btn:hover{background:var(--dark);color:var(--lime)}
+.email-btn:disabled{background:rgba(200,200,200,.6);color:#999;border-color:#ccc;box-shadow:none;cursor:not-allowed}
+
+/* States */
+.msg-success{
+  display:none;margin-top:16px;padding:16px 18px;
+  background:var(--lime);border:3px solid var(--dark);border-radius:12px;
+  font-size:15px;font-weight:600;color:var(--dark);
+  box-shadow:3px 3px 0 var(--dark);
+}
+.msg-error{
+  display:none;margin-top:16px;padding:16px 18px;
+  background:#ffe0e6;border:3px solid var(--hot);border-radius:12px;
+  font-size:14px;color:var(--hot);
+}
+.pdf-reveal{
+  display:none;margin-top:20px;
+  background:var(--yellow);border:3px solid var(--dark);border-radius:14px;
+  padding:18px 20px;box-shadow:4px 4px 0 var(--dark);
+}
+.pdf-reveal-label{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--hot);margin-bottom:8px}
+.pdf-link{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--dark);color:var(--lime);text-decoration:none;
+  border-radius:100px;padding:10px 20px;font-family:'Bebas Neue',sans-serif;
+  font-size:18px;letter-spacing:.05em;transition:all .18s;
+  border:2px solid var(--dark);
+}
+.pdf-link:hover{background:var(--hot);color:var(--yellow)}
+
+/* FOOTER */
+footer{background:var(--hot);padding:18px 28px;display:flex;justify-content:space-between;align-items:center;border-top:5px solid var(--yellow)}
+footer .fl{font-size:12px;color:rgba(255,249,230,.55)}
+footer .fr a{font-size:12px;color:var(--yellow);text-decoration:none;font-weight:700}
+
+@media(max-width:600px){
+  .appbar{padding:10px 16px}
+  .hero-band,.main{padding-left:16px;padding-right:16px}
+  .email-form{flex-direction:column}
+  .email-btn{width:100%}
+}
+</style>
+</head>
+<body>
+
+<header class="appbar">
+  <div class="appbar-left">
+    <img class="appbar-logo" src="MCFPN_Logo.png" alt="MCFPN"/>
+    <div class="appbar-sep"></div>
+    <div class="appbar-titles">
+      <h1>MCFPN Member Assistant</h1>
+      <p>Muskegon County Food Policy Network</p>
+    </div>
+  </div>
+  <a href="https://tierralocal.org/mcfpn" class="appbar-link">← Back to Site</a>
+</header>
+
+<div class="hero-band">
+  <div class="hero-inner">
+    <div class="hero-tag"><div class="hero-dot"></div>Session 2 Prep — Due before May 3</div>
+    <h2 class="hero-headline">Take 10 Minutes.<br><em>Watch This First.</em></h2>
+    <p class="hero-sub">Before our next meeting on <strong>Sunday, May 3</strong>, please watch the short video below, then enter your email to receive the data review notes. We'd love for you to spend some time with the data before you arrive.</p>
+  </div>
 </div>
 
-<div class="email-panel">
-  <div class="email-panel-head">
-    <h2>Get the Data Review Notes</h2>
-    <p>Takes 30 seconds — we'll send the links straight to your inbox</p>
+<div class="main">
+
+  <!-- STEP 1: VIDEO -->
+  <div class="step" style="margin-top:8px">
+    <div class="step-num sn1">1</div>
+    <div class="step-label">Watch the Video (~10 min)</div>
   </div>
-  <div class="email-panel-body">
-    <p class="email-instruct">Click below to enter your email and receive links to the <strong>reports and data</strong> you'll need to review before <strong>May 3</strong>.</p>
-    <a href="https://www.cognitoforms.com/TierraLocal/FoodPolicyDataReportsReviewNotes" target="_blank" class="email-btn" style="display:inline-block;text-decoration:none;font-size:20px;padding:14px 28px;border-radius:12px;">GET THE REVIEW LINKS →</a>
+
+  <div class="video-panel">
+    <div class="video-wrap">
+      <iframe
+        src="https://www.canva.com/design/DAHG-Or8q9o/2OzdmyCLyHufQCRhYK4HHA/view?utm_content=DAHG-Or8q9o&utm_campaign=designshare&utm_medium=link&utm_source=recording_view&embed=true"
+        allowfullscreen
+        allow="fullscreen">
+      </iframe>
+    </div>
+    <div class="video-footer">
+      <span class="video-footer-txt">Food Policy & Bias — <strong>MCFPN 2026 Training Series</strong></span>
+      <a class="video-open-btn" href="https://www.canva.com/design/DAHG-Or8q9o/2OzdmyCLyHufQCRhYK4HHA/view?utm_content=DAHG-Or8q9o&utm_campaign=designshare&utm_medium=link&utm_source=recording_view" target="_blank">↗ Open Full Screen</a>
+    </div>
   </div>
+
+  <!-- STEP 2: FORM -->
+  <div class="step">
+    <div class="step-num sn2">2</div>
+    <div class="step-label">Enter Your Email to Get the Review Links</div>
+  </div>
+
+  <div class="email-panel">
+    <div class="email-panel-head">
+      <h2>Get the Data Review Links</h2>
+      <p>Takes 30 seconds — we will send the reports straight to your inbox</p>
+    </div>
+    <div class="email-panel-body">
+      <p class="email-instruct">Enter your email below and we will send you links to the <strong>reports and data</strong> we would like you to review before <strong>Sunday, May 3</strong>. Please spend some time with them before you arrive.</p>
+      <a href="https://www.cognitoforms.com/TierraLocal/FoodPolicyDataReportsReviewNotes" target="_blank" class="email-btn" style="display:inline-block;text-decoration:none;font-size:20px;padding:14px 28px;border-radius:12px;margin-top:4px;">GET THE REVIEW LINKS →</a>
+    </div>
+  </div>
+
 </div>
+
+<footer>
+  <span class="fl">Muskegon County Food Policy Network · Supported by Tierra Local</span>
+  <span class="fr"><a href="mailto:kody@tierralocal.org">kody@tierralocal.org</a></span>
+</footer>
+
+</body>
+</html>
