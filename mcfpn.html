@@ -504,7 +504,7 @@ function fmt(t){
 function showTyping(){
   const c=document.getElementById('chat-msgs');const id='t'+Date.now();
   const d=document.createElement('div');d.className='msg assistant';d.id=id;
-  d.innerHTML='<div class="msg-av">🌱</div><div class="msg-bub"><div class="typing"><div class="tdot"></div><div class="tdot"></div><div class="tdot"></div></div></div>';
+  d.innerHTML='<div class="msg-av">🌱</div><div class="msg-bub" style="background:var(--hot);border-color:var(--hot);color:var(--yellow);font-family:\'Bebas Neue\',sans-serif;font-size:18px;letter-spacing:.06em;display:flex;align-items:center;gap:12px;">⚡ WORKING ON IT...<div class="typing" style="margin:0"><div class="tdot"></div><div class="tdot"></div><div class="tdot"></div></div></div>';
   c.appendChild(d);c.scrollTop=c.scrollHeight;return id;
 }
 function rmTyping(id){const e=document.getElementById(id);if(e)e.remove();}
