@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Family Support Fund</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #102b6b;
+    --green: #72ad28;
+    --navy-light: #1a3d8f;
+    --green-light: #8fcf35;
+    --green-pale: #f0f8e6;
+    --navy-pale: #eef1f9;
+    --white: #ffffff;
+    --gray-100: #f5f5f5;
+    --gray-200: #e8e8e8;
+    --gray-400: #9a9a9a;
+    --gray-700: #333333;
+    --red: #c0392b;
+    --radius: 10px;
+    --shadow: 0 2px 16px rgba(16,43,107,0.10);
+  }
+ 
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #fff;
+    color: var(--gray-700);
+    min-height: 100vh;
+  }
+ 
+  /* HEADER */
+  .header {
+    background: var(--navy);
+    padding: 2.5rem 1.5rem 2rem;
+    text-align: center;
+    position: relative;
+  }
+  .header h1 {
+    font-family: 'DM Serif Display', serif;
+    color: #fff;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    line-height: 1.2;
+    margin-bottom: 0.4rem;
+  }
+  .header .subtitle {
+    color: rgba(255,255,255,0.7);
+    font-size: 0.95rem;
+    font-weight: 300;
+  }
+  .admin-toggle {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.2rem;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: rgba(255,255,255,0.7);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .admin-toggle:hover { background: rgba(255,255,255,0.2); color: #fff; }
+ 
+  /* PROGRESS SECTION */
+  .progress-section {
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-200);
+    padding: 2rem 1.5rem;
+  }
+  .progress-inner {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 1.5rem;
+  }
+  .stat-card {
+    background: var(--gray-100);
+    border-radius: var(--radius);
+    padding: 1rem;
+    text-align: center;
+  }
+  .stat-card.goal { background: var(--navy-pale); }
+  .stat-card.raised { background: var(--green-pale); }
+  .stat-card.needed { background: #fff3f3; }
+  .stat-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--gray-400);
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+  .stat-value {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    line-height: 1;
+  }
+  .stat-card.goal .stat-value { color: var(--navy); }
+  .stat-card.raised .stat-value { color: var(--green); }
+  .stat-card.needed .stat-value { color: var(--red); }
+ 
+  .progress-bar-wrap {
+    background: var(--gray-200);
+    border-radius: 999px;
+    height: 18px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+    position: relative;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--green);
+    border-radius: 999px;
+    transition: width 0.6s cubic-bezier(.4,0,.2,1);
+    min-width: 0;
+    position: relative;
+  }
+  .progress-bar-fill::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.25) 50%, transparent 100%);
+  }
+  .progress-pct {
+    font-size: 0.85rem;
+    color: var(--gray-400);
+    text-align: right;
+  }
+  .progress-pct span { color: var(--green); font-weight: 600; }
+ 
+  /* FORM SECTION */
+  .form-section {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.3rem;
+    color: var(--navy);
+    margin-bottom: 1.25rem;
+  }
+  .form-card {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  @media (max-width: 540px) {
+    .form-row { grid-template-columns: 1fr; }
+    .stats-row { grid-template-columns: 1fr; }
+  }
+  .field label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--navy);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.4rem;
+  }
+  .field input, .field textarea {
+    width: 100%;
+    border: 1px solid var(--gray-200);
+    border-radius: 7px;
+    padding: 0.65rem 0.85rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    color: var(--gray-700);
+    background: #fff;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+  }
+  .field input:focus, .field textarea:focus {
+    border-color: var(--navy);
+    box-shadow: 0 0 0 3px rgba(16,43,107,0.1);
+  }
+  .field.full { grid-column: 1 / -1; }
+  .amount-wrap {
+    position: relative;
+  }
+  .amount-wrap span {
+    position: absolute;
+    left: 0.85rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gray-400);
+    font-weight: 500;
+  }
+  .amount-wrap input { padding-left: 1.6rem; }
+  .submit-btn {
+    width: 100%;
+    background: var(--green);
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    padding: 0.85rem;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    margin-top: 0.5rem;
+    letter-spacing: 0.01em;
+  }
+  .submit-btn:hover { background: var(--green-light); }
+  .submit-btn:active { transform: scale(0.99); }
+ 
+  .success-banner {
+    background: var(--green-pale);
+    border: 1px solid rgba(114,173,40,0.3);
+    border-radius: 8px;
+    padding: 0.85rem 1rem;
+    color: #3b6d11;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-top: 1rem;
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .success-banner.show { display: flex; }
+  .error-text { color: var(--red); font-size: 0.8rem; margin-top: 0.25rem; display: none; }
+ 
+  /* CONTRIBUTIONS LIST */
+  .list-section {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 1.5rem 3rem;
+  }
+  .list-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  .contribution-count {
+    background: var(--navy);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 999px;
+    padding: 0.2rem 0.6rem;
+  }
+  .contributions-list { list-style: none; }
+  .contribution-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid var(--gray-200);
+    animation: fadeIn 0.35s ease;
+  }
+  .contribution-item:last-child { border-bottom: none; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  .org-avatar {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    border-radius: 50%;
+    background: var(--navy-pale);
+    color: var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+  }
+  .org-info { flex: 1; min-width: 0; }
+  .org-name { font-weight: 600; font-size: 0.95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .org-note { font-size: 0.8rem; color: var(--gray-400); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .contribution-amount {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem;
+    color: var(--green);
+    white-space: nowrap;
+  }
+  .delete-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--gray-400);
+    font-size: 1.2rem;
+    line-height: 1;
+    padding: 4px;
+    border-radius: 4px;
+    transition: color 0.15s, background 0.15s;
+    display: none;
+  }
+  .delete-btn:hover { color: var(--red); background: #fff3f3; }
+  .admin-mode .delete-btn { display: block; }
+ 
+  .empty-state {
+    text-align: center;
+    padding: 2rem;
+    color: var(--gray-400);
+    font-size: 0.9rem;
+  }
+ 
+  /* ADMIN PANEL */
+  .admin-panel {
+    max-width: 680px;
+    margin: 0 auto 0;
+    padding: 0 1.5rem;
+    display: none;
+  }
+  .admin-panel.open { display: block; }
+  .admin-card {
+    background: var(--navy-pale);
+    border: 1px solid rgba(16,43,107,0.15);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .admin-card h3 {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--navy);
+    margin-bottom: 1rem;
+  }
+  .admin-row {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-end;
+    flex-wrap: wrap;
+  }
+  .admin-row .field { flex: 1; min-width: 180px; }
+  .admin-btn {
+    background: var(--navy);
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    padding: 0.65rem 1.1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+  .admin-btn:hover { background: var(--navy-light); }
+  .admin-btn.danger { background: var(--red); }
+  .admin-btn.danger:hover { background: #a93226; }
+ 
+  /* FOOTER */
+  footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.45);
+    text-align: center;
+    font-size: 0.8rem;
+    padding: 1.25rem;
+  }
+</style>
+</head>
+<body>
+ 
+<header class="header">
+  <h1 id="fund-title">Family Support Fund</h1>
+  <p class="subtitle" id="fund-description">Every contribution brings this family closer to stability.</p>
+  <button class="admin-toggle" onclick="toggleAdmin()">⚙ Admin</button>
+</header>
+ 
+<!-- ADMIN PANEL -->
+<div class="admin-panel" id="admin-panel">
+  <div style="padding-top:1.5rem"></div>
+  <div class="admin-card">
+    <h3>Fund Settings</h3>
+    <div class="admin-row">
+      <div class="field">
+        <label>Family / Fund Name</label>
+        <input type="text" id="admin-title" placeholder="e.g. The Johnson Family">
+      </div>
+      <div class="field">
+        <label>Goal Amount ($)</label>
+        <input type="number" id="admin-goal" placeholder="5000" min="1">
+      </div>
+    </div>
+    <div class="admin-row" style="margin-top:0.75rem">
+      <div class="field" style="flex:2">
+        <label>Description</label>
+        <input type="text" id="admin-desc" placeholder="Brief context shown at the top">
+      </div>
+      <button class="admin-btn" onclick="saveSettings()">Save</button>
+    </div>
+  </div>
+  <div class="admin-card">
+    <h3>Danger Zone</h3>
+    <p style="font-size:0.85rem;color:var(--gray-400);margin-bottom:0.85rem">Reset all contributions (keeps fund settings).</p>
+    <button class="admin-btn danger" onclick="resetContributions()">Clear All Contributions</button>
+  </div>
+</div>
+ 
+<!-- PROGRESS -->
+<div class="progress-section">
+  <div class="progress-inner">
+    <div class="stats-row">
+      <div class="stat-card goal">
+        <span class="stat-label">Goal</span>
+        <span class="stat-value" id="stat-goal">$0</span>
+      </div>
+      <div class="stat-card raised">
+        <span class="stat-label">Raised</span>
+        <span class="stat-value" id="stat-raised">$0</span>
+      </div>
+      <div class="stat-card needed">
+        <span class="stat-label">Still Needed</span>
+        <span class="stat-value" id="stat-needed">$0</span>
+      </div>
+    </div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
+    </div>
+    <p class="progress-pct"><span id="pct-text">0%</span> funded</p>
+  </div>
+</div>
+ 
+<!-- CONTRIBUTION FORM -->
+<div class="form-section">
+  <h2 class="section-title">Make a Pledge</h2>
+  <div class="form-card">
+    <div class="form-row">
+      <div class="field">
+        <label>Organization Name *</label>
+        <input type="text" id="org-name" placeholder="Your organization">
+        <p class="error-text" id="err-name">Please enter your organization name.</p>
+      </div>
+      <div class="field">
+        <label>Contribution Amount *</label>
+        <div class="amount-wrap">
+          <span>$</span>
+          <input type="number" id="org-amount" placeholder="0.00" min="1" step="0.01">
+        </div>
+        <p class="error-text" id="err-amount">Please enter a valid amount.</p>
+      </div>
+      <div class="field full">
+        <label>Note (optional)</label>
+        <input type="text" id="org-note" placeholder="Any message or context">
+      </div>
+    </div>
+    <button class="submit-btn" onclick="submitContribution()">Record Contribution</button>
+    <div class="success-banner" id="success-banner">
+      <span>✓</span> <span id="success-msg">Contribution recorded!</span>
+    </div>
+  </div>
+</div>
+ 
+<!-- LIST -->
+<div class="list-section" id="list-section">
+  <div class="list-header">
+    <h2 class="section-title" style="margin-bottom:0">Contributions</h2>
+    <span class="contribution-count" id="contrib-count">0</span>
+  </div>
+  <ul class="contributions-list" id="contributions-list">
+    <li class="empty-state" id="empty-state">No contributions yet. Be the first!</li>
+  </ul>
+</div>
+ 
+<footer>Built for community giving &nbsp;·&nbsp; Data stored locally in your browser</footer>
+ 
+<script>
+const DEFAULT = { title: 'Family Support Fund', description: 'Every contribution brings this family closer to stability.', goal: 5000 };
+ 
+function load(key, fallback) {
+  try { const v = localStorage.getItem(key); return v !== null ? JSON.parse(v) : fallback; } catch { return fallback; }
+}
+function save(key, val) {
+  try { localStorage.setItem(key, JSON.stringify(val)); } catch {}
+}
+ 
+let settings = load('fund_settings', DEFAULT);
+let contributions = load('fund_contributions', []);
+let adminOpen = false;
+ 
+function fmt(n) {
+  return '$' + Number(n).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+}
+ 
+function initials(name) {
+  return name.trim().split(/\s+/).slice(0, 2).map(w => w[0].toUpperCase()).join('');
+}
+ 
+function render() {
+  document.getElementById('fund-title').textContent = settings.title;
+  document.getElementById('fund-description').textContent = settings.description;
+ 
+  const goal = Number(settings.goal) || 0;
+  const raised = contributions.reduce((s, c) => s + Number(c.amount), 0);
+  const needed = Math.max(0, goal - raised);
+  const pct = goal > 0 ? Math.min(100, (raised / goal) * 100) : 0;
+ 
+  document.getElementById('stat-goal').textContent = fmt(goal);
+  document.getElementById('stat-raised').textContent = fmt(raised);
+  document.getElementById('stat-needed').textContent = fmt(needed);
+  document.getElementById('progress-fill').style.width = pct.toFixed(2) + '%';
+  document.getElementById('pct-text').textContent = Math.round(pct) + '%';
+  document.getElementById('contrib-count').textContent = contributions.length;
+ 
+  const list = document.getElementById('contributions-list');
+  const empty = document.getElementById('empty-state');
+  list.innerHTML = '';
+ 
+  if (contributions.length === 0) {
+    const li = document.createElement('li');
+    li.className = 'empty-state';
+    li.textContent = 'No contributions yet. Be the first!';
+    list.appendChild(li);
+    return;
+  }
+ 
+  const sorted = [...contributions].sort((a, b) => b.amount - a.amount);
+  sorted.forEach(c => {
+    const li = document.createElement('li');
+    li.className = 'contribution-item';
+    li.innerHTML = `
+      <div class="org-avatar">${initials(c.org)}</div>
+      <div class="org-info">
+        <div class="org-name">${esc(c.org)}</div>
+        ${c.note ? `<div class="org-note">${esc(c.note)}</div>` : '<div class="org-note">' + new Date(c.ts).toLocaleDateString() + '</div>'}
+      </div>
+      <div class="contribution-amount">${fmt(c.amount)}</div>
+      <button class="delete-btn" onclick="deleteContrib('${c.id}')" title="Remove">×</button>
+    `;
+    list.appendChild(li);
+  });
+ 
+  if (adminOpen) document.getElementById('list-section').classList.add('admin-mode');
+  else document.getElementById('list-section').classList.remove('admin-mode');
+}
+ 
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+ 
+function submitContribution() {
+  const org = document.getElementById('org-name').value.trim();
+  const amount = parseFloat(document.getElementById('org-amount').value);
+  const note = document.getElementById('org-note').value.trim();
+ 
+  let valid = true;
+  document.getElementById('err-name').style.display = (!org) ? 'block' : 'none';
+  document.getElementById('err-amount').style.display = (!amount || amount <= 0) ? 'block' : 'none';
+  if (!org || !amount || amount <= 0) return;
+ 
+  const entry = { id: Date.now().toString(), org, amount, note, ts: Date.now() };
+  contributions.push(entry);
+  save('fund_contributions', contributions);
+ 
+  document.getElementById('org-name').value = '';
+  document.getElementById('org-amount').value = '';
+  document.getElementById('org-note').value = '';
+ 
+  const banner = document.getElementById('success-banner');
+  document.getElementById('success-msg').textContent = `${org} — ${fmt(amount)} recorded. Thank you!`;
+  banner.classList.add('show');
+  setTimeout(() => banner.classList.remove('show'), 4000);
+ 
+  render();
+}
+ 
+function deleteContrib(id) {
+  if (!confirm('Remove this contribution?')) return;
+  contributions = contributions.filter(c => c.id !== id);
+  save('fund_contributions', contributions);
+  render();
+}
+ 
+function toggleAdmin() {
+  adminOpen = !adminOpen;
+  document.getElementById('admin-panel').classList.toggle('open', adminOpen);
+  if (adminOpen) {
+    document.getElementById('admin-title').value = settings.title;
+    document.getElementById('admin-goal').value = settings.goal;
+    document.getElementById('admin-desc').value = settings.description;
+  }
+  render();
+}
+ 
+function saveSettings() {
+  const title = document.getElementById('admin-title').value.trim();
+  const goal = parseFloat(document.getElementById('admin-goal').value);
+  const desc = document.getElementById('admin-desc').value.trim();
+  if (!title || !goal || goal <= 0) { alert('Please fill in a valid title and goal amount.'); return; }
+  settings = { title: title || DEFAULT.title, goal, description: desc || DEFAULT.description };
+  save('fund_settings', settings);
+  render();
+  alert('Settings saved!');
+}
+ 
+function resetContributions() {
+  if (!confirm('Clear ALL contributions? This cannot be undone.')) return;
+  contributions = [];
+  save('fund_contributions', contributions);
+  render();
+}
+ 
+render();
+</script>
+</body>
+</html>
