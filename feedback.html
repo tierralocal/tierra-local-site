@@ -587,7 +587,153 @@
     </form>
   </div>
 </section>
+
+ <!-- ============================================================
+     NAMING POLL — Waste & Rescue Working Group
+     Paste this BETWEEN the closing </section> of the RSVP block
+     and the <footer> tag
+     ============================================================ -->
  
+<section style="background:#ffffff; border-top: 6px solid #FFD600; padding: 48px 32px;">
+  <div style="max-width:920px; margin:0 auto;">
+    <div style="font-family:'Bebas Neue',sans-serif; font-size:0.85rem; letter-spacing:0.22em; color:#FF2D55; margin-bottom:10px;">Working Group Name</div>
+    <h2 style="font-family:'Bebas Neue',sans-serif; font-size:clamp(1.8rem,4vw,2.8rem); color:#111111; line-height:1; margin-bottom:16px;">What Should We Call It?</h2>
+    <p style="font-size:1rem; color:#444; max-width:580px; line-height:1.65; margin-bottom:28px;">
+      We are forming a working group focused on food waste, food rescue, and getting rescued food back into the community. Help us pick a name. Vote for your favorite or suggest your own.
+    </p>
+ 
+    <form id="naming-form" onsubmit="handleNaming(event)" style="display:flex; flex-direction:column; gap:0;">
+ 
+      <!-- Option list -->
+      <div id="naming-options" style="display:flex; flex-direction:column; gap:0; margin-bottom:20px; border:2px solid #111;">
+ 
+        <label class="naming-opt" style="display:flex; align-items:center; gap:14px; padding:14px 18px; cursor:pointer; border-bottom:1px solid #e0e0e0; transition:background 0.1s;">
+          <input type="radio" name="name_vote" value="Waste Management" style="accent-color:#FF2D55; width:18px; height:18px; flex-shrink:0;"/>
+          <span style="font-size:0.95rem; font-weight:600; color:#111;">Waste Management</span>
+        </label>
+ 
+        <label class="naming-opt" style="display:flex; align-items:center; gap:14px; padding:14px 18px; cursor:pointer; border-bottom:1px solid #e0e0e0; transition:background 0.1s;">
+          <input type="radio" name="name_vote" value="Waste Prevention" style="accent-color:#FF2D55; width:18px; height:18px; flex-shrink:0;"/>
+          <span style="font-size:0.95rem; font-weight:600; color:#111;">Waste Prevention</span>
+        </label>
+ 
+        <label class="naming-opt" style="display:flex; align-items:center; gap:14px; padding:14px 18px; cursor:pointer; border-bottom:1px solid #e0e0e0; transition:background 0.1s;">
+          <input type="radio" name="name_vote" value="Waste Repurposing" style="accent-color:#FF2D55; width:18px; height:18px; flex-shrink:0;"/>
+          <span style="font-size:0.95rem; font-weight:600; color:#111;">Waste Repurposing</span>
+        </label>
+ 
+        <label class="naming-opt" style="display:flex; align-items:center; gap:14px; padding:14px 18px; cursor:pointer; border-bottom:1px solid #e0e0e0; transition:background 0.1s;">
+          <input type="radio" name="name_vote" value="Waste Mitigation" style="accent-color:#FF2D55; width:18px; height:18px; flex-shrink:0;"/>
+          <span style="font-size:0.95rem; font-weight:600; color:#111;">Waste Mitigation</span>
+        </label>
+ 
+        <label class="naming-opt" style="display:flex; align-items:center; gap:14px; padding:14px 18px; cursor:pointer; border-bottom:1px solid #e0e0e0; transition:background 0.1s;">
+          <input type="radio" name="name_vote" value="Food Recycling" style="accent-color:#FF2D55; width:18px; height:18px; flex-shrink:0;"/>
+          <span style="font-size:0.95rem; font-weight:600; color:#111;">Food Recycling</span>
+        </label>
+ 
+        <label class="naming-opt" style="display:flex; align-items:center; gap:14px; padding:14px 18px; cursor:pointer; border-bottom:1px solid #e0e0e0; transition:background 0.1s;">
+          <input type="radio" name="name_vote" value="Upcycling" style="accent-color:#FF2D55; width:18px; height:18px; flex-shrink:0;"/>
+          <span style="font-size:0.95rem; font-weight:600; color:#111;">Upcycling</span>
+        </label>
+ 
+        <label class="naming-opt" style="display:flex; align-items:center; gap:14px; padding:14px 18px; cursor:pointer; border-bottom:1px solid #e0e0e0; transition:background 0.1s;">
+          <input type="radio" name="name_vote" value="Second Harvest" style="accent-color:#FF2D55; width:18px; height:18px; flex-shrink:0;"/>
+          <span style="font-size:0.95rem; font-weight:600; color:#111;">Second Harvest</span>
+        </label>
+ 
+        <label class="naming-opt" style="display:flex; align-items:center; gap:14px; padding:14px 18px; cursor:pointer; border-bottom:1px solid #e0e0e0; transition:background 0.1s;">
+          <input type="radio" name="name_vote" value="Reharvest" style="accent-color:#FF2D55; width:18px; height:18px; flex-shrink:0;"/>
+          <span style="font-size:0.95rem; font-weight:600; color:#111;">Reharvest</span>
+        </label>
+ 
+        <label class="naming-opt" style="display:flex; align-items:center; gap:14px; padding:14px 18px; cursor:pointer; border-bottom:1px solid #e0e0e0; transition:background 0.1s;">
+          <input type="radio" name="name_vote" value="Food Recovery" style="accent-color:#FF2D55; width:18px; height:18px; flex-shrink:0;"/>
+          <div>
+            <span style="font-size:0.95rem; font-weight:600; color:#111;">Food Recovery</span>
+            <span style="display:block; font-size:0.78rem; color:#888; margin-top:2px;">Used widely in food banking and USDA programs</span>
+          </div>
+        </label>
+ 
+        <label class="naming-opt" style="display:flex; align-items:center; gap:14px; padding:14px 18px; cursor:pointer; border-bottom:1px solid #e0e0e0; transition:background 0.1s;">
+          <input type="radio" name="name_vote" value="Gleaning & Recovery" style="accent-color:#FF2D55; width:18px; height:18px; flex-shrink:0;"/>
+          <div>
+            <span style="font-size:0.95rem; font-weight:600; color:#111;">Gleaning &amp; Recovery</span>
+            <span style="display:block; font-size:0.78rem; color:#888; margin-top:2px;">Rooted in agricultural tradition of collecting leftover crops</span>
+          </div>
+        </label>
+ 
+        <label class="naming-opt" style="display:flex; align-items:center; gap:14px; padding:14px 18px; cursor:pointer; transition:background 0.1s;">
+          <input type="radio" name="name_vote" value="__other__" style="accent-color:#FF2D55; width:18px; height:18px; flex-shrink:0;"/>
+          <span style="font-size:0.95rem; font-weight:600; color:#111;">My own idea (see below)</span>
+        </label>
+ 
+      </div>
+ 
+      <!-- Suggest your own -->
+      <div style="display:flex; flex-direction:column; gap:4px; margin-bottom:16px;">
+        <label style="font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:#999;">Suggest your own name</label>
+        <input type="text" name="name_suggestion" placeholder="Type a name here..."
+          style="background:#f7f7f7; border:1.5px solid #ddd; color:#111; padding:9px 12px; font-family:'DM Sans',sans-serif; font-size:0.88rem; outline:none; border-radius:0; max-width:400px;"/>
+      </div>
+ 
+      <!-- Your name -->
+      <div style="display:flex; flex-direction:column; gap:4px; margin-bottom:20px;">
+        <label style="font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:#999;">Your Name (optional)</label>
+        <input type="text" name="poll_name" placeholder="First Last"
+          style="background:#f7f7f7; border:1.5px solid #ddd; color:#111; padding:9px 12px; font-family:'DM Sans',sans-serif; font-size:0.88rem; outline:none; border-radius:0; max-width:400px;"/>
+      </div>
+ 
+      <div>
+        <button type="submit"
+          style="font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:0.12em; padding:10px 28px; background:#FF2D55; color:#fff; border:none; cursor:pointer;">
+          Submit My Vote
+        </button>
+      </div>
+      <div id="poll-thanks" style="display:none; font-size:0.88rem; font-weight:700; color:#2db84d; padding-top:12px;">Vote recorded. Thank you!</div>
+    </form>
+  </div>
+</section>
+ 
+<script>
+  function handleNaming(e) {
+    e.preventDefault();
+    const form = document.getElementById('naming-form');
+    const voteEl = form.querySelector('input[name="name_vote"]:checked');
+    const suggestion = form.name_suggestion.value.trim();
+    const pollName = form.poll_name.value.trim();
+ 
+    const vote = voteEl ? voteEl.value : '';
+    const finalVote = (vote === '__other__' && suggestion) ? suggestion : (vote === '__other__' ? 'Other (no suggestion)' : vote);
+ 
+    const data = {
+      type: 'naming_vote',
+      vote: finalVote,
+      suggestion: suggestion,
+      name: pollName,
+      timestamp: new Date().toISOString()
+    };
+ 
+    const btn = form.querySelector('button[type="submit"]');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+ 
+    fetch(SUBMIT_URL, {
+      method: 'POST', mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+    .then(() => showPollThanks(form, btn))
+    .catch(() => showPollThanks(form, btn));
+  }
+ 
+  function showPollThanks(form, btn) {
+    form.querySelectorAll('input, textarea').forEach(el => el.disabled = true);
+    btn.style.display = 'none';
+    document.getElementById('poll-thanks').style.display = 'block';
+  }
+</script> 
+  
 <footer>
   Muskegon County Food Policy Network &nbsp;|&nbsp; tierralocal.org
 </footer>
