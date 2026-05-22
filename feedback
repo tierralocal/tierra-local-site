@@ -562,7 +562,7 @@
 </footer>
 
 <script>
-  const SUBMIT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
+  const SUBMIT_URL = 'https://script.google.com/macros/s/AKfycbzxAokX7-0pyPoM_VGVC2EmpcyRBZ6CBJQRxDbVN0ErHu87g5bYpcEuOt4IWO3Vwvp1/exec';
 
   function handleSubmit(e, form) {
     e.preventDefault();
@@ -579,11 +579,6 @@
     btn.textContent = 'Sending...';
     btn.disabled = true;
 
-    if (SUBMIT_URL === 'https://script.google.com/macros/s/AKfycbzxAokX7-0pyPoM_VGVC2EmpcyRBZ6CBJQRxDbVN0ErHu87g5bYpcEuOt4IWO3Vwvp1/exec') {
-      console.log('Feedback:', data);
-      showThanks(form, btn, thanks);
-      return;
-    }
     fetch(SUBMIT_URL, {
       method: 'POST', mode: 'no-cors',
       headers: { 'Content-Type': 'application/json' },
