@@ -609,11 +609,6 @@
     const thanks = form.querySelector('.thank-you');
     btn.textContent = 'Sending...';
     btn.disabled = true;
- 
-    if (SUBMIT_URL === 'https://script.google.com/macros/s/AKfycbw97hJYCN9BReS3YAVVqL5kPsi9hqS2qJ3xO5uCIgM3vUKTSZJHzWRHQlf9gEHOw4AC/exec') {
-      console.log('Feedback:', data);
-      showThanks(form, btn, thanks);
-      return;
     }
     fetch(SUBMIT_URL, {
       method: 'POST', mode: 'no-cors',
