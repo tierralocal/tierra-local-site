@@ -16,9 +16,9 @@
     --white: #FFFFFF;
     --text: #1a1a1a;
   }
-
+ 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+ 
   body {
     background: var(--yellow);
     color: var(--text);
@@ -26,7 +26,7 @@
     font-size: 16px;
     line-height: 1.5;
   }
-
+ 
   /* APPBAR */
   .appbar {
     background: var(--black);
@@ -53,7 +53,7 @@
     text-transform: uppercase;
     letter-spacing: 0.12em;
   }
-
+ 
   /* HERO */
   .hero {
     background: var(--black);
@@ -95,7 +95,7 @@
     line-height: 1.5;
     max-width: 640px;
   }
-
+ 
   /* MAIN */
   main {
     max-width: 920px;
@@ -105,7 +105,7 @@
     flex-direction: column;
     gap: 48px;
   }
-
+ 
   /* SECTION CARD — white bg, colored border */
   .section-card {
     background: var(--white);
@@ -117,7 +117,7 @@
   .section-card.waste { border-color: var(--pink); }
   .section-card.prod  { border-color: var(--violet); }
   .section-card.proc  { border-color: var(--cyan); }
-
+ 
   /* TAB uses section color as bg */
   .section-tab {
     font-family: 'Bebas Neue', sans-serif;
@@ -132,14 +132,14 @@
   .waste .section-tab { background: var(--pink); color: var(--white); }
   .prod  .section-tab { background: var(--violet); color: var(--white); }
   .proc  .section-tab { background: var(--cyan); }
-
+ 
   .section-body { padding: 24px; }
-
+ 
   /* SINGLE COL */
   .single-col {
     margin-bottom: 28px;
   }
-
+ 
   .col-head {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 0.82rem;
@@ -149,7 +149,7 @@
     border-bottom: 2px solid #e0e0e0;
     color: #888;
   }
-
+ 
   /* ISSUE LIST */
   .issue-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
   .issue-list li {
@@ -167,7 +167,7 @@
     font-style: italic;
   }
   .issue-list li.sub::before { content: 'o'; left: 13px; font-size: 0.6rem; top: 4px; }
-
+ 
   /* PROBLEM LIST */
   .problem-list { list-style: none; display: flex; flex-direction: column; gap: 8px; counter-reset: prob; }
   .problem-list li {
@@ -194,7 +194,7 @@
   .prod  .problem-list li::before { background: var(--violet); color: var(--white); }
   .proc  .problem-list li::before { background: var(--cyan);   color: var(--black); }
   /* colored text — inline style on each li for maximum specificity */
-
+ 
   /* SYNTHESIS BLOCK */
   .synthesis {
     margin: 0 0 24px;
@@ -206,7 +206,7 @@
   .waste .synthesis { border-color: var(--pink);   background: #fff0f3; }
   .prod  .synthesis { border-color: var(--violet); background: #f4efff; }
   .proc  .synthesis { border-color: var(--cyan);   background: #e8fafd; }
-
+ 
   .synthesis-label {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 0.78rem;
@@ -218,14 +218,14 @@
   .waste .synthesis-label { color: var(--pink); }
   .prod  .synthesis-label { color: var(--violet); }
   .proc  .synthesis-label { color: #0099b0; }
-
+ 
   .synthesis-text {
     font-size: 1.05rem;
     font-weight: 700;
     line-height: 1.55;
     color: var(--black);
   }
-
+ 
   /* FEEDBACK ZONE */
   .feedback-zone {
     border-top: 2px dashed #ddd;
@@ -245,7 +245,7 @@
     margin-bottom: 12px;
   }
   @media (max-width: 620px) { .feedback-grid { grid-template-columns: 1fr; } }
-
+ 
   .form-field { display: flex; flex-direction: column; gap: 4px; }
   .form-field label {
     font-size: 0.7rem; font-weight: 700;
@@ -272,7 +272,7 @@
   .form-field select:focus { border-color: var(--black); background: #fff; }
   .form-field select option { background: #fff; color: var(--black); }
   .form-field.full { grid-column: 1 / -1; }
-
+ 
   .submit-btn {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 1rem; letter-spacing: 0.12em;
@@ -287,13 +287,13 @@
   .waste .submit-btn { background: var(--pink); color: var(--white); }
   .prod  .submit-btn { background: var(--violet); color: var(--white); }
   .proc  .submit-btn { background: var(--cyan); }
-
+ 
   .thank-you {
     display: none;
     font-size: 0.88rem; font-weight: 700;
     color: #2db84d; padding: 8px 0 0;
   }
-
+ 
   footer {
     background: var(--black);
     color: var(--yellow);
@@ -306,12 +306,12 @@
 </style>
 </head>
 <body>
-
+ 
 <div class="appbar">
   <img src="MCFPN_Logo.png" alt="MCFPN" style="height:36px;filter:brightness(0) invert(1);"/>
   <span class="appbar-sub">Member Review</span>
 </div>
-
+ 
 <div class="hero">
   <h1>What Are the Issues<br/>in Our Food System?</h1>
   <p class="hero-context">
@@ -321,9 +321,9 @@
     Read each section. Use the form at the bottom to tell us what we missed or got wrong. Takes about 15 minutes.
   </div>
 </div>
-
+ 
 <main>
-
+ 
   <!-- DISTRIBUTION -->
   <div class="section-card dist">
     <div class="section-tab">Distribution</div>
@@ -367,7 +367,7 @@
       </div>
     </div>
   </div>
-
+ 
   <!-- CONSUMPTION -->
   <div class="section-card cons">
     <div class="section-tab">Consumption</div>
@@ -412,7 +412,7 @@
       </div>
     </div>
   </div>
-
+ 
   <!-- WASTE / RESCUE -->
   <div class="section-card waste">
     <div class="section-tab">Waste &amp; Rescue</div>
@@ -461,7 +461,7 @@
       </div>
     </div>
   </div>
-
+ 
   <!-- PRODUCTION -->
   <div class="section-card prod">
     <div class="section-tab">Production</div>
@@ -505,7 +505,7 @@
       </div>
     </div>
   </div>
-
+ 
   <!-- PROCESSING -->
   <div class="section-card proc">
     <div class="section-tab">Processing</div>
@@ -553,16 +553,16 @@
       </div>
     </div>
   </div>
-
+ 
 </main>
-
-
+ 
+ 
 <section style="background:#111111; border-top: 6px solid #FFD600; padding: 48px 32px;">
   <div style="max-width:920px; margin:0 auto;">
     <div style="font-family:'Bebas Neue',sans-serif; font-size:0.85rem; letter-spacing:0.22em; color:#FFD600; margin-bottom:10px;">Make-Up Session</div>
     <h2 style="font-family:'Bebas Neue',sans-serif; font-size:clamp(1.8rem,4vw,2.8rem); color:#ffffff; line-height:1; margin-bottom:16px;">Join Us on June 4</h2>
     <p style="font-size:1rem; color:rgba(255,255,255,0.8); max-width:580px; line-height:1.65; margin-bottom:28px;">
-      If you missed the session or want to keep the conversation going, join us online on <strong style="color:#FFD600;">Wednesday, June 4 from 6:00 &ndash; 7:30 PM online.</strong> Members who attend will receive a <strong style="color:#FFD600;">$75 stipend</strong>. Enter your name and email below to RSVP.
+      If you missed the session or want to keep the conversation going, join us online on <strong style="color:#FFD600;">Wednesday, June 4 from 6:00 &ndash; 7:30 PM.</strong> Members who attend will receive a <strong style="color:#FFD600;">$75 stipend</strong>. Enter your name and email below to RSVP.
     </p>
     <form id="rsvp-form" onsubmit="handleRSVP(event)" style="display:flex; flex-direction:column; gap:12px; max-width:480px;">
       <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
@@ -587,14 +587,14 @@
     </form>
   </div>
 </section>
-
+ 
 <footer>
   Muskegon County Food Policy Network &nbsp;|&nbsp; tierralocal.org
 </footer>
-
+ 
 <script>
   const SUBMIT_URL = 'https://script.google.com/macros/s/AKfycbw97hJYCN9BReS3YAVVqL5kPsi9hqS2qJ3xO5uCIgM3vUKTSZJHzWRHQlf9gEHOw4AC/exec';
-
+ 
   function handleSubmit(e, form) {
     e.preventDefault();
     const data = {
@@ -609,7 +609,7 @@
     const thanks = form.querySelector('.thank-you');
     btn.textContent = 'Sending...';
     btn.disabled = true;
-
+ 
     if (SUBMIT_URL === 'https://script.google.com/macros/s/AKfycbw97hJYCN9BReS3YAVVqL5kPsi9hqS2qJ3xO5uCIgM3vUKTSZJHzWRHQlf9gEHOw4AC/exec') {
       console.log('Feedback:', data);
       showThanks(form, btn, thanks);
@@ -623,7 +623,7 @@
     .then(() => showThanks(form, btn, thanks))
     .catch(() => showThanks(form, btn, thanks));
   }
-
+ 
   function handleRSVP(e) {
     e.preventDefault();
     const form = document.getElementById('rsvp-form');
@@ -645,7 +645,7 @@
     btn.style.display = 'none';
     document.getElementById('rsvp-thanks').style.display = 'block';
   }
-
+ 
   function showThanks(form, btn, thanks) {
     form.querySelectorAll('input, textarea, select').forEach(el => el.disabled = true);
     btn.style.display = 'none';
@@ -654,11 +654,4 @@
 </script>
 </body>
 </html>
-  function showThanks(form, btn, thanks) {
-    form.querySelectorAll('input, textarea, select').forEach(el => el.disabled = true);
-    btn.style.display = 'none';
-    thanks.style.display = 'block';
-  }
-</script>
-</body>
-</html>
+ 
