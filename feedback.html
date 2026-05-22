@@ -308,18 +308,17 @@
 <body>
 
 <div class="appbar">
-  <span class="appbar-title">Muskegon County Food Policy Network</span>
+  <img src="MCFPN_Logo.png" alt="MCFPN" style="height:36px;filter:brightness(0) invert(1);"/>
   <span class="appbar-sub">Member Review</span>
 </div>
 
 <div class="hero">
-  <div class="hero-label">Member Feedback</div>
   <h1>What Are the Issues<br/>in Our Food System?</h1>
   <p class="hero-context">
     At our last meeting, members looked at data together and talked about what is working and what is not in Muskegon County's food system. We wrote up the key issues below. <strong>We need your help to make sure we got it right.</strong>
   </p>
   <div class="hero-instructions">
-    Read each section. Use the form at the bottom to tell us what we missed or got wrong. Takes about 5 minutes.
+    Read each section. Use the form at the bottom to tell us what we missed or got wrong. Takes about 15 minutes.
   </div>
 </div>
 
@@ -557,12 +556,44 @@
 
 </main>
 
+
+<section style="background:#111111; border-top: 6px solid #FFD600; padding: 48px 32px;">
+  <div style="max-width:920px; margin:0 auto;">
+    <div style="font-family:'Bebas Neue',sans-serif; font-size:0.85rem; letter-spacing:0.22em; color:#FFD600; margin-bottom:10px;">Make-Up Session</div>
+    <h2 style="font-family:'Bebas Neue',sans-serif; font-size:clamp(1.8rem,4vw,2.8rem); color:#ffffff; line-height:1; margin-bottom:16px;">Join Us on June 4</h2>
+    <p style="font-size:1rem; color:rgba(255,255,255,0.8); max-width:580px; line-height:1.65; margin-bottom:28px;">
+      If you missed the session or want to keep the conversation going, join us online on <strong style="color:#FFD600;">Wednesday, June 4 from 6:00 &ndash; 7:30 PM.</strong> Members who attend will receive a <strong style="color:#FFD600;">$75 stipend</strong>. Enter your name and email below to RSVP.
+    </p>
+    <form id="rsvp-form" onsubmit="handleRSVP(event)" style="display:flex; flex-direction:column; gap:12px; max-width:480px;">
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+        <div style="display:flex; flex-direction:column; gap:4px;">
+          <label style="font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:#999;">Your Name</label>
+          <input type="text" name="rsvp_name" placeholder="First Last" required
+            style="background:#1e1e1e; border:1.5px solid #333; color:#fff; padding:9px 12px; font-family:'DM Sans',sans-serif; font-size:0.88rem; outline:none; border-radius:0;"/>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:4px;">
+          <label style="font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:#999;">Email</label>
+          <input type="email" name="rsvp_email" placeholder="you@example.com" required
+            style="background:#1e1e1e; border:1.5px solid #333; color:#fff; padding:9px 12px; font-family:'DM Sans',sans-serif; font-size:0.88rem; outline:none; border-radius:0;"/>
+        </div>
+      </div>
+      <div>
+        <button type="submit"
+          style="font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:0.12em; padding:10px 28px; background:#FFD600; color:#111; border:none; cursor:pointer;">
+          RSVP for June 4
+        </button>
+      </div>
+      <div id="rsvp-thanks" style="display:none; font-size:0.88rem; font-weight:700; color:#5EE06A; padding-top:4px;">You are on the list. See you June 4!</div>
+    </form>
+  </div>
+</section>
+
 <footer>
   Muskegon County Food Policy Network &nbsp;|&nbsp; tierralocal.org
 </footer>
 
 <script>
-  const SUBMIT_URL = 'https://script.google.com/macros/s/AKfycbzxAokX7-0pyPoM_VGVC2EmpcyRBZ6CBJQRxDbVN0ErHu87g5bYpcEuOt4IWO3Vwvp1/exec';
+  const SUBMIT_URL = 'https://script.google.com/macros/s/AKfycbw97hJYCN9BReS3YAVVqL5kPsi9hqS2qJ3xO5uCIgM3vUKTSZJHzWRHQlf9gEHOw4AC/exec';
 
   function handleSubmit(e, form) {
     e.preventDefault();
@@ -579,6 +610,11 @@
     btn.textContent = 'Sending...';
     btn.disabled = true;
 
+    if (SUBMIT_URL === 'https://script.google.com/macros/s/AKfycbw97hJYCN9BReS3YAVVqL5kPsi9hqS2qJ3xO5uCIgM3vUKTSZJHzWRHQlf9gEHOw4AC/exec') {
+      console.log('Feedback:', data);
+      showThanks(form, btn, thanks);
+      return;
+    }
     fetch(SUBMIT_URL, {
       method: 'POST', mode: 'no-cors',
       headers: { 'Content-Type': 'application/json' },
@@ -588,6 +624,36 @@
     .catch(() => showThanks(form, btn, thanks));
   }
 
+  function handleRSVP(e) {
+    e.preventDefault();
+    const form = document.getElementById('rsvp-form');
+    const data = {
+      type: 'rsvp',
+      name: form.rsvp_name.value.trim(),
+      email: form.rsvp_email.value.trim(),
+      timestamp: new Date().toISOString()
+    };
+    const btn = form.querySelector('button');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+    if (SUBMIT_URL === '') {
+      console.log('RSVP:', data);
+    } else {
+      fetch(SUBMIT_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+    }
+    form.querySelectorAll('input').forEach(el => el.disabled = true);
+    btn.style.display = 'none';
+    document.getElementById('rsvp-thanks').style.display = 'block';
+  }
+
+  function showThanks(form, btn, thanks) {
+    form.querySelectorAll('input, textarea, select').forEach(el => el.disabled = true);
+    btn.style.display = 'none';
+    thanks.style.display = 'block';
+  }
+</script>
+</body>
+</html>
   function showThanks(form, btn, thanks) {
     form.querySelectorAll('input, textarea, select').forEach(el => el.disabled = true);
     btn.style.display = 'none';
