@@ -16,9 +16,9 @@
     --white: #FFFFFF;
     --text: #1a1a1a;
   }
- 
+
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
- 
+
   body {
     background: var(--yellow);
     color: var(--text);
@@ -26,7 +26,7 @@
     font-size: 16px;
     line-height: 1.5;
   }
- 
+
   /* APPBAR */
   .appbar {
     background: var(--black);
@@ -53,7 +53,7 @@
     text-transform: uppercase;
     letter-spacing: 0.12em;
   }
- 
+
   /* HERO */
   .hero {
     background: var(--black);
@@ -95,7 +95,7 @@
     line-height: 1.5;
     max-width: 640px;
   }
- 
+
   /* MAIN */
   main {
     max-width: 920px;
@@ -105,7 +105,7 @@
     flex-direction: column;
     gap: 48px;
   }
- 
+
   /* SECTION CARD — white bg, colored border */
   .section-card {
     background: var(--white);
@@ -117,7 +117,7 @@
   .section-card.waste { border-color: var(--pink); }
   .section-card.prod  { border-color: var(--violet); }
   .section-card.proc  { border-color: var(--cyan); }
- 
+
   /* TAB uses section color as bg */
   .section-tab {
     font-family: 'Bebas Neue', sans-serif;
@@ -132,14 +132,14 @@
   .waste .section-tab { background: var(--pink); color: var(--white); }
   .prod  .section-tab { background: var(--violet); color: var(--white); }
   .proc  .section-tab { background: var(--cyan); }
- 
+
   .section-body { padding: 24px; }
- 
+
   /* SINGLE COL */
   .single-col {
     margin-bottom: 28px;
   }
- 
+
   .col-head {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 0.82rem;
@@ -149,7 +149,7 @@
     border-bottom: 2px solid #e0e0e0;
     color: #888;
   }
- 
+
   /* ISSUE LIST */
   .issue-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
   .issue-list li {
@@ -167,7 +167,7 @@
     font-style: italic;
   }
   .issue-list li.sub::before { content: 'o'; left: 13px; font-size: 0.6rem; top: 4px; }
- 
+
   /* PROBLEM LIST */
   .problem-list { list-style: none; display: flex; flex-direction: column; gap: 8px; counter-reset: prob; }
   .problem-list li {
@@ -194,7 +194,7 @@
   .prod  .problem-list li::before { background: var(--violet); color: var(--white); }
   .proc  .problem-list li::before { background: var(--cyan);   color: var(--black); }
   /* colored text — inline style on each li for maximum specificity */
- 
+
   /* SYNTHESIS BLOCK */
   .synthesis {
     margin: 0 0 24px;
@@ -206,7 +206,7 @@
   .waste .synthesis { border-color: var(--pink);   background: #fff0f3; }
   .prod  .synthesis { border-color: var(--violet); background: #f4efff; }
   .proc  .synthesis { border-color: var(--cyan);   background: #e8fafd; }
- 
+
   .synthesis-label {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 0.78rem;
@@ -218,14 +218,14 @@
   .waste .synthesis-label { color: var(--pink); }
   .prod  .synthesis-label { color: var(--violet); }
   .proc  .synthesis-label { color: #0099b0; }
- 
+
   .synthesis-text {
     font-size: 1.05rem;
     font-weight: 700;
     line-height: 1.55;
     color: var(--black);
   }
- 
+
   /* FEEDBACK ZONE */
   .feedback-zone {
     border-top: 2px dashed #ddd;
@@ -245,7 +245,7 @@
     margin-bottom: 12px;
   }
   @media (max-width: 620px) { .feedback-grid { grid-template-columns: 1fr; } }
- 
+
   .form-field { display: flex; flex-direction: column; gap: 4px; }
   .form-field label {
     font-size: 0.7rem; font-weight: 700;
@@ -272,7 +272,7 @@
   .form-field select:focus { border-color: var(--black); background: #fff; }
   .form-field select option { background: #fff; color: var(--black); }
   .form-field.full { grid-column: 1 / -1; }
- 
+
   .submit-btn {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 1rem; letter-spacing: 0.12em;
@@ -287,13 +287,13 @@
   .waste .submit-btn { background: var(--pink); color: var(--white); }
   .prod  .submit-btn { background: var(--violet); color: var(--white); }
   .proc  .submit-btn { background: var(--cyan); }
- 
+
   .thank-you {
     display: none;
     font-size: 0.88rem; font-weight: 700;
     color: #2db84d; padding: 8px 0 0;
   }
- 
+
   footer {
     background: var(--black);
     color: var(--yellow);
@@ -306,12 +306,12 @@
 </style>
 </head>
 <body>
- 
+
 <div class="appbar">
-  <img src="MCFPN_Logo.png" alt="MCFPN" style="height:36px;"/>
+  <img src="MCFPN_Logo.png" alt="MCFPN" style="height:36px;filter:brightness(0) invert(1);"/>
   <span class="appbar-sub">Member Review</span>
 </div>
- 
+
 <div class="hero">
   <h1>What Are the Issues<br/>in Our Food System?</h1>
   <p class="hero-context">
@@ -321,9 +321,9 @@
     Read each section. Use the form at the bottom to tell us what we missed or got wrong. Takes about 15 minutes.
   </div>
 </div>
- 
+
 <main>
- 
+
   <!-- DISTRIBUTION -->
   <div class="section-card dist">
     <div class="section-tab">Distribution</div>
@@ -337,6 +337,8 @@
             <li>Farmers and food buyers are not connected</li>
             <li>Makeshift workarounds have filled the gap, but they do not scale</li>
             <li>Rules and regulations make distribution harder</li>
+            <li class="sub">Which rules? We need to name them so we can understand and change them</li>
+            <li>People who need help do not know that others are working to solve this</li>
           </ul>
         </div>
       </div>
@@ -367,7 +369,7 @@
       </div>
     </div>
   </div>
- 
+
   <!-- CONSUMPTION -->
   <div class="section-card cons">
     <div class="section-tab">Consumption</div>
@@ -377,10 +379,13 @@
           <div class="col-head">The Issues</div>
           <ul class="issue-list">
             <li>Many people cannot easily get to food</li>
-            <li>No bus routes or transportation to food sources in many areas</li>
-            <li>Food programs, markets, and agencies do not share information</li>
+            <li>Bus routes do not reach food sources in many parts of the county</li>
+            <li>Local food is not where people actually shop — not at Meijer, not at corner stores</li>
+            <li class="sub">CSAs require driving to farms outside the city, which many families cannot do</li>
+            <li>Food programs, markets, and agencies do not share information with each other</li>
             <li>Food is too expensive for many families</li>
             <li>Some people lack the tools or skills to cook at home</li>
+            <li class="sub">Teaching cooking and nutrition builds real demand for better food access</li>
             <li>City and county planning does not prioritize food access</li>
           </ul>
         </div>
@@ -412,7 +417,7 @@
       </div>
     </div>
   </div>
- 
+
   <!-- WASTE / RESCUE -->
   <div class="section-card waste">
     <div class="section-tab">Waste &amp; Rescue</div>
@@ -422,13 +427,13 @@
           <div class="col-head">The Issues</div>
           <ul class="issue-list">
             <li>Rescued food is routed out of the county before it can reach local pantries and food programs</li>
-            <li class="sub">supply leaves Muskegon, then trickles back in through regional networks at reduced volume and quality</li>
+            <li class="sub">Supply leaves Muskegon, then trickles back in through regional networks at reduced volume and quality</li>
             <li>No local aggregation point or cold storage to receive, hold, and redistribute rescued food at scale</li>
             <li>Lack of public will and incentive for waste reduction; limited community-level efforts</li>
-            <li>Composting and organic waste management infrastructure largely absent</li>
+            <li>Composting infrastructure is largely absent — but composting could save cities money on beautification and become a revenue driver</li>
+            <li class="sub">Other cities have shown this works; worth studying those models</li>
             <li>Redistribution seen as mitigation rather than economic or community opportunity</li>
             <li>Regulation and liability barriers limit participation in food rescue</li>
-            <li>Infrastructure gaps across composting, biofuels, and alternative operational models</li>
             <li>Point source reduction not addressed at the producer or retail level</li>
             <li>Sociocultural practices and education gaps around food waste</li>
           </ul>
@@ -461,7 +466,7 @@
       </div>
     </div>
   </div>
- 
+
   <!-- PRODUCTION -->
   <div class="section-card prod">
     <div class="section-tab">Production</div>
@@ -470,17 +475,21 @@
         <div>
           <div class="col-head">The Issues</div>
           <ul class="issue-list">
-            <li>Labor and workforce development gaps</li>
-            <li class="sub">reducing reliance on seasonal and migrant workers</li>
-            <li>Small and mid-size farmers are fragmented and not aligned</li>
-            <li>No efficient mechanism to aggregate for market, distribute, or store</li>
-            <li class="sub">insufficient supply chain development, logistics, and communications</li>
+            <li>Land is too expensive and inaccessible for small and beginning farmers</li>
+            <li>County zoning is inconsistent from township to township — some townships exclude farming entirely</li>
+            <li>Small and mid-size producers are not connected to local buyers — schools, restaurants, and institutions do not know who is growing what</li>
+            <li class="sub">This is a producer-to-buyer gap, not a lack of alignment among farmers themselves</li>
+            <li>Farmers market vendor fees and requirements are not small-farm friendly</li>
+            <li>Secondary markets for food pay too little or do not exist locally</li>
+            <li>Seasonal and migrant workers fill a critical role in large farm operations — the issue is making sure that system works well for everyone</li>
+            <li>Small and mid-size farms are at risk of being bought out by large industrial operations</li>
+            <li>No shared system for collecting, storing, and moving crops to local buyers</li>
           </ul>
         </div>
       </div>
       <div class="synthesis">
         <div class="synthesis-label">Why This Matters</div>
-        <div class="synthesis-text">We have good land and farmers who want to grow more. But there are not enough trained workers, no shared way to move and store crops, and no system to help farmers sell locally. One farmer cannot fix this alone.</div>
+        <div class="synthesis-text">Muskegon County has good land and farmers who want to grow more. But land costs are rising, zoning rules vary wildly by township, and there is no clear path for a small farmer to find local buyers, get fair prices, or store and move their crops. The system is not built for them.</div>
       </div>
       <div class="feedback-zone">
         <div class="feedback-label">Your Feedback</div>
@@ -505,7 +514,7 @@
       </div>
     </div>
   </div>
- 
+
   <!-- PROCESSING -->
   <div class="section-card proc">
     <div class="section-tab">Processing</div>
@@ -553,194 +562,19 @@
       </div>
     </div>
   </div>
- 
-</main>
- 
- 
-<section style="background:#111111; border-top: 6px solid #FFD600; padding: 48px 32px;">
-  <div style="max-width:920px; margin:0 auto;">
-    <div style="font-family:'Bebas Neue',sans-serif; font-size:0.85rem; letter-spacing:0.22em; color:#FFD600; margin-bottom:10px;">Make-Up Session</div>
-    <h2 style="font-family:'Bebas Neue',sans-serif; font-size:clamp(1.8rem,4vw,2.8rem); color:#ffffff; line-height:1; margin-bottom:16px;">Join Us on June 4</h2>
-    <p style="font-size:1rem; color:rgba(255,255,255,0.8); max-width:580px; line-height:1.65; margin-bottom:28px;">
-      If you missed the session or want to keep the conversation going, join us online on <strong style="color:#FFD600;">Wednesday, June 4 from 6:00 &ndash; 7:30 PM.</strong> Members who attend will receive a <strong style="color:#FFD600;">$75 stipend</strong>. Enter your name and email below to RSVP.
-    </p>
-    <form id="rsvp-form" onsubmit="handleRSVP(event)" style="display:flex; flex-direction:column; gap:12px; max-width:480px;">
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-        <div style="display:flex; flex-direction:column; gap:4px;">
-          <label style="font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:#999;">Your Name</label>
-          <input type="text" name="rsvp_name" placeholder="First Last" required
-            style="background:#1e1e1e; border:1.5px solid #333; color:#fff; padding:9px 12px; font-family:'DM Sans',sans-serif; font-size:0.88rem; outline:none; border-radius:0;"/>
-        </div>
-        <div style="display:flex; flex-direction:column; gap:4px;">
-          <label style="font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:#999;">Email</label>
-          <input type="email" name="rsvp_email" placeholder="you@example.com" required
-            style="background:#1e1e1e; border:1.5px solid #333; color:#fff; padding:9px 12px; font-family:'DM Sans',sans-serif; font-size:0.88rem; outline:none; border-radius:0;"/>
-        </div>
-      </div>
-      <div>
-        <button type="submit"
-          style="font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:0.12em; padding:10px 28px; background:#FFD600; color:#111; border:none; cursor:pointer;">
-          RSVP for June 4
-        </button>
-      </div>
-      <div id="rsvp-thanks" style="display:none; font-size:0.88rem; font-weight:700; color:#5EE06A; padding-top:4px;">You are on the list. See you June 4!</div>
-    </form>
-  </div>
-</section>
 
- <!-- ============================================================
-     NAMING POLL — Waste & Rescue Working Group
-     Paste this BETWEEN the closing </section> of the RSVP block
-     and the <footer> tag
-     ============================================================ -->
- 
-<section style="background:#ffffff; border-top: 6px solid #FFD600; padding: 48px 32px;">
-  <div style="max-width:920px; margin:0 auto;">
-    <div style="font-family:'Bebas Neue',sans-serif; font-size:0.85rem; letter-spacing:0.22em; color:#FF2D55; margin-bottom:10px;">Working Group Name</div>
-    <h2 style="font-family:'Bebas Neue',sans-serif; font-size:clamp(1.8rem,4vw,2.8rem); color:#111111; line-height:1; margin-bottom:16px;">What Should We Call It?</h2>
-    <p style="font-size:1rem; color:#444; max-width:580px; line-height:1.65; margin-bottom:28px;">
-      We are forming a working group focused on food waste, food rescue, and getting rescued food back into the community. Help us pick a name. Vote for your favorite or suggest your own.
-    </p>
- 
-    <form id="naming-form" onsubmit="handleNaming(event)" style="display:flex; flex-direction:column; gap:0;">
- 
-      <!-- Option list -->
-      <div id="naming-options" style="display:flex; flex-direction:column; gap:0; margin-bottom:20px; border:2px solid #111;">
- 
-        <label class="naming-opt" style="display:flex; align-items:center; gap:14px; padding:14px 18px; cursor:pointer; border-bottom:1px solid #e0e0e0; transition:background 0.1s;">
-          <input type="radio" name="name_vote" value="Waste Management" style="accent-color:#FF2D55; width:18px; height:18px; flex-shrink:0;"/>
-          <span style="font-size:0.95rem; font-weight:600; color:#111;">Waste Management</span>
-        </label>
- 
-        <label class="naming-opt" style="display:flex; align-items:center; gap:14px; padding:14px 18px; cursor:pointer; border-bottom:1px solid #e0e0e0; transition:background 0.1s;">
-          <input type="radio" name="name_vote" value="Waste Prevention" style="accent-color:#FF2D55; width:18px; height:18px; flex-shrink:0;"/>
-          <span style="font-size:0.95rem; font-weight:600; color:#111;">Waste Prevention</span>
-        </label>
- 
-        <label class="naming-opt" style="display:flex; align-items:center; gap:14px; padding:14px 18px; cursor:pointer; border-bottom:1px solid #e0e0e0; transition:background 0.1s;">
-          <input type="radio" name="name_vote" value="Waste Repurposing" style="accent-color:#FF2D55; width:18px; height:18px; flex-shrink:0;"/>
-          <span style="font-size:0.95rem; font-weight:600; color:#111;">Waste Repurposing</span>
-        </label>
- 
-        <label class="naming-opt" style="display:flex; align-items:center; gap:14px; padding:14px 18px; cursor:pointer; border-bottom:1px solid #e0e0e0; transition:background 0.1s;">
-          <input type="radio" name="name_vote" value="Waste Mitigation" style="accent-color:#FF2D55; width:18px; height:18px; flex-shrink:0;"/>
-          <span style="font-size:0.95rem; font-weight:600; color:#111;">Waste Mitigation</span>
-        </label>
- 
-        <label class="naming-opt" style="display:flex; align-items:center; gap:14px; padding:14px 18px; cursor:pointer; border-bottom:1px solid #e0e0e0; transition:background 0.1s;">
-          <input type="radio" name="name_vote" value="Food Recycling" style="accent-color:#FF2D55; width:18px; height:18px; flex-shrink:0;"/>
-          <span style="font-size:0.95rem; font-weight:600; color:#111;">Food Recycling</span>
-        </label>
- 
-        <label class="naming-opt" style="display:flex; align-items:center; gap:14px; padding:14px 18px; cursor:pointer; border-bottom:1px solid #e0e0e0; transition:background 0.1s;">
-          <input type="radio" name="name_vote" value="Upcycling" style="accent-color:#FF2D55; width:18px; height:18px; flex-shrink:0;"/>
-          <span style="font-size:0.95rem; font-weight:600; color:#111;">Upcycling</span>
-        </label>
- 
-        <label class="naming-opt" style="display:flex; align-items:center; gap:14px; padding:14px 18px; cursor:pointer; border-bottom:1px solid #e0e0e0; transition:background 0.1s;">
-          <input type="radio" name="name_vote" value="Second Harvest" style="accent-color:#FF2D55; width:18px; height:18px; flex-shrink:0;"/>
-          <span style="font-size:0.95rem; font-weight:600; color:#111;">Second Harvest</span>
-        </label>
- 
-        <label class="naming-opt" style="display:flex; align-items:center; gap:14px; padding:14px 18px; cursor:pointer; border-bottom:1px solid #e0e0e0; transition:background 0.1s;">
-          <input type="radio" name="name_vote" value="Reharvest" style="accent-color:#FF2D55; width:18px; height:18px; flex-shrink:0;"/>
-          <span style="font-size:0.95rem; font-weight:600; color:#111;">Reharvest</span>
-        </label>
- 
-        <label class="naming-opt" style="display:flex; align-items:center; gap:14px; padding:14px 18px; cursor:pointer; border-bottom:1px solid #e0e0e0; transition:background 0.1s;">
-          <input type="radio" name="name_vote" value="Food Recovery" style="accent-color:#FF2D55; width:18px; height:18px; flex-shrink:0;"/>
-          <div>
-            <span style="font-size:0.95rem; font-weight:600; color:#111;">Food Recovery</span>
-            <span style="display:block; font-size:0.78rem; color:#888; margin-top:2px;">Used widely in food banking and USDA programs</span>
-          </div>
-        </label>
- 
-        <label class="naming-opt" style="display:flex; align-items:center; gap:14px; padding:14px 18px; cursor:pointer; border-bottom:1px solid #e0e0e0; transition:background 0.1s;">
-          <input type="radio" name="name_vote" value="Gleaning & Recovery" style="accent-color:#FF2D55; width:18px; height:18px; flex-shrink:0;"/>
-          <div>
-            <span style="font-size:0.95rem; font-weight:600; color:#111;">Gleaning &amp; Recovery</span>
-            <span style="display:block; font-size:0.78rem; color:#888; margin-top:2px;">Rooted in agricultural tradition of collecting leftover crops</span>
-          </div>
-        </label>
- 
-        <label class="naming-opt" style="display:flex; align-items:center; gap:14px; padding:14px 18px; cursor:pointer; transition:background 0.1s;">
-          <input type="radio" name="name_vote" value="__other__" style="accent-color:#FF2D55; width:18px; height:18px; flex-shrink:0;"/>
-          <span style="font-size:0.95rem; font-weight:600; color:#111;">My own idea (see below)</span>
-        </label>
- 
-      </div>
- 
-      <!-- Suggest your own -->
-      <div style="display:flex; flex-direction:column; gap:4px; margin-bottom:16px;">
-        <label style="font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:#999;">Suggest your own name</label>
-        <input type="text" name="name_suggestion" placeholder="Type a name here..."
-          style="background:#f7f7f7; border:1.5px solid #ddd; color:#111; padding:9px 12px; font-family:'DM Sans',sans-serif; font-size:0.88rem; outline:none; border-radius:0; max-width:400px;"/>
-      </div>
- 
-      <!-- Your name -->
-      <div style="display:flex; flex-direction:column; gap:4px; margin-bottom:20px;">
-        <label style="font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.12em; color:#999;">Your Name (optional)</label>
-        <input type="text" name="poll_name" placeholder="First Last"
-          style="background:#f7f7f7; border:1.5px solid #ddd; color:#111; padding:9px 12px; font-family:'DM Sans',sans-serif; font-size:0.88rem; outline:none; border-radius:0; max-width:400px;"/>
-      </div>
- 
-      <div>
-        <button type="submit"
-          style="font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:0.12em; padding:10px 28px; background:#FF2D55; color:#fff; border:none; cursor:pointer;">
-          Submit My Vote
-        </button>
-      </div>
-      <div id="poll-thanks" style="display:none; font-size:0.88rem; font-weight:700; color:#2db84d; padding-top:12px;">Vote recorded. Thank you!</div>
-    </form>
-  </div>
-</section>
- 
-<script>
-  function handleNaming(e) {
-    e.preventDefault();
-    const form = document.getElementById('naming-form');
-    const voteEl = form.querySelector('input[name="name_vote"]:checked');
-    const suggestion = form.name_suggestion.value.trim();
-    const pollName = form.poll_name.value.trim();
- 
-    const vote = voteEl ? voteEl.value : '';
-    const finalVote = (vote === '__other__' && suggestion) ? suggestion : (vote === '__other__' ? 'Other (no suggestion)' : vote);
- 
-    const data = {
-      type: 'naming_vote',
-      vote: finalVote,
-      suggestion: suggestion,
-      name: pollName,
-      timestamp: new Date().toISOString()
-    };
- 
-    const btn = form.querySelector('button[type="submit"]');
-    btn.textContent = 'Sending...';
-    btn.disabled = true;
- 
-    fetch(SUBMIT_URL, {
-      method: 'POST', mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    })
-    .then(() => showPollThanks(form, btn))
-    .catch(() => showPollThanks(form, btn));
-  }
- 
-  function showPollThanks(form, btn) {
-    form.querySelectorAll('input, textarea').forEach(el => el.disabled = true);
-    btn.style.display = 'none';
-    document.getElementById('poll-thanks').style.display = 'block';
-  }
-</script> 
-  
+</main>
+
+
+
+
 <footer>
   Muskegon County Food Policy Network &nbsp;|&nbsp; tierralocal.org
 </footer>
- 
+
 <script>
-  const SUBMIT_URL = 'https://script.google.com/macros/s/AKfycbw97hJYCN9BReS3YAVVqL5kPsi9hqS2qJ3xO5uCIgM3vUKTSZJHzWRHQlf9gEHOw4AC/exec';
- 
+  const SUBMIT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
+
   function handleSubmit(e, form) {
     e.preventDefault();
     const data = {
@@ -755,7 +589,12 @@
     const thanks = form.querySelector('.thank-you');
     btn.textContent = 'Sending...';
     btn.disabled = true;
-    
+
+    if (SUBMIT_URL === 'YOUR_APPS_SCRIPT_URL_HERE') {
+      console.log('Feedback:', data);
+      showThanks(form, btn, thanks);
+      return;
+    }
     fetch(SUBMIT_URL, {
       method: 'POST', mode: 'no-cors',
       headers: { 'Content-Type': 'application/json' },
@@ -764,7 +603,7 @@
     .then(() => showThanks(form, btn, thanks))
     .catch(() => showThanks(form, btn, thanks));
   }
- 
+
   function handleRSVP(e) {
     e.preventDefault();
     const form = document.getElementById('rsvp-form');
@@ -786,7 +625,7 @@
     btn.style.display = 'none';
     document.getElementById('rsvp-thanks').style.display = 'block';
   }
- 
+
   function showThanks(form, btn, thanks) {
     form.querySelectorAll('input, textarea, select').forEach(el => el.disabled = true);
     btn.style.display = 'none';
@@ -795,4 +634,3 @@
 </script>
 </body>
 </html>
- 
