@@ -680,7 +680,7 @@
 </footer>
 
 <script>
-var SUBMIT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
+var SUBMIT_URL = 'https://script.google.com/macros/s/AKfycbwjzHhLcBVZLWt0TKXFZyJ1u-XO6EA9EjEBK0hgG0pYcN4X0zztwjYoLEhfRcmD4K3ccw/exec';
 
 var GROUPS = {
   dist: {
