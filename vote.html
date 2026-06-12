@@ -157,10 +157,11 @@
   .notice-strip {
     background: var(--yellow);
     color: var(--black);
-    padding: 12px 18px;
-    font-size: 0.85rem;
+    padding: 16px 20px;
+    font-size: 1rem;
     font-weight: 700;
     border-left: 5px solid var(--pink);
+    line-height: 1.6;
     display: none;
   }
 
@@ -869,7 +870,7 @@ nameSelect.addEventListener('change', function() {
   if (isConfirmed) {
     notice.innerHTML = 'Your working groups are highlighted below. Vote on priorities in each one, and feel free to weigh in on any others.';
   } else {
-    notice.innerHTML = 'You weren\'t signed up for any working groups yet. Check the box on any group you\'d like to join, then vote on the problems that matter most to you.';
+    notice.innerHTML = 'You weren\'t signed up for any working groups yet. You can join up to two groups. Check the box on the ones you\'d like to join, then vote on the problems that matter most to you.';
   }
   notice.style.display = 'block';
   sections.style.display = 'flex';
@@ -889,8 +890,36 @@ nameSelect.addEventListener('change', function() {
 
     // Show join row only if not already in the group
     joinRow.style.display = inGroup ? 'none' : 'block';
+
+    // Wire up join checkbox to enforce max 2
+    var cb = document.getElementById('joincheck-' + slug);
+    if (cb) {
+      cb.checked = false;
+      cb.disabled = false;
+      cb.addEventListener('change', enforceJoinLimit);
+    }
   });
 });
+
+function enforceJoinLimit() {
+  var slugs = ['dist','cons','waste','prod','proc','net'];
+  var checked = slugs.filter(function(s) {
+    var cb = document.getElementById('joincheck-' + s);
+    return cb && cb.checked;
+  });
+  slugs.forEach(function(s) {
+    var cb = document.getElementById('joincheck-' + s);
+    var row = document.getElementById('join-' + s);
+    if (!cb || row.style.display === 'none') return;
+    if (!cb.checked && checked.length >= 2) {
+      cb.disabled = true;
+      row.style.opacity = '0.4';
+    } else {
+      cb.disabled = false;
+      row.style.opacity = '1';
+    }
+  });
+}
 
 // Per-group submit
 function handleSubmit(slug) {
