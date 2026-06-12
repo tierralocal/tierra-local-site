@@ -464,7 +464,7 @@
   </div>
 
   <!-- DATE AVAILABILITY -->
-  <div class="name-block" id="dateBlock" style="display:none;">
+  <div class="name-block" id="dateBlock">
     <div class="block-label">Step 2 — Next Meeting Availability</div>
     <p style="font-size:0.88rem;color:#555;margin-bottom:16px;line-height:1.6;">Our next meeting will be in July. Check all dates that work for you.</p>
     <div style="display:flex;flex-direction:column;gap:10px;">
@@ -880,15 +880,13 @@ nameSelect.addEventListener('change', function() {
     notice.style.display = 'none';
     sections.style.display = 'none';
     helper.style.display = 'none';
-    document.getElementById('dateBlock').style.display = 'none';
     return;
   }
 
   var isConfirmed = CONFIRMED_MEMBERS.indexOf(name) !== -1;
 
-  // Show helper text and date block
+  // Show helper text
   helper.style.display = 'block';
-  document.getElementById('dateBlock').style.display = 'block';
 
   // Notice
   if (isConfirmed) {
