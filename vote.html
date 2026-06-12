@@ -875,12 +875,21 @@ nameSelect.addEventListener('change', function() {
   notice.style.display = 'block';
   sections.style.display = 'flex';
 
-  // For each group — update members note and join row visibility
+  // For each group — show/hide card, update members note, join row visibility
   Object.keys(GROUPS).forEach(function(slug) {
     var g = GROUPS[slug];
     var inGroup = g.members.indexOf(name) !== -1;
+    var card = document.getElementById('card-' + slug);
     var joinRow = document.getElementById('join-' + slug);
     var membersNote = document.getElementById('members-' + slug);
+
+    // Confirmed members only see their own groups
+    // Non-confirmed members see all groups with join checkboxes
+    if (isConfirmed) {
+      card.style.display = inGroup ? 'block' : 'none';
+    } else {
+      card.style.display = 'block';
+    }
 
     // Members note — highlight current person if they're in the group
     var memberList = g.members.map(function(m) {
