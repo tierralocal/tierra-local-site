@@ -463,6 +463,26 @@
     </div>
   </div>
 
+  <!-- DATE AVAILABILITY -->
+  <div class="name-block" id="dateBlock" style="display:none;">
+    <div class="block-label">Step 2 — Next Meeting Availability</div>
+    <p style="font-size:0.88rem;color:#555;margin-bottom:16px;line-height:1.6;">Our next meeting will be in July. Check all dates that work for you.</p>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <label style="display:flex;align-items:center;gap:12px;cursor:pointer;font-size:0.95rem;font-weight:600;">
+        <input type="checkbox" id="date-jul9" value="July 9" style="width:18px;height:18px;accent-color:var(--pink);cursor:pointer;">
+        Wednesday, July 9 &nbsp;<span style="font-size:0.78rem;font-weight:400;color:#888;">6–8 PM</span>
+      </label>
+      <label style="display:flex;align-items:center;gap:12px;cursor:pointer;font-size:0.95rem;font-weight:600;">
+        <input type="checkbox" id="date-jul14" value="July 14" style="width:18px;height:18px;accent-color:var(--pink);cursor:pointer;">
+        Monday, July 14 &nbsp;<span style="font-size:0.78rem;font-weight:400;color:#888;">6–8 PM</span>
+      </label>
+      <label style="display:flex;align-items:center;gap:12px;cursor:pointer;font-size:0.95rem;font-weight:600;">
+        <input type="checkbox" id="date-jul23" value="July 23" style="width:18px;height:18px;accent-color:var(--pink);cursor:pointer;">
+        Wednesday, July 23 &nbsp;<span style="font-size:0.78rem;font-weight:400;color:#888;">6–8 PM</span>
+      </label>
+    </div>
+  </div>
+
   <!-- NOTICE -->
   <div class="notice-strip" id="noticeStrip"></div>
 
@@ -865,8 +885,9 @@ nameSelect.addEventListener('change', function() {
 
   var isConfirmed = CONFIRMED_MEMBERS.indexOf(name) !== -1;
 
-  // Show helper text
+  // Show helper text and date block
   helper.style.display = 'block';
+  document.getElementById('dateBlock').style.display = 'block';
 
   // Notice
   if (isConfirmed) {
@@ -962,6 +983,10 @@ function handleSubmit(slug) {
     return;
   }
 
+  var dates = ['date-jul9','date-jul14','date-jul23']
+    .filter(function(id) { return document.getElementById(id).checked; })
+    .map(function(id) { return document.getElementById(id).value; });
+
   var btn = document.getElementById('submit-' + slug);
   btn.textContent = 'Sending...';
   btn.disabled = true;
@@ -977,7 +1002,8 @@ function handleSubmit(slug) {
       doNow: doNow,
       getStarted: getStarted,
       otherDoNow: document.getElementById('other-donow-' + slug).value || '',
-      otherGetStarted: document.getElementById('other-getstart-' + slug).value || ''
+      otherGetStarted: document.getElementById('other-getstart-' + slug).value || '',
+      availableDates: dates
     }]
   };
 
