@@ -157,8 +157,8 @@
   .notice-strip {
     background: var(--yellow);
     color: var(--black);
-    padding: 16px 20px;
-    font-size: 1rem;
+    padding: 20px 24px;
+    font-size: 1.2rem;
     font-weight: 700;
     border-left: 5px solid var(--pink);
     line-height: 1.6;
@@ -868,12 +868,17 @@ nameSelect.addEventListener('change', function() {
 
   // Notice
   if (isConfirmed) {
-    notice.innerHTML = 'Your working groups are highlighted below. Vote on priorities in each one, and feel free to weigh in on any others.';
+    notice.innerHTML = 'Your working groups are highlighted below. Vote on priorities in each one.';
   } else {
     notice.innerHTML = 'You weren\'t signed up for any working groups yet. You can join up to two groups. Check the box on the ones you\'d like to join, then vote on the problems that matter most to you.';
   }
   notice.style.display = 'block';
   sections.style.display = 'flex';
+
+  // Hide all cards first, then show the right ones
+  ['dist','cons','waste','prod','proc','net'].forEach(function(s) {
+    document.getElementById('card-' + s).style.display = 'none';
+  });
 
   // For each group — show/hide card, update members note, join row visibility
   Object.keys(GROUPS).forEach(function(slug) {
