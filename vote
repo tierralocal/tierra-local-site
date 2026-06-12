@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>MCFPN — Working Group Priorities</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --yellow: #FFD600;
+    --cyan: #00C8E0;
+    --lime: #5EE06A;
+    --pink: #FF2D55;
+    --violet: #9B5FFF;
+    --black: #111111;
+    --white: #FFFFFF;
+    --text: #1a1a1a;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--yellow);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  /* APPBAR */
+  .appbar {
+    background: var(--black);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 4px solid var(--yellow);
+  }
+  .appbar-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.06em;
+    color: var(--yellow);
+  }
+  .appbar-sub {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.5);
+    margin-left: auto;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--black);
+    color: var(--white);
+    padding: 52px 36px 44px;
+    border-bottom: 6px solid var(--yellow);
+  }
+  .hero-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.22em;
+    color: var(--yellow);
+    margin-bottom: 10px;
+  }
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    line-height: 1;
+    letter-spacing: 0.02em;
+    color: var(--yellow);
+    margin-bottom: 20px;
+  }
+  .hero-context {
+    max-width: 680px;
+    font-size: 1rem;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 24px;
+  }
+  .hero-context strong { color: var(--yellow); }
+  .hero-instructions {
+    background: var(--yellow);
+    color: var(--black);
+    display: inline-block;
+    padding: 12px 18px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border-left: 5px solid var(--pink);
+    line-height: 1.5;
+    max-width: 640px;
+  }
+
+  /* MAIN */
+  main {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 44px 24px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  /* NAME BLOCK */
+  .name-block {
+    background: var(--white);
+    border: 4px solid var(--black);
+    padding: 24px;
+  }
+  .block-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.2em;
+    color: #888;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #e0e0e0;
+  }
+  .name-block select {
+    background: #f7f7f7;
+    border: 1.5px solid #ddd;
+    color: var(--black);
+    padding: 9px 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    outline: none;
+    border-radius: 0;
+    -webkit-appearance: none;
+    width: 100%;
+    max-width: 360px;
+    transition: border-color 0.2s;
+    cursor: pointer;
+  }
+  .name-block select:focus { border-color: var(--black); background: #fff; }
+
+  /* NAME HELPER TEXT */
+  .name-helper {
+    margin-top: 14px;
+    font-size: 0.82rem;
+    color: #666;
+    line-height: 1.6;
+    display: none;
+  }
+  .name-helper a {
+    color: var(--black);
+    font-weight: 700;
+    text-decoration: underline;
+  }
+  .name-helper a:hover { color: var(--pink); }
+
+  /* NOTICE STRIP */
+  .notice-strip {
+    background: var(--yellow);
+    color: var(--black);
+    padding: 12px 18px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    border-left: 5px solid var(--pink);
+    display: none;
+  }
+
+  /* SECTION CARDS */
+  .section-card {
+    background: var(--white);
+    border-width: 4px;
+    border-style: solid;
+  }
+  .section-card.dist   { border-color: var(--cyan); }
+  .section-card.cons   { border-color: var(--lime); }
+  .section-card.waste  { border-color: var(--pink); }
+  .section-card.prod   { border-color: var(--violet); }
+  .section-card.proc   { border-color: var(--cyan); }
+  .section-card.net    { border-color: var(--yellow); border-bottom-color: var(--black); }
+
+  .section-tab {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.1em;
+    padding: 10px 24px;
+    display: inline-block;
+    color: var(--black);
+  }
+  .dist  .section-tab  { background: var(--cyan); }
+  .cons  .section-tab  { background: var(--lime); }
+  .waste .section-tab  { background: var(--pink);   color: var(--white); }
+  .prod  .section-tab  { background: var(--violet); color: var(--white); }
+  .proc  .section-tab  { background: var(--cyan); }
+  .net   .section-tab  { background: var(--yellow); }
+
+  .section-body { padding: 24px; }
+
+  /* SYNTHESIS */
+  .synthesis {
+    margin-bottom: 20px;
+    padding: 18px 22px;
+    border-left: 5px solid;
+  }
+  .dist  .synthesis { border-color: var(--cyan);   background: #e8fafd; }
+  .cons  .synthesis { border-color: var(--lime);   background: #edfaee; }
+  .waste .synthesis { border-color: var(--pink);   background: #fff0f3; }
+  .prod  .synthesis { border-color: var(--violet); background: #f4efff; }
+  .proc  .synthesis { border-color: var(--cyan);   background: #e8fafd; }
+  .net   .synthesis { border-color: var(--black);  background: #fffde6; }
+
+  .synthesis-label {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.22em;
+    margin-bottom: 8px;
+  }
+  .dist  .synthesis-label { color: var(--cyan); }
+  .cons  .synthesis-label { color: #2db84d; }
+  .waste .synthesis-label { color: var(--pink); }
+  .prod  .synthesis-label { color: var(--violet); }
+  .proc  .synthesis-label { color: #0099b0; }
+  .net   .synthesis-label { color: var(--black); }
+
+  .synthesis-text {
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.55;
+    color: var(--black);
+  }
+
+  /* MEMBERS NOTE */
+  .members-note {
+    font-size: 0.78rem;
+    color: #888;
+    margin-bottom: 20px;
+  }
+  .members-note strong { color: var(--black); }
+
+  /* JOIN ROW */
+  .join-row {
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    border-left: 5px solid;
+    display: none;
+  }
+  .dist  .join-row { background: #e8fafd; border-color: var(--cyan); }
+  .cons  .join-row { background: #edfaee; border-color: var(--lime); }
+  .waste .join-row { background: #fff0f3; border-color: var(--pink); }
+  .prod  .join-row { background: #f4efff; border-color: var(--violet); }
+  .proc  .join-row { background: #e8fafd; border-color: var(--cyan); }
+  .net   .join-row { background: #fffde6; border-color: var(--black); }
+
+  .join-row label {
+    font-size: 0.9rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    color: var(--black);
+  }
+  .join-row input[type=checkbox] {
+    width: 18px; height: 18px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .dist  .join-row input[type=checkbox] { accent-color: var(--cyan); }
+  .cons  .join-row input[type=checkbox] { accent-color: var(--lime); }
+  .waste .join-row input[type=checkbox] { accent-color: var(--pink); }
+  .prod  .join-row input[type=checkbox] { accent-color: var(--violet); }
+  .proc  .join-row input[type=checkbox] { accent-color: var(--cyan); }
+  .net   .join-row input[type=checkbox] { accent-color: var(--black); }
+
+  /* VOTE COLUMNS */
+  .vote-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 20px;
+  }
+  @media (max-width: 580px) { .vote-cols { grid-template-columns: 1fr; } }
+
+  .col-head {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.1em;
+    line-height: 1.3;
+    margin-bottom: 6px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid;
+  }
+
+  /* col-head colors per group */
+  .dist  .col-donow .col-head    { color: var(--cyan);   border-color: var(--cyan); }
+  .cons  .col-donow .col-head    { color: #2db84d;        border-color: var(--lime); }
+  .waste .col-donow .col-head    { color: var(--pink);   border-color: var(--pink); }
+  .prod  .col-donow .col-head    { color: var(--violet); border-color: var(--violet); }
+  .proc  .col-donow .col-head    { color: #0099b0;        border-color: var(--cyan); }
+  .net   .col-donow .col-head    { color: var(--black);  border-color: var(--black); }
+
+  .dist  .col-getstart .col-head { color: var(--cyan);   border-color: var(--cyan); }
+  .cons  .col-getstart .col-head { color: #2db84d;        border-color: var(--lime); }
+  .waste .col-getstart .col-head { color: var(--violet); border-color: var(--violet); }
+  .prod  .col-getstart .col-head { color: var(--violet); border-color: var(--violet); }
+  .proc  .col-getstart .col-head { color: #0099b0;        border-color: var(--cyan); }
+  .net   .col-getstart .col-head { color: var(--black);  border-color: var(--black); }
+
+  .limit-note {
+    font-size: 0.78rem;
+    color: #888;
+    font-style: italic;
+    margin-bottom: 12px;
+  }
+
+  /* PROBLEM ITEMS */
+  .problem-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 10px;
+    margin-bottom: 4px;
+    cursor: pointer;
+    transition: background 0.12s;
+  }
+  .problem-item:hover { background: #f5f5f5; }
+  .problem-item input[type=checkbox] {
+    margin-top: 3px;
+    flex-shrink: 0;
+    width: 16px; height: 16px;
+    cursor: pointer;
+  }
+  .problem-item label {
+    font-size: 0.88rem;
+    cursor: pointer;
+    line-height: 1.45;
+    color: #333;
+  }
+  .problem-item.disabled { opacity: 0.35; pointer-events: none; }
+
+  /* checkbox accent per group */
+  .dist  .problem-item input { accent-color: var(--cyan); }
+  .cons  .problem-item input { accent-color: var(--lime); }
+  .waste .problem-item input { accent-color: var(--pink); }
+  .prod  .problem-item input { accent-color: var(--violet); }
+  .proc  .problem-item input { accent-color: var(--cyan); }
+  .net   .problem-item input { accent-color: var(--black); }
+
+  /* OTHER FIELD */
+  .other-row { margin-top: 10px; }
+  .other-row label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #999;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .other-row input[type=text] {
+    background: #f7f7f7;
+    border: 1.5px solid #ddd;
+    color: var(--black);
+    padding: 9px 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    outline: none;
+    border-radius: 0;
+    width: 100%;
+    transition: border-color 0.2s;
+  }
+  .other-row input[type=text]:focus { border-color: var(--black); background: #fff; }
+
+  /* SUBMIT ZONE */
+  .submit-zone {
+    border-top: 2px dashed #ddd;
+    padding-top: 20px;
+    margin-top: 8px;
+  }
+  .submit-btn {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.12em;
+    padding: 10px 28px;
+    border: none;
+    cursor: pointer;
+    color: var(--black);
+    transition: opacity 0.15s, transform 0.1s;
+  }
+  .submit-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+  .submit-btn:active { transform: translateY(0); }
+  .submit-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+  .dist  .submit-btn { background: var(--cyan); }
+  .cons  .submit-btn { background: var(--lime); }
+  .waste .submit-btn { background: var(--pink);   color: var(--white); }
+  .prod  .submit-btn { background: var(--violet); color: var(--white); }
+  .proc  .submit-btn { background: var(--cyan); }
+  .net   .submit-btn { background: var(--yellow); }
+
+  .thank-you {
+    display: none;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #2db84d;
+    padding: 8px 0 0;
+  }
+  .error-msg {
+    display: none;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--pink);
+    padding: 8px 0 0;
+  }
+
+  /* hidden until name selected */
+  .group-sections { display: none; }
+
+  footer {
+    background: var(--black);
+    color: var(--yellow);
+    text-align: center;
+    padding: 20px 24px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    border-top: 4px solid var(--yellow);
+  }
+</style>
+</head>
+<body>
+
+<div class="appbar">
+  <img src="MCFPN_Logo.png" alt="MCFPN" style="height:36px;filter:brightness(0) invert(1);"/>
+  <span class="appbar-title">MCFPN</span>
+  <span class="appbar-sub">Working Group Priorities</span>
+</div>
+
+<div class="hero">
+  <div class="hero-label">Muskegon County Food Policy Network</div>
+  <h1>Which Problems<br/>Do We Tackle First?</h1>
+  <p class="hero-context">
+    You've identified the issues across all five working areas. Now it's time to choose where to focus. <strong>For each working group you're in, pick up to two problems to tackle in the next six months — and up to two that we should get started on even if they'll take longer.</strong>
+  </p>
+  <div class="hero-instructions">
+    Select your name below. Your working groups will be pre-checked. Vote on priorities in each one, and weigh in on any others you care about.
+  </div>
+</div>
+
+<main>
+
+  <!-- NAME PICKER -->
+  <div class="name-block">
+    <div class="block-label">Step 1 — Who Are You</div>
+    <select id="nameSelect">
+      <option value="">— Select your name —</option>
+    </select>
+    <div class="name-helper" id="nameHelper">
+      Want to review the working group issues before voting?
+      <a href="https://www.tierralocal.org/feedback" target="_blank">Read them here.</a>
+      &nbsp;&nbsp;Need to change which working groups you're in?
+      <a href="mailto:kody@tierralocal.org">Email Kody.</a>
+    </div>
+  </div>
+
+  <!-- NOTICE -->
+  <div class="notice-strip" id="noticeStrip"></div>
+
+  <!-- ALL GROUP CARDS -->
+  <div class="group-sections" id="groupSections">
+
+    <!-- DISTRIBUTION -->
+    <div class="section-card dist" id="card-dist">
+      <div class="section-tab">Distribution</div>
+      <div class="section-body">
+        <div class="synthesis">
+          <div class="synthesis-label">Why This Matters</div>
+          <div class="synthesis-text">We grow food here, but it does not get to the people who need it. Farmers and buyers are not connected. There is no central place to collect and move food around the county.</div>
+        </div>
+        <div class="members-note" id="members-dist"></div>
+        <div class="join-row" id="join-dist">
+          <label><input type="checkbox" id="joincheck-dist"> I'd like to join the Distribution working group</label>
+        </div>
+        <div class="vote-cols">
+          <div class="col-donow">
+            <div class="col-head">Let's do this in the next six months</div>
+            <div class="limit-note">Pick up to 2</div>
+            <div id="donow-dist"></div>
+            <div class="other-row"><label>Something else</label><input type="text" id="other-donow-dist" placeholder="Write in a problem…"></div>
+          </div>
+          <div class="col-getstart">
+            <div class="col-head">Let's get started, but this will probably take longer than six months</div>
+            <div class="limit-note">Pick up to 2</div>
+            <div id="getstart-dist"></div>
+            <div class="other-row"><label>Something else</label><input type="text" id="other-getstart-dist" placeholder="Write in a problem…"></div>
+          </div>
+        </div>
+        <div class="submit-zone">
+          <button class="submit-btn" id="submit-dist" data-group="Distribution">Submit My Priorities</button>
+          <div class="thank-you" id="thanks-dist"></div>
+          <div class="error-msg" id="error-dist"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONSUMPTION -->
+    <div class="section-card cons" id="card-cons">
+      <div class="section-tab">Consumption</div>
+      <div class="section-body">
+        <div class="synthesis">
+          <div class="synthesis-label">Why This Matters</div>
+          <div class="synthesis-text">People in Muskegon County go hungry even though food is available. Getting food depends too much on where you live and how you get around. The systems that could help are not working together.</div>
+        </div>
+        <div class="members-note" id="members-cons"></div>
+        <div class="join-row" id="join-cons">
+          <label><input type="checkbox" id="joincheck-cons"> I'd like to join the Consumption working group</label>
+        </div>
+        <div class="vote-cols">
+          <div class="col-donow">
+            <div class="col-head">Let's do this in the next six months</div>
+            <div class="limit-note">Pick up to 2</div>
+            <div id="donow-cons"></div>
+            <div class="other-row"><label>Something else</label><input type="text" id="other-donow-cons" placeholder="Write in a problem…"></div>
+          </div>
+          <div class="col-getstart">
+            <div class="col-head">Let's get started, but this will probably take longer than six months</div>
+            <div class="limit-note">Pick up to 2</div>
+            <div id="getstart-cons"></div>
+            <div class="other-row"><label>Something else</label><input type="text" id="other-getstart-cons" placeholder="Write in a problem…"></div>
+          </div>
+        </div>
+        <div class="submit-zone">
+          <button class="submit-btn" id="submit-cons" data-group="Consumption">Submit My Priorities</button>
+          <div class="thank-you" id="thanks-cons"></div>
+          <div class="error-msg" id="error-cons"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WASTE / RESCUE -->
+    <div class="section-card waste" id="card-waste">
+      <div class="section-tab">Waste &amp; Rescue</div>
+      <div class="section-body">
+        <div class="synthesis">
+          <div class="synthesis-label">Why This Matters</div>
+          <div class="synthesis-text">A lot of food that could be saved and shared here gets sent out of the county instead. There is no local place to collect and store rescued food. Pantries run out. Farmers lose food with nowhere to send it.</div>
+        </div>
+        <div class="members-note" id="members-waste"></div>
+        <div class="join-row" id="join-waste">
+          <label><input type="checkbox" id="joincheck-waste"> I'd like to join the Waste &amp; Rescue working group</label>
+        </div>
+        <div class="vote-cols">
+          <div class="col-donow">
+            <div class="col-head">Let's do this in the next six months</div>
+            <div class="limit-note">Pick up to 2</div>
+            <div id="donow-waste"></div>
+            <div class="other-row"><label>Something else</label><input type="text" id="other-donow-waste" placeholder="Write in a problem…"></div>
+          </div>
+          <div class="col-getstart">
+            <div class="col-head">Let's get started, but this will probably take longer than six months</div>
+            <div class="limit-note">Pick up to 2</div>
+            <div id="getstart-waste"></div>
+            <div class="other-row"><label>Something else</label><input type="text" id="other-getstart-waste" placeholder="Write in a problem…"></div>
+          </div>
+        </div>
+        <div class="submit-zone">
+          <button class="submit-btn" id="submit-waste" data-group="Waste / Rescue">Submit My Priorities</button>
+          <div class="thank-you" id="thanks-waste"></div>
+          <div class="error-msg" id="error-waste"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRODUCTION -->
+    <div class="section-card prod" id="card-prod">
+      <div class="section-tab">Production</div>
+      <div class="section-body">
+        <div class="synthesis">
+          <div class="synthesis-label">Why This Matters</div>
+          <div class="synthesis-text">Muskegon County has good land and farmers who want to grow more. But land costs are rising, zoning rules vary wildly by township, and there is no clear path for a small farmer to find local buyers, get fair prices, or store and move their crops. The system is not built for them.</div>
+        </div>
+        <div class="members-note" id="members-prod"></div>
+        <div class="join-row" id="join-prod">
+          <label><input type="checkbox" id="joincheck-prod"> I'd like to join the Production working group</label>
+        </div>
+        <div class="vote-cols">
+          <div class="col-donow">
+            <div class="col-head">Let's do this in the next six months</div>
+            <div class="limit-note">Pick up to 2</div>
+            <div id="donow-prod"></div>
+            <div class="other-row"><label>Something else</label><input type="text" id="other-donow-prod" placeholder="Write in a problem…"></div>
+          </div>
+          <div class="col-getstart">
+            <div class="col-head">Let's get started, but this will probably take longer than six months</div>
+            <div class="limit-note">Pick up to 2</div>
+            <div id="getstart-prod"></div>
+            <div class="other-row"><label>Something else</label><input type="text" id="other-getstart-prod" placeholder="Write in a problem…"></div>
+          </div>
+        </div>
+        <div class="submit-zone">
+          <button class="submit-btn" id="submit-prod" data-group="Production">Submit My Priorities</button>
+          <div class="thank-you" id="thanks-prod"></div>
+          <div class="error-msg" id="error-prod"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROCESSING -->
+    <div class="section-card proc" id="card-proc">
+      <div class="section-tab">Processing</div>
+      <div class="section-body">
+        <div class="synthesis">
+          <div class="synthesis-label">Why This Matters</div>
+          <div class="synthesis-text">Processing is where local food either makes it into the system or gets lost. It costs a lot, requires special certifications, and is heavily regulated. Small businesses and minority-owned operations face the biggest barriers.</div>
+        </div>
+        <div class="members-note" id="members-proc"></div>
+        <div class="join-row" id="join-proc">
+          <label><input type="checkbox" id="joincheck-proc"> I'd like to join the Processing working group</label>
+        </div>
+        <div class="vote-cols">
+          <div class="col-donow">
+            <div class="col-head">Let's do this in the next six months</div>
+            <div class="limit-note">Pick up to 2</div>
+            <div id="donow-proc"></div>
+            <div class="other-row"><label>Something else</label><input type="text" id="other-donow-proc" placeholder="Write in a problem…"></div>
+          </div>
+          <div class="col-getstart">
+            <div class="col-head">Let's get started, but this will probably take longer than six months</div>
+            <div class="limit-note">Pick up to 2</div>
+            <div id="getstart-proc"></div>
+            <div class="other-row"><label>Something else</label><input type="text" id="other-getstart-proc" placeholder="Write in a problem…"></div>
+          </div>
+        </div>
+        <div class="submit-zone">
+          <button class="submit-btn" id="submit-proc" data-group="Processing">Submit My Priorities</button>
+          <div class="thank-you" id="thanks-proc"></div>
+          <div class="error-msg" id="error-proc"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NETWORK & COORDINATION -->
+    <div class="section-card net" id="card-net">
+      <div class="section-tab">Network &amp; Coordination</div>
+      <div class="section-body">
+        <div class="synthesis">
+          <div class="synthesis-label">Why This Matters</div>
+          <div class="synthesis-text">The food system in Muskegon County is fragmented. Organizations, farmers, and institutions are not connected to each other. Building communication and coordination infrastructure is foundational to everything else.</div>
+        </div>
+        <div class="members-note" id="members-net"></div>
+        <div class="join-row" id="join-net">
+          <label><input type="checkbox" id="joincheck-net"> I'd like to join the Network &amp; Coordination working group</label>
+        </div>
+        <div class="vote-cols">
+          <div class="col-donow">
+            <div class="col-head">Let's do this in the next six months</div>
+            <div class="limit-note">Pick up to 2</div>
+            <div id="donow-net"></div>
+            <div class="other-row"><label>Something else</label><input type="text" id="other-donow-net" placeholder="Write in a problem…"></div>
+          </div>
+          <div class="col-getstart">
+            <div class="col-head">Let's get started, but this will probably take longer than six months</div>
+            <div class="limit-note">Pick up to 2</div>
+            <div id="getstart-net"></div>
+            <div class="other-row"><label>Something else</label><input type="text" id="other-getstart-net" placeholder="Write in a problem…"></div>
+          </div>
+        </div>
+        <div class="submit-zone">
+          <button class="submit-btn" id="submit-net" data-group="Network & Coordination">Submit My Priorities</button>
+          <div class="thank-you" id="thanks-net"></div>
+          <div class="error-msg" id="error-net"></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /group-sections -->
+
+</main>
+
+<footer>
+  Muskegon County Food Policy Network &nbsp;|&nbsp; tierralocal.org
+</footer>
+
+<script>
+var SUBMIT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
+
+var GROUPS = {
+  dist: {
+    key: 'Distribution',
+    members: ['Elissa Penczar','Ana Olson','Jess Grimm','Savannah Cunningham','Venessa Johnson-Jenkins'],
+    problems: [
+      'No central place to collect, store, and move food around the county',
+      'Hard to keep food cold during transport',
+      'Farmers and food buyers are not connected',
+      'Makeshift workarounds have filled the gap, but they do not scale',
+      'Rules and regulations make distribution harder — we need to name which ones so we can change them',
+      'People who need help do not know that others are working to solve this'
+    ]
+  },
+  cons: {
+    key: 'Consumption',
+    members: ['Elissa Penczar','Reuben Richardson'],
+    problems: [
+      'Many people cannot easily get to food',
+      'Bus routes do not reach food sources in many parts of the county',
+      'Local food is not where people actually shop — not at Meijer, not at corner stores',
+      'CSAs require driving to farms outside the city, which many families cannot do',
+      'Food programs, markets, and agencies do not share information with each other',
+      'Food is too expensive for many families',
+      'Some people lack the tools or skills to cook at home',
+      'Teaching cooking and nutrition builds real demand for better food access',
+      'City and county planning does not prioritize food access'
+    ]
+  },
+  waste: {
+    key: 'Waste / Rescue',
+    members: ['Reuben Richardson','Stephen Proctor'],
+    problems: [
+      'Rescued food is routed out of the county before it can reach local pantries and food programs',
+      'No local aggregation point or cold storage to receive, hold, and redistribute rescued food at scale',
+      'Lack of public will and incentive for waste reduction',
+      'Composting infrastructure is largely absent — but could save cities money and become a revenue driver',
+      'Redistribution is seen as mitigation rather than economic or community opportunity',
+      'Regulation and liability barriers limit participation in food rescue',
+      'Point source reduction not addressed at the producer or retail level',
+      'Sociocultural practices and education gaps around food waste'
+    ]
+  },
+  prod: {
+    key: 'Production',
+    members: ['Ian Miller','Renae Hesselink','Lisa Potter','Savannah Cunningham','Venessa Johnson-Jenkins'],
+    problems: [
+      'Land is too expensive and inaccessible for small and beginning farmers',
+      'County zoning is inconsistent from township to township — some townships exclude farming entirely',
+      'Small and mid-size producers are not connected to local buyers — schools, restaurants, and institutions do not know who is growing what',
+      'Farmers market vendor fees and requirements are not small-farm friendly',
+      'Secondary markets for food pay too little or do not exist locally',
+      'Small and mid-size farms are at risk of being bought out by large industrial operations',
+      'No shared system for collecting, storing, and moving crops to local buyers'
+    ]
+  },
+  proc: {
+    key: 'Processing',
+    members: ['Renae Hesselink','Lisa Potter'],
+    problems: [
+      'Cold chain infrastructure gaps',
+      'Access to capital and entrepreneurial education',
+      'Food safety credentials and regulatory requirements',
+      'Heavily regulated at multiple levels of government',
+      'Labor-intensive work requiring specialized skills to reach viability',
+      'Difficulty aligning demand to efficient, profitable supply management',
+      'Disparity among minority-owned businesses',
+      'Limited access to certified commercial space',
+      'High demand for skilled labor with limited local supply'
+    ]
+  },
+  net: {
+    key: 'Network & Coordination',
+    members: ['Ian Miller','Ana Olson','Stephen Proctor'],
+    problems: [
+      'No shared communication infrastructure across food system organizations',
+      'Organizations working in parallel without awareness of each other',
+      'No central point of contact or directory for food system actors',
+      'Lack of shared data or metrics to track food system progress',
+      'No coordinated funding strategy across organizations'
+    ]
+  }
+};
+
+var ALL_MEMBERS = [
+  'Angela Fox','Ana Olson','Ben Soyars','Brittany Brown','Elissa Penczar',
+  'Emily Merten','Ian Miller','Jess Grimm','Joseph Heeren','Kaitlin Hermanson',
+  'Kaitlyn Sutton','Larry Williams','Lisa Potter','Nick Tushek','Renae Hesselink',
+  'Reuben Richardson','Savannah Cunningham','Stephen Proctor','Vanessa Guardiola',
+  'Venessa Johnson-Jenkins'
+];
+
+var CONFIRMED_MEMBERS = [
+  'Elissa Penczar','Ian Miller','Ana Olson','Renae Hesselink','Jess Grimm',
+  'Reuben Richardson','Lisa Potter','Savannah Cunningham','Stephen Proctor','Venessa Johnson-Jenkins'
+];
+
+// Populate name dropdown
+var nameSelect = document.getElementById('nameSelect');
+ALL_MEMBERS.forEach(function(name) {
+  var opt = document.createElement('option');
+  opt.value = name;
+  opt.textContent = name;
+  nameSelect.appendChild(opt);
+});
+
+// Build problem checkboxes for all groups
+Object.keys(GROUPS).forEach(function(slug) {
+  var g = GROUPS[slug];
+  buildItems('donow-' + slug, slug, 'donow', g.problems);
+  buildItems('getstart-' + slug, slug, 'getstart', g.problems);
+  // Wire submit button
+  document.getElementById('submit-' + slug).addEventListener('click', function() {
+    handleSubmit(slug);
+  });
+});
+
+function buildItems(containerId, slug, col, problems) {
+  var container = document.getElementById(containerId);
+  problems.forEach(function(p, i) {
+    var id = col + '-' + slug + '-' + i;
+    var div = document.createElement('div');
+    div.className = 'problem-item';
+    div.id = 'item-' + id;
+
+    var cb = document.createElement('input');
+    cb.type = 'checkbox';
+    cb.id = id;
+    cb.setAttribute('data-col', col);
+    cb.setAttribute('data-slug', slug);
+
+    var lbl = document.createElement('label');
+    lbl.setAttribute('for', id);
+    lbl.textContent = p;
+
+    div.appendChild(cb);
+    div.appendChild(lbl);
+
+    div.addEventListener('click', function(e) {
+      if (e.target === cb) return;
+      if (cb.disabled) return;
+      cb.checked = !cb.checked;
+      enforceLimit(slug, col, 2);
+    });
+    cb.addEventListener('change', function() { enforceLimit(slug, col, 2); });
+
+    container.appendChild(div);
+  });
+}
+
+function enforceLimit(slug, col, max) {
+  var boxes = document.querySelectorAll('input[data-col="' + col + '"][data-slug="' + slug + '"]');
+  var checked = Array.prototype.filter.call(boxes, function(b) { return b.checked; });
+  boxes.forEach(function(b) {
+    var item = document.getElementById('item-' + b.id);
+    if (!b.checked && checked.length >= max) {
+      b.disabled = true;
+      if (item) item.classList.add('disabled');
+    } else {
+      b.disabled = false;
+      if (item) item.classList.remove('disabled');
+    }
+  });
+}
+
+// Name selection — show/hide cards, set members note, show/hide join row
+nameSelect.addEventListener('change', function() {
+  var name = this.value;
+  var notice = document.getElementById('noticeStrip');
+  var sections = document.getElementById('groupSections');
+  var helper = document.getElementById('nameHelper');
+
+  if (!name) {
+    notice.style.display = 'none';
+    sections.style.display = 'none';
+    helper.style.display = 'none';
+    return;
+  }
+
+  var isConfirmed = CONFIRMED_MEMBERS.indexOf(name) !== -1;
+
+  // Show helper text
+  helper.style.display = 'block';
+
+  // Notice
+  if (isConfirmed) {
+    notice.innerHTML = 'Your working groups are highlighted below. Vote on priorities in each one, and feel free to weigh in on any others.';
+  } else {
+    notice.innerHTML = 'You weren\'t signed up for any working groups yet. Check the box on any group you\'d like to join, then vote on the problems that matter most to you.';
+  }
+  notice.style.display = 'block';
+  sections.style.display = 'flex';
+
+  // For each group — update members note and join row visibility
+  Object.keys(GROUPS).forEach(function(slug) {
+    var g = GROUPS[slug];
+    var inGroup = g.members.indexOf(name) !== -1;
+    var joinRow = document.getElementById('join-' + slug);
+    var membersNote = document.getElementById('members-' + slug);
+
+    // Members note — highlight current person if they're in the group
+    var memberList = g.members.map(function(m) {
+      return m === name ? '<strong>' + m + '</strong>' : m;
+    }).join(', ');
+    membersNote.innerHTML = 'Current members: ' + memberList;
+
+    // Show join row only if not already in the group
+    joinRow.style.display = inGroup ? 'none' : 'block';
+  });
+});
+
+// Per-group submit
+function handleSubmit(slug) {
+  var name = nameSelect.value;
+  if (!name) { showError(slug, 'Please select your name at the top of the page.'); return; }
+
+  var g = GROUPS[slug];
+  var inGroup = g.members.indexOf(name) !== -1;
+  var isConfirmed = CONFIRMED_MEMBERS.indexOf(name) !== -1;
+  var joining = !inGroup && document.getElementById('joincheck-' + slug).checked;
+
+  var doNow = [];
+  document.querySelectorAll('input[data-col="donow"][data-slug="' + slug + '"]').forEach(function(b) {
+    if (b.checked) doNow.push(b.nextElementSibling.textContent.trim());
+  });
+
+  var getStarted = [];
+  document.querySelectorAll('input[data-col="getstart"][data-slug="' + slug + '"]').forEach(function(b) {
+    if (b.checked) getStarted.push(b.nextElementSibling.textContent.trim());
+  });
+
+  if (doNow.length === 0 && getStarted.length === 0) {
+    showError(slug, 'Please select at least one problem priority before submitting.');
+    return;
+  }
+
+  var btn = document.getElementById('submit-' + slug);
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+
+  var payload = {
+    type: 'working_group_vote',
+    name: name,
+    isNewMember: !isConfirmed,
+    timestamp: new Date().toISOString(),
+    votes: [{
+      group: g.key,
+      joining: joining,
+      doNow: doNow,
+      getStarted: getStarted,
+      otherDoNow: document.getElementById('other-donow-' + slug).value || '',
+      otherGetStarted: document.getElementById('other-getstart-' + slug).value || ''
+    }]
+  };
+
+  fetch(SUBMIT_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+  .then(function() { showThanks(slug, name, btn); })
+  .catch(function() {
+    showError(slug, 'Something went wrong. Please try again.');
+    btn.disabled = false;
+    btn.textContent = 'Submit My Priorities';
+  });
+}
+
+function showThanks(slug, name, btn) {
+  btn.style.display = 'none';
+  var el = document.getElementById('thanks-' + slug);
+  el.textContent = 'Got it, ' + name.split(' ')[0] + '. Thank you.';
+  el.style.display = 'block';
+  document.getElementById('error-' + slug).style.display = 'none';
+}
+
+function showError(slug, msg) {
+  var el = document.getElementById('error-' + slug);
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+</script>
+</body>
+</html>
