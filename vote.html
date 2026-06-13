@@ -927,18 +927,29 @@ nameSelect.addEventListener('change', function() {
     // Show join row only if not already in the group
     joinRow.style.display = inGroup ? 'none' : 'block';
 
-    // For non-members, lock problems until they check join
-    if (!isConfirmed && !inGroup) {
-      lockProblems(slug, true);
+    // For non-members, lock vote area until they check join
+    var voteArea = document.getElementById('card-' + slug).querySelector('.vote-cols');
+    if (!isConfirmed && !inGroup && voteArea) {
+      voteArea.style.opacity = '0.4';
+      voteArea.style.pointerEvents = 'none';
+    } else if (voteArea) {
+      voteArea.style.opacity = '1';
+      voteArea.style.pointerEvents = '';
     }
 
-    // Wire up join checkbox to enforce max 2 and lock/unlock problems
-    var cb = document.getElementById('joincheck-' + slug);
-    if (cb) {
-      cb.checked = false;
-      cb.disabled = false;
-      cb.addEventListener('change', function() {
-        lockProblems(slug, !this.checked);
+    // Replace join checkbox with a fresh clone to avoid stacking listeners
+    var oldCb = document.getElementById('joincheck-' + slug);
+    if (oldCb) {
+      var newCb = oldCb.cloneNode(true);
+      newCb.checked = false;
+      newCb.disabled = false;
+      oldCb.parentNode.replaceChild(newCb, oldCb);
+      newCb.addEventListener('change', function() {
+        var va = document.getElementById('card-' + slug).querySelector('.vote-cols');
+        if (va) {
+          va.style.opacity = this.checked ? '1' : '0.4';
+          va.style.pointerEvents = this.checked ? '' : 'none';
+        }
         enforceJoinLimit();
       });
     }
@@ -963,25 +974,6 @@ function enforceJoinLimit() {
       row.style.opacity = '1';
     }
   });
-}
-
-function lockProblems(slug, lock) {
-  var card = document.getElementById('card-' + slug);
-  var boxes = card.querySelectorAll('input[type=checkbox][data-col]');
-  var otherDn = document.getElementById('other-donow-' + slug);
-  var otherGs = document.getElementById('other-getstart-' + slug);
-  var voteArea = card.querySelector('.vote-cols');
-  if (voteArea) {
-    voteArea.style.opacity = lock ? '0.4' : '1';
-    voteArea.style.pointerEvents = lock ? 'none' : '';
-  }
-  boxes.forEach(function(b) {
-    if (lock) { b.checked = false; }
-    var item = document.getElementById('item-' + b.id);
-    if (item) item.classList.toggle('disabled', lock);
-  });
-  if (otherDn) { otherDn.disabled = lock; if (lock) otherDn.value = ''; }
-  if (otherGs) { otherGs.disabled = lock; if (lock) otherGs.value = ''; }
 }
 
 // Per-group submit
