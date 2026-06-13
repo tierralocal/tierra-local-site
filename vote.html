@@ -954,36 +954,40 @@ function enforceJoinLimit() {
   slugs.forEach(function(s) {
     var cb = document.getElementById('joincheck-' + s);
     var row = document.getElementById('join-' + s);
+    var card = document.getElementById('card-' + s);
     if (!cb || row.style.display === 'none') return;
     if (!cb.checked && checked.length >= 2) {
+      // grey out the whole card, disable join checkbox
       cb.disabled = true;
-      row.style.opacity = '0.4';
-      // lock problem checkboxes for this group
-      lockProblems(s, true);
+      card.style.opacity = '0.4';
+      card.style.pointerEvents = 'none';
     } else {
+      // restore card, but only unlock problems if join is checked
       cb.disabled = false;
-      row.style.opacity = '1';
-      // unlock problem checkboxes if join is checked or re-enabled
-      lockProblems(s, false);
+      card.style.opacity = '1';
+      card.style.pointerEvents = '';
+      lockProblems(s, !cb.checked);
     }
   });
 }
 
 function lockProblems(slug, lock) {
-  var body = document.getElementById('card-' + slug).querySelector('.section-body');
-  var boxes = body.querySelectorAll('input[type=checkbox][data-col]');
+  var card = document.getElementById('card-' + slug);
+  var boxes = card.querySelectorAll('input[type=checkbox][data-col]');
   var otherDn = document.getElementById('other-donow-' + slug);
   var otherGs = document.getElementById('other-getstart-' + slug);
+  var voteArea = card.querySelector('.vote-cols');
+  if (voteArea) {
+    voteArea.style.opacity = lock ? '0.4' : '1';
+    voteArea.style.pointerEvents = lock ? 'none' : '';
+  }
   boxes.forEach(function(b) {
-    b.disabled = lock;
-    b.checked = lock ? false : b.checked;
+    if (lock) { b.checked = false; }
     var item = document.getElementById('item-' + b.id);
     if (item) item.classList.toggle('disabled', lock);
   });
-  if (otherDn) otherDn.disabled = lock;
-  if (otherGs) otherGs.disabled = lock;
-  body.style.opacity = lock ? '0.4' : '1';
-  body.style.pointerEvents = lock ? 'none' : '';
+  if (otherDn) { otherDn.disabled = lock; if (lock) otherDn.value = ''; }
+  if (otherGs) { otherGs.disabled = lock; if (lock) otherGs.value = ''; }
 }
 
 // Per-group submit
