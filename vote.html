@@ -563,7 +563,7 @@
       <div class="section-body">
         <div class="synthesis">
           <div class="synthesis-label">Why This Matters</div>
-          <div class="synthesis-text">A lot of food that could be saved and shared here gets sent out of the county instead. There is no local place to collect and store rescued food. Pantries run out. Food that isn't eaten ends up in the landfill because we don't have a robust compost program either. Farmers waste expired or nearly expired food with nowhere to send it.</div>
+          <div class="synthesis-text">A lot of food that could be saved and shared here gets sent out of the county instead. There is no local place to collect and store rescued food. Pantries run out. Farmers lose food with nowhere to send it.</div>
         </div>
         <div class="members-note" id="members-waste"></div>
         <div class="join-row" id="join-waste">
@@ -927,12 +927,20 @@ nameSelect.addEventListener('change', function() {
     // Show join row only if not already in the group
     joinRow.style.display = inGroup ? 'none' : 'block';
 
-    // Wire up join checkbox to enforce max 2
+    // For non-members, lock problems until they check join
+    if (!isConfirmed && !inGroup) {
+      lockProblems(slug, true);
+    }
+
+    // Wire up join checkbox to enforce max 2 and lock/unlock problems
     var cb = document.getElementById('joincheck-' + slug);
     if (cb) {
       cb.checked = false;
       cb.disabled = false;
-      cb.addEventListener('change', enforceJoinLimit);
+      cb.addEventListener('change', function() {
+        lockProblems(slug, !this.checked);
+        enforceJoinLimit();
+      });
     }
   });
 });
@@ -950,11 +958,32 @@ function enforceJoinLimit() {
     if (!cb.checked && checked.length >= 2) {
       cb.disabled = true;
       row.style.opacity = '0.4';
+      // lock problem checkboxes for this group
+      lockProblems(s, true);
     } else {
       cb.disabled = false;
       row.style.opacity = '1';
+      // unlock problem checkboxes if join is checked or re-enabled
+      lockProblems(s, false);
     }
   });
+}
+
+function lockProblems(slug, lock) {
+  var body = document.getElementById('card-' + slug).querySelector('.section-body');
+  var boxes = body.querySelectorAll('input[type=checkbox][data-col]');
+  var otherDn = document.getElementById('other-donow-' + slug);
+  var otherGs = document.getElementById('other-getstart-' + slug);
+  boxes.forEach(function(b) {
+    b.disabled = lock;
+    b.checked = lock ? false : b.checked;
+    var item = document.getElementById('item-' + b.id);
+    if (item) item.classList.toggle('disabled', lock);
+  });
+  if (otherDn) otherDn.disabled = lock;
+  if (otherGs) otherGs.disabled = lock;
+  body.style.opacity = lock ? '0.4' : '1';
+  body.style.pointerEvents = lock ? 'none' : '';
 }
 
 // Per-group submit
@@ -1009,7 +1038,6 @@ function handleSubmit(slug) {
   fetch(SUBMIT_URL, {
     method: 'POST',
     mode: 'no-cors',
-    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload)
   })
   .then(function() { showThanks(slug, name, btn); })
