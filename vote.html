@@ -954,19 +954,13 @@ function enforceJoinLimit() {
   slugs.forEach(function(s) {
     var cb = document.getElementById('joincheck-' + s);
     var row = document.getElementById('join-' + s);
-    var card = document.getElementById('card-' + s);
-    if (!cb || row.style.display === 'none') return;
+    if (!cb || !row || row.style.display === 'none') return;
     if (!cb.checked && checked.length >= 2) {
-      // grey out the whole card, disable join checkbox
       cb.disabled = true;
-      card.style.opacity = '0.4';
-      card.style.pointerEvents = 'none';
+      row.style.opacity = '0.4';
     } else {
-      // restore card, but only unlock problems if join is checked
       cb.disabled = false;
-      card.style.opacity = '1';
-      card.style.pointerEvents = '';
-      lockProblems(s, !cb.checked);
+      row.style.opacity = '1';
     }
   });
 }
