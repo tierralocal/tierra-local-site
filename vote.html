@@ -170,6 +170,7 @@
     background: var(--white);
     border-width: 4px;
     border-style: solid;
+    width: 100%;
   }
   .section-card.dist   { border-color: var(--cyan); }
   .section-card.cons   { border-color: var(--lime); }
@@ -414,7 +415,7 @@
   }
 
   /* hidden until name selected */
-  .group-sections { display: none; }
+  .group-sections { display: none; flex-direction: column; gap: 48px; }
 
   footer {
     background: var(--black);
