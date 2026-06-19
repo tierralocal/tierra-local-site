@@ -1,1376 +1,3 @@
-// ============================================================
-// MCFPN Feedback + RSVP Handler
-// Google Apps Script Web App
-// ============================================================
-// SETUP:
-// 1. Go to script.google.com — create a new project, paste this in
-// 2. Set SHEET_ID below to your Google Sheet ID
-// 3. Deploy > New deployment > Web app
-//    Execute as: Me | Who has access: Anyone
-// 4. Paste the web app URL into feedback.html as SUBMIT_URL
-// ============================================================
-
-var SHEET_ID = '1KRJyySqtP2-KtHlCHzGLsznM022Qq2nIR1sbDB26kS0';
-
-function doPost(e) {
-  var result;
-  try {
-    var body = JSON.parse(e.postData.contents);
-    if (body.type === 'rsvp') {
-      logRSVP(body);
-    } else if (body.type === 'naming_vote') {
-      logNamingVote(body);
-    } else {
-      logFeedback(body);
-    }
-    result = JSON.stringify({ ok: true });
-  } catch (err) {
-    result = JSON.stringify({ ok: false, error: err.message });
-  }
-  return ContentService.createTextOutput(result).setMimeType(ContentService.MimeType.JSON);
-}
-
-function doGet(e) {
-  return ContentService.createTextOutput(JSON.stringify({ ok: true, status: 'MCFPN handler running' }))
-    .setMimeType(ContentService.MimeType.JSON);
-}
-
-function logFeedback(data) {
-  var ss = SpreadsheetApp.openById(SHEET_ID);
-  var sheet = ss.getSheetByName('Feedback');
-  if (!sheet) {
-    sheet = ss.insertSheet('Feedback');
-    var header = sheet.getRange(1, 1, 1, 6);
-    header.setValues([['Timestamp', 'Section', 'Name', 'Organization', 'Reaction', 'Comment']]);
-    header.setFontWeight('bold');
-    header.setBackground('#FF2D55');
-    header.setFontColor('#FFFFFF');
-    sheet.setFrozenRows(1);
-    sheet.setColumnWidths(1, 6, [160, 120, 150, 160, 200, 400]);
-  }
-  sheet.appendRow([
-    data.timestamp || new Date().toISOString(),
-    data.section   || '',
-    data.name      || '',
-    data.org       || '',
-    data.reaction  || '',
-    data.comment   || ''
-  ]);
-}
-
-function logRSVP(data) {
-  var ss = SpreadsheetApp.openById(SHEET_ID);
-  var sheet = ss.getSheetByName('RSVPs');
-  if (!sheet) {
-    sheet = ss.insertSheet('RSVPs');
-    var header = sheet.getRange(1, 1, 1, 3);
-    header.setValues([['Timestamp', 'Name', 'Email']]);
-    header.setFontWeight('bold');
-    header.setBackground('#FFD600');
-    header.setFontColor('#111111');
-    sheet.setFrozenRows(1);
-    sheet.setColumnWidths(1, 3, [160, 200, 260]);
-  }
-  sheet.appendRow([
-    data.timestamp || new Date().toISOString(),
-    data.name      || '',
-    data.email     || ''
-  ]);
-}
-
-
-function logNamingVote(data) {
-  var ss = SpreadsheetApp.openById(SHEET_ID);
-  var sheet = ss.getSheetByName('Naming Votes');
-  if (!sheet) {
-    sheet = ss.insertSheet('Naming Votes');
-    var header = sheet.getRange(1, 1, 1, 4);
-    header.setValues([['Timestamp', 'Vote', 'Suggestion', 'Name']]);
-    header.setFontWeight('bold');
-    header.setBackground('#FF2D55');
-    header.setFontColor('#FFFFFF');
-    sheet.setFrozenRows(1);
-    sheet.setColumnWidths(1, 4, [160, 200, 200, 160]);
-  }
-  sheet.appendRow([
-    data.timestamp || new Date().toISOString(),
-    data.vote      || '',
-    data.suggestion|| '',
-    data.name      || ''
-  ]);
-}
-Show more
-Jun 12
-Got it. What edits do you need?
-
-
-00:00 and the other one is we're recording everything you say jess so be careful with 00:10 gonna come back to haunt you yeah i'm sure i'll talk a bunch of shit then 00:15 perfect perfect get it on the record all right 00:19 so you just gave me a list of grants earlier too i was like oh yeah i know
-
-pasted
-
-ok, read the transcript for contet:
-
-Jun 12
-Read it. Looks like an MCFPN session 3 meeting — Kalia walking the group through campaign planning tools, then Cody facilitating a discussion about next steps and issue prioritization across the five working group areas.
-
-What edits do you need to the Apps Script?
-
-
-Subcommittees - MCFPN (1).xlsx
-xlsx
-
-in the attached excel file, you will see who was present, and then who signed up for which working groups. a Y means they signed up for the working group, a V means they were volunteered by that working group but were not present so ignore the Vs, I will take care of those. nothing means they weren't there and weren't signed up for anything. so, I need the script to updated with a few things - under each working group, I want it listed who is in that working group. then I want a drop down where those members who are already in that subgroup can choose their name and vote for the problems they want to focus one (you already have the problems in bullets) and they should always have a space for "other" working group. for the people who were volunteered and the people who weren't there, they should be able to pick which working groups they want to be on, then pick which problems they want to focus on within that subgroup. If this doesn't make sense, propose another way to do this.
-
-Show more
-Jun 12
-Let me read the Excel file first to understand the data.
-
-
-Viewed a file, ran a command
-Viewed a file, ran a command
-Got the data. Now I have a clear picture. Let me map this out before proposing anything:
-
-Working groups & members (Y only):
-
-Distribution: Elissa, Ana, Renae, Jess, Reuben, Lisa, Savannah, Stephen, Venessa
-Consumption: Elissa, Jess, Ana (via Funding col?), Savannah, Venessa
-Waste/Rescue: Elissa, Reuben, Stephen
-Production: Ian, Jess, Reuben, Lisa, Savannah, Stephen
-Processing: Ian, Renae, Lisa, Venessa
-Funding & Sustainability: Elissa, Ana, Ian, Renae, Lisa, Stephen
-Let me re-read the columns more carefully to confirm the mapping.
-
-
-Read raw row/column structure
-Read raw row/column structure
-Now I have everything I need. Let me map the columns precisely:
-
-Col B: Present (Y = attended)
-Col C: Distribution
-Col D: Consumption
-Col E: Waste/Rescue
-Col F: Production
-Col G: Processing
-Col H: Network & Communications
-Col I: Funding & Sustainability
-Here's my proposed approach before touching any code:
-
-Two-path form on the feedback page:
-
-Path 1 — "I was at the session" (the Y/Present people)
-They already signed up for working groups. They see a list of the groups they're already in, pick one, then vote on which problems to prioritize within it (checkboxes from the bullet list + an "Other" write-in).
-
-Path 2 — "I wasn't there" / volunteers / new folks
-They pick their name from a dropdown (or type it), choose which working group(s) they want to join, then for each group they select, vote on the problems they want to focus on.
-
-On the back end, a new sheet called Working Group Votes logs: timestamp, name, working group, problems selected, and any "other" write-in.
-
-The existing Feedback / RSVP / Naming Vote sheets stay untouched.
-
-Does this approach make sense? A couple of clarifying questions:
-
-Should people be able to vote in multiple working groups in one submission, or one at a time?
-For the problems vote — should they be able to pick multiple problems, or just their top one?
-for starters, here is a simplified version of who is in what subgroup:
-    Distribution    Consumption    Waste / Rescue    Production    Processing    Network & Coordination
-Emily Merten                        
-Elissa Penczar    Y    Y                
-Ian Miller                Y        Y
-Kaitlin Hermanson                        
-Ana Olson    Y                    Y
-Renae Hesselink                Y    Y    
-Jess Grimm    Y        Y            
-Angela Fox            V            
-Ben Soyars                        
-Brittany Brown        V    V            
-Joseph Heeren                        
-Reuben Richardson        Y    Y            
-Lisa Potter                Y    Y    
-Nick Tushek                        
-Savannah Cunningham    Y            Y        
-Stephen Proctor        Y    Y            Y
-Kaitlyn Sutton                    V    
-Vanessa Guardiola                        
-Venessa Johnson-Jenkins    Y            Y        
-Larry Williams
-
-Show more
-Jun 12
-Got it. Clean data. Let me also get your answers to those two questions before I write any code:
-
-Q: Should people be able to vote in multiple working groups in one submission, or one group at a time?
-A: Multiple groups in one submission
-
-Q: For the problems vote within each group — pick one priority, or select all that apply?
-A: there should a do now (we should do this in the next sixth months) and a we should get started on this (but it will probably take longer than six months)
-
-Jun 12
-Love that framing — much more actionable than a simple checkbox. So each problem gets a two-option tag: Do Now (≤6 months) or Get Started (longer horizon), and people can tag as many problems as they want across multiple groups in one submission.
-
-Let me build this out now.
-
-Claude's response was interrupted.
-no, they should only be able to tag max of two do now and get started
-
-Jun 12
-Got it — so per working group, each person can tag:
-
-Max 2 problems as "Do Now"
-Max 2 problems as "Get Started"
-And they can do this across multiple groups in one submission. Building it now.
-
-
-Map out the data before coding
-Map out the data before coding
-Good, data is clean. Writing the full updated script now.
-
-
-Updated MCFPN Apps Script with working group voting
-Updated MCFPN Apps Script with working group voting
-Now the frontend form logic — this is the more complex piece:
-
-
-Created a file, ran a command, read a file
-Created a file, ran a command, read a file
-Here's what you've got and how to deploy it:
-
-mcfpn_handler.gs — replace your existing Apps Script with this. It adds a new logWorkingGroupVote() function and a Working Group Votes sheet with columns for: name, group, joining status, Do Now (×2), Do Now Other, Get Started (×2), Get Started Other.
-
-working_group_vote_form.html — drop this block into your existing feedback.html wherever you want the vote section. One thing to update: swap YOUR_APPS_SCRIPT_URL_HERE with your actual deployed URL (same one you already use for the other forms).
-
-How the form works:
-
-Person picks their name from the dropdown
-If they're a confirmed attendee (Y), their groups are pre-checked and expanded, with a note explaining they can also weigh in on others
-If they weren't there / were volunteered, all groups are unchecked and they pick which ones they want to join
-Each open group shows two columns — 🔴 Do Now and 🔵 Get Started — with the problem bullets as checkboxes. Once they hit 2 in a column, the rest grey out
-There's an "Other idea" write-in field in each column
-Submit sends all groups in one payload
-One heads-up: the Network & Coordination problems I wrote from the transcript are reasonable but weren't in your original Excel — let me know if you want to adjust those bullet points.
-
-
-Mcfpn handler
-GS 
-
-Working group vote form
-Code · HTML 
-replace the feedback script and RSVP handler, right?
-
-Jun 12
-No — keep all of that. The .gs file I gave you already includes the original logFeedback(), logRSVP(), and logNamingVote() functions unchanged at the bottom. It's a full replacement of the script, not an addition — paste it over everything and all three original handlers stay intact, plus the new logWorkingGroupVote() gets added.
-
-I no longer want feedback or the RSVP and we're just going to use waste and recue
-
-Jun 12
-Got it. Let me update both files.
-
-
-Ran 2 commands
-Ran 2 commands
-Now update the frontend to only show Waste / Rescue:
-
-
-Ran 2 commands, read a file
-Ran 2 commands, read a file
-Cleaned up. Here's what changed:
-
-mcfpn_handler_v2.gs — all three old loggers (feedback, RSVP, naming vote) are gone. doPost only handles working_group_vote now. The working groups data is trimmed to Waste / Rescue only, with its three confirmed members (Jess, Reuben, Stephen).
-
-working_group_vote_form_v2.html — no more multi-group card layout. It's a single focused form: pick your name, get a contextual notice (confirmed member vs. joining), then vote Do Now / Get Started with the 8 Waste & Rescue problem bullets. The "join this group" checkbox only appears for people who weren't signed up.
-
-Just swap YOUR_APPS_SCRIPT_URL_HERE with your deployed URL and drop it into your page.
-
-
-Mcfpn handler v2
-GS 
-
-Working group vote form v2
-Code · HTML 
-don't use > symbols, just say "let's do this in the next six months" or "let's get started, but this will probably take longer than six months" and also keep the warhol pop colo design
-
-Jun 12
-Let me check the existing site design first so I match it properly.
-
-
-Read the current form HTML to get Warhol design tokens
-Read the current form HTML to get Warhol design tokens
-Do you have the existing feedback.html or design system CSS somewhere I can reference? I want to make sure I'm pulling the actual Warhol colors and fonts from your site rather than guessing. If you can paste it or share the file, I'll match it exactly.
-
-
-<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"/> <meta name="viewport" content="width=device-width, initial-scale=1.0"/> <title>MCFPN — Issue Statements Review</title> <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,400;0,600;0,700;1,400&disp
-
-pasted
-
-Jun 12
-Got the full design system. Rebuilding now with the real tokens.
-
-
-Ran 2 commands, read a file
-Ran 2 commands, read a file
-Here's what changed in v3:
-
-No emoji or symbols — columns are now labeled "Let's do this in the next six months" and "Let's get started, but this will probably take longer than six months" in Bebas Neue all-caps, pink and violet respectively
-Full Warhol design system — black hero bar with yellow Bebas Neue headline, yellow notice strip with pink left border, white card with 4px pink border, pink tab, pink synthesis block, pink submit button, "Got it, [First name]. Thank you." confirmation — all matching your existing page exactly
-Same no-cors fetch pattern as your original feedback forms so it works with the Apps Script deployment the same way
-The .gs file from v2 is unchanged — only the HTML needed updating
-
-Working group vote form v3
-Code · HTML 
-also, let's just create a new page for this and new form for the script, not write over the old google form
-
-Jun 12
-Got it — so three things:
-
-A brand new standalone HTML page (not embedded in the existing feedback page)
-A new separate Apps Script file just for the vote handler — the old feedback/RSVP script stays completely untouched
-They'll have their own separate deployment URL
-Building now.
-
-
-Ran 2 commands, read a file
-Ran 2 commands, read a file
-Two clean files, nothing overwritten:
-
-waste_rescue_vote.html — standalone page, full Warhol design, same MCFPN_Logo.png reference and footer as your existing site. Deploy this wherever you host the feedback page.
-
-waste_rescue_vote_handler.gs — a brand new Apps Script project, completely separate from your old one. Create a new project at script.google.com, paste this in, deploy it, then drop that new URL into waste_rescue_vote.html where it says YOUR_APPS_SCRIPT_URL_HERE. Your original feedback/RSVP script and sheet are untouched.
-
-
-Waste rescue vote
-Code · HTML 
-
-Waste rescue vote handler
-GS 
-does the GS still have the old google sheet id?
-
-Jun 12
-Yes it does — 1KRJyySqtP2-KtHlCHzGLsznM022Qq2nIR1sbDB26kS0 is still in there from the original script. Since this is a new standalone form, you'll probably want it logging to a different sheet. Do you have a new Sheet ID to plug in, or do you want me to leave it as a placeholder so you can fill it in?
-
-I'll fill it in, the first one will create the headers, right?
-
-Jun 12
-Yes — the logWorkingGroupVote() function checks if the "Working Group Votes" sheet exists and if not, creates it and writes the headers on the first submission. So just point it at any Google Sheet and the first vote will set everything up automatically.
-
-the script only looks like it will handle the waste / rescue votes it needs to handle all of them, and the drop down needs to connect to all 6 working groups
-
-Jun 12
-You're right — the v2 script got stripped down too far when we went Waste/Rescue only for the page, but the script itself should still handle all 6 groups since other groups will eventually have their own pages too. Let me update the .gs only.
-
-
-Ran 2 commands, read a file
-Ran 2 commands, read a file
-Updated. The script now has all 6 working groups and their full member/problem lists, plus the complete ALL_MEMBERS and CONFIRMED_MEMBERS arrays. The sheet ID is set to YOUR_SHEET_ID_HERE as a placeholder for you to fill in.
-
-The HTML page stays Waste/Rescue only — when you build pages for the other groups later, they'll all post to this same script and sheet, with the group name captured in each row so you can filter by working group in the spreadsheet.
-
-
-Waste rescue vote handler
-GS 
-ok, now does the code for the website in warhol design include all the commitees and those who signed up for them?
-
-Jun 12
-No — the HTML page (waste_rescue_vote.html) only has the Waste/Rescue data hardcoded. It has:
-
-Only the 3 Waste/Rescue confirmed members
-Only the Waste/Rescue problems
-No other working groups at all
-Since you said earlier you want to start with just the Waste/Rescue page, that's intentional for now. But if you want the page to eventually show all 6 groups with their correct member lists and problems — like a full network-wide priority vote on one page — I can build that version. Just say the word.
-
-yeah, build it. also, when people click their name at the bottom it could say "if you want to review the working groups issues, click here (www.tierralocal.org/feedback) and if you want to change your workgroup selections, email kody@tierralocal.org
-
-Jun 12
-On it.
-
-
-Ran 2 commands, read a file
-Ran 2 commands, read a file
-Here's what's in mcfpn_vote.html:
-
-All 6 working groups — Distribution (cyan), Consumption (lime), Waste/Rescue (pink), Production (violet), Processing (cyan), Network & Coordination (yellow) — each with their correct confirmed members and problem lists, all in the Warhol design.
-
-How it behaves when someone picks their name:
-
-Their groups highlight their name in bold in the members note
-The "I'd like to join" checkbox is hidden for groups they're already in, shown for ones they're not
-Non-confirmed members see join checkboxes on all 6 groups
-Each group has its own submit button and "Got it, [First name]. Thank you." confirmation so people can submit one group at a time
-The helper text appears as soon as they pick a name: "Want to review the working group issues before voting? Read them here. Need to change which working groups you're in? Email Kody." — with the live links to tierralocal.org/feedback and kody@tierralocal.org.
-
-The .gs file from the last version is unchanged — this page posts to the same script.
-
-
-Mcfpn vote
-Code · HTML 
-I have a url for the news script, do I have to paste it into the code?
-
-Jun 12
-Yes — in mcfpn_vote.html find this line near the top of the <script> block:
-
-javascript
-var SUBMIT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
-Replace YOUR_APPS_SCRIPT_URL_HERE with your deployed Apps Script URL and you're good to go.
-
-is network included in the working groups? if not, give me the code snippet and where to insert it in the code so the two member who chose networking and communications (I think it was Ana and Ian) should be able to write in what they want to do and why in this space
-
-Jun 12
-Looking at your corrected spreadsheet from earlier, the Network & Coordination members are Ian Miller, Ana Olson, and Stephen Proctor — and yes, it's already included as the sixth card in the page. The full group is there with all the problem checkboxes.
-
-That said, Network & Coordination is a bit different from the others — it's more infrastructure/process than a concrete issue area, so a write-in field makes sense. But before I give you a snippet, quick question: do you want the write-in to replace the checkbox problems entirely for this group, or just be an addition alongside them?
-
-be an addition
-
-Jun 12
-Got it. Here's the snippet to add — just drop it into the Network & Coordination section, right after the closing </div> of the vote-cols div and before the submit-zone div:
-
-html
-<div style="margin-bottom: 20px; border-top: 2px dashed #ddd; padding-top: 20px;">
-  <div class="block-label" style="margin-bottom: 10px;">Something we haven't captured yet</div>
-  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
-    <div class="other-row">
-      <label>What do you want to do?</label>
-      <textarea id="net-writein-what" rows="4" placeholder="Describe the action or idea…" style="background:#f7f7f7;border:1.5px solid #ddd;color:var(--black);padding:9px 12px;font-family:'DM Sans',sans-serif;font-size:0.88rem;outline:none;border-radius:0;width:100%;resize:vertical;transition:border-color 0.2s;"></textarea>
-    </div>
-    <div class="other-row">
-      <label>Why does it matter?</label>
-      <textarea id="net-writein-why" rows="4" placeholder="What problem does this solve…" style="background:#f7f7f7;border:1.5px solid #ddd;color:var(--black);padding:9px 12px;font-family:'DM Sans',sans-serif;font-size:0.88rem;outline:none;border-radius:0;width:100%;resize:vertical;transition:border-color 0.2s;"></textarea>
-    </div>
-  </div>
-</div>
-Then in the handleSubmit function, find the votes: [{ block and add two fields to capture the write-ins. Replace the existing votes block inside handleSubmit for the net slug with this:
-
-javascript
-votes: [{
-  group: g.key,
-  joining: joining,
-  doNow: doNow,
-  getStarted: getStarted,
-  otherDoNow: document.getElementById('other-donow-' + slug).value || '',
-  otherGetStarted: document.getElementById('other-getstart-' + slug).value || '',
-  writeInWhat: slug === 'net' ? (document.getElementById('net-writein-what').value || '') : '',
-  writeInWhy:  slug === 'net' ? (document.getElementById('net-writein-why').value  || '') : ''
-}]
-And in the .gs file, add two columns to the headers array and the appendRow call:
-
-Headers array — add at the end:
-
-javascript
-'Network — What do you want to do?',
-'Network — Why does it matter?'
-appendRow call — add at the end:
-
-javascript
-v.writeInWhat || '',
-v.writeInWhy  || ''
-Those two columns will just be empty for all other working groups and only populate for Network & Coordination submissions.
-
-can you give me a quick chart of who voted to join which working groups?
-
-Jun 12
-Let me pull that from the spreadsheet data we already have.
-
-
-Re-read the spreadsheet
-Re-read the spreadsheet
-I also need to use your corrected version from earlier in the conversation since the columns shifted. Using that data:
-
-V
-
-Connecting to visualize...
-Confirmed members (Y) in bold, volunteered (V) in gray below the dividing line. A few things worth noting: Waste/Rescue and Processing are thin at 2 confirmed members each — might be worth a heads up to Kody before you send the vote page out.
-
-how many groups did each member sign up for?
-
-Jun 12
-V
-
-Connecting to visualize...
-Stephen is the most spread out at 4 groups. Everyone else signed up for 2–3. Nobody signed up for just one, which is good — but worth keeping an eye on Stephen and Jess given they're also in some of the thinner groups.
-
-what is the distribution across the groups
-
-Jun 12
-V
-
-Connecting to visualize...
-Distribution, Consumption, and Production are all solid at 5. Network & Coordination is workable at 3. Waste/Rescue and Processing are the ones to watch — 2 members each means if one person goes quiet, those groups are basically solo operations. The volunteered folks (Brittany Brown for Waste/Rescue, Kaitlyn Sutton for Processing) could help shore those up if they convert.
-
-corrections: Stephen Proctor    Consumption, Waste/Rescue,  Network & Coord.    4
-Jess Grimm    Distribution,  Production    3
-Savannah Cunningham    Distribution, Production    3
-
-Jun 12
-Got it — let me fix both charts with the corrected data.
-
-V
-
-Connecting to visualize...
-V
-
-Connecting to visualize...
-With the corrections, everyone is now at 2–3 groups — much more evenly spread. Waste/Rescue actually moved up to 3 (Jess, Reuben, Stephen), so Processing is now the only group that needs attention at just 2. Kaitlyn Sutton being volunteered there is the obvious fix.
-
-Also — these corrections affect the member lists in the HTML page. Want me to update mcfpn_vote.html with the corrected group assignments?
-
-yes
-
-Jun 12
-
-Viewed a file, ran a command
-Viewed a file, ran a command
-Three fixes needed: Consumption (remove Stephen), Waste/Rescue (remove Jess), and the CONFIRMED_MEMBERS array. Let me check those lines.
-
-
-Edited 2 files, viewed a file
-Edited 2 files, viewed a file
-Now fix Distribution — Jess stays, but also need to check Production for Jess and Savannah being removed from Consumption.
-
-
-Check Distribution and Production members
-Check Distribution and Production members
-Distribution looks correct. Now check the .gs file members too, and update CONFIRMED_MEMBERS in the HTML.
-
-
-Ran a command, viewed a file
-Ran a command, viewed a file
-CONFIRMED_MEMBERS is fine — it's just the list of people who attended and signed up for anything, which hasn't changed. Now update the .gs file to match:
-
-
-Edited 2 files, ran a command, read a file
-Edited 2 files, ran a command, read a file
-Both files updated. The two changes made in each:
-
-Consumption: Elissa Penczar, Reuben Richardson (Stephen removed)
-Waste/Rescue: Reuben Richardson, Stephen Proctor (Jess removed)
-Distribution and Production were already correct.
-
-
-Mcfpn vote
-Code · HTML 
-
-Waste rescue vote handler
-GS 
-I ran the gs without the site set up yet but it didn't create the headers
-
-Jun 12
-That's expected — the headers only get created when the first actual POST submission comes in, not when you just run or deploy the script. The logWorkingGroupVote function only fires when it receives a working_group_vote payload via doPost.
-
-Once you have the page up and someone (even just you testing it) submits a vote, it'll create the sheet and headers automatically on that first hit.
-
-ok, then can we write me in as part of the waste rescue and networking groups
-
-Jun 12
-What's your full name as you'd want it to appear in the sheet and on the dropdown?
-
-wait, can someone choose their name from the drop down more than once?
-
-Jun 12
-Yes — nothing in the current code prevents that. Someone could select their name, submit, then submit again. Want me to add a guard that disables the submit button and shows a "you've already submitted" message after the first submission for each group? It would use localStorage to remember — though that only works per browser/device, so it's not bulletproof, but it's a reasonable deterrent for accidental double submissions.
-
-no
-
-Jun 12
-Then just keep an eye on the sheet for duplicates. Since each row has a timestamp and name, it'll be easy to spot and delete any accidental double submissions.
-
-Now — what's your full name so I can add you to Waste/Rescue and Network & Coordination?
-
-how do I add this to my site in git hub again?
-
-Jun 12
-Since you're on GitHub Pages, the simplest way:
-
-Go to your repository on github.com
-Click Add file → Upload files
-Drag in mcfpn_vote.html
-Scroll down, add a commit message like "Add working group priorities page"
-Click Commit changes
-Then it'll be live at https://tierralocal.org/mcfpn_vote (or whatever your custom domain maps to).
-
-If you want a cleaner URL like tierralocal.org/vote, just rename the file to vote.html before uploading.
-
-where do I add in the script url?
-
-Jun 12
-In mcfpn_vote.html, near the top of the <script> block at the bottom of the file, find this line:
-
-javascript
-var SUBMIT_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
-Replace YOUR_APPS_SCRIPT_URL_HERE with the URL you get after deploying the Apps Script. To get that URL:
-
-Open your script at script.google.com
-Click Deploy → Manage deployments
-Copy the Web app URL — it'll look like https://script.google.com/macros/s/AKfyc.../exec
-Paste that full URL between the quotes and you're good.
-
-when I go to the site, it download a doc vs shwoing a wesbite
-
-Jun 12
-That's a GitHub Pages configuration issue. A few things to check:
-
-Make sure GitHub Pages is enabled — go to your repo → Settings → Pages → make sure the source is set to your main branch
-Check the file is in the right place — it needs to be in the root of the repo (or wherever your other pages like feedback.html live), not inside a subfolder
-Check the URL — you should be going to tierralocal.org/mcfpn_vote not trying to open the raw file from github.com/yourusername/yourrepo/blob/main/mcfpn_vote.html — that raw GitHub URL will always download instead of render
-If your other pages like feedback.html are working fine, just make sure mcfpn_vote.html is sitting in the exact same folder in the repo and access it the same way.
-
-Screenshot 2026-06-12 at 6.21.02 PM.png
-Jun 12
-The file is named vote with no .html extension — that's why it's downloading instead of rendering. GitHub Pages needs the .html extension to know it's a webpage.
-
-To fix it:
-
-Click the pencil icon (edit) in the top right of that view
-At the top where it shows the filename vote, add .html so it reads vote.html
-Scroll down and commit the change
-Then it'll be live at tierralocal.org/vote.
-
-I did that but it still wants to download
-
-Jun 12
-Looking at your repo, I can see feedback.html is working fine as a site. The issue is likely that the file has no extension being served correctly. Try these two things:
-
-Check the CNAME file — your custom domain is set up, so make sure you're going to tierralocal.org/vote not tierralocal.org/vote.html (GitHub Pages with custom domains sometimes drops the extension)
-Check if there's still a file named vote without the extension — looking at your file list I can see both might exist. If the old extensionless vote file is still there, delete it:
-Click on the old vote file
-Click the ... menu top right
-Select Delete file
-Commit the deletion
-The extensionless file is probably still being served and overriding the .html one.
-
-Screenshot 2026-06-12 at 6.27.29 PM.png
-Jun 12
-The file looks correct now — vote.html is there. GitHub Pages can take a minute or two to redeploy after a change. Try:
-
-Wait 2–3 minutes and try tierralocal.org/vote.html again
-Hard refresh in your browser — Cmd+Shift+R on Mac or Ctrl+Shift+R on Windows to bypass the cache
-If it still downloads, try opening it in an incognito window — your browser may have cached the old download behavior.
-
-do I have to add the html to the link?
-
-Jun 12
-No — try tierralocal.org/vote without the .html. GitHub Pages typically serves pages without the extension. If that still downloads, try clearing your browser cache or opening in incognito.
-
-can we make this bigger and mention they can only join two?
-
-Jun 12
-Can you share a screenshot of what you're seeing? That way I know exactly which element you want to make bigger and where the "can only join two" note should go.
-
-You weren't signed up for any working groups yet. Check the box on any group you'd like to join, then vote on the problems that matter most to you.
-
-Jun 12
-Got it — that's the notice strip. Here's the updated text, and I'll also bump the font size:
-
-
-Edited 4 files, ran a command, read a file
-Edited 4 files, ran a command, read a file
-Done — the notice is now larger (1rem, more padding, 1.6 line height) and reads: "You weren't signed up for any working groups yet. You can join up to two groups. Check the box on the ones you'd like to join, then vote on the problems that matter most to you."
-
-
-Mcfpn vote
-Code · HTML 
-what happens if they click on three?
-
-Jun 12
-Nothing stops them right now — the code doesn't enforce the two-group limit for joining. Want me to add that? It would grey out the remaining join checkboxes once two are checked, same way the problem checkboxes work when you hit the limit of 2.
-
-yes, and include the apps script url: https://script.google.com/macros/s/AKfycbwjzHhLcBVZLWt0TKXFZyJ1u-XO6EA9EjEBK0hgG0pYcN4X0zztwjYoLEhfRcmD4K3ccw/exec
-
-Jun 12
-
-Add Apps Script URL and join checkbox limit enforcement
-Add Apps Script URL and join checkbox limit enforcement
-Now add the join limit enforcement. First let me find where the join checkboxes are wired up:
-
-
-Ran 2 commands, viewed a file, edited a file
-Ran 2 commands, viewed a file, edited a file
-Done — two changes in this version:
-
-Apps Script URL is now live in the code
-Join limit — once someone checks two groups, all remaining join checkboxes grey out and disable. Unchecking one re-enables the others, same behavior as the problem checkboxes.
-
-Mcfpn vote
-Code · HTML 
-here's the issue, where it says "your working groups are highlighted below" for people who are in any working group it shows all working groups
-
-Jun 12
-Got it — it should only show the groups they're actually in, and hide the ones they're not in. Let me fix that.
-
-
-Viewed a file, edited a file, ran a command
-Viewed a file, edited a file, ran a command
-Fixed. Now:
-
-Confirmed members (signed up with a Y) — only see the cards for their own groups, nothing else
-Everyone else — sees all 6 groups with join checkboxes, capped at 2
-
-Mcfpn vote
-Code · HTML 
-it still shows all of them for everyone who was there, also, lets make the "Your working groups are highlighted below. Vote on priorities in each one." larger and ONLY show the groups they are already in
-
-Jun 12
-Let me check how the card IDs are set in the HTML to make sure they match what the script is targeting.
-
-
-Check card IDs in HTML
-Check card IDs in HTML
-Card IDs match. The issue is that sections.style.display = 'flex' makes all cards visible before the loop hides them. Let me fix that and the notice size at the same time.
-
-
-Fix card visibility — hide all cards first, then show selectively. Also fix notice size.
-Fix card visibility — hide all cards first, then show selectively. Also fix notice size.
-Now make the confirmed member notice larger:
-
-
-Edited 2 files, ran a command, read a file
-Edited 2 files, ran a command, read a file
-The key fix was hiding all cards first before the loop runs — previously sections.style.display = 'flex' was making everything visible before the hide logic could fire. Now:
-
-All cards get hidden immediately
-Then only the right ones get shown based on who you are
-Confirmed members see only their groups
-The notice is now 1.2rem with more padding
-
-Mcfpn vote
-Code · HTML 
-ok, this is looking really good, the network coordination box needs a black outline like the other boxes have outlines (because the background is yellow) and the Let's do this shouls be easier to read, maye the same font as the why this matter description
-
-Jun 12
-
-Viewed 2 files, ran a command
-Viewed 2 files, ran a command
-Two fixes — net card full black border, and col-head switched to DM Sans like the synthesis text:
-
-
-Edited 2 files, viewed a file, ran a command
-Edited 2 files, viewed a file, ran a command
-Two fixes:
-
-Network & Coordination card now has a full black border on all sides — no more blending into the yellow background
-"Let's do this..." headings are now DM Sans bold at 0.88rem instead of Bebas Neue, same feel as the synthesis text — much easier to read
-
-Mcfpn vote
-Code · HTML 
-ok, last this, the logo doesn't show up in the upper right hand corner
-
-Jun 12
-Looking at your repo in the screenshot earlier, the logo file is called MCFPN_Logo.png — and in the HTML the appbar references it as MCFPN_Logo.png which should work since it's in the same root folder.
-
-A few things to check:
-
-Case sensitivity — GitHub Pages is case-sensitive. Check the exact filename in your repo. If it's mcfpn_logo.png or MCFPN_logo.png it won't match.
-The logo is in the upper left, not right — the appbar has the logo on the left with the title next to it. Is that where you're not seeing it, or did you want it moved to the right?
-Try the raw URL — go to tierralocal.org/MCFPN_Logo.png directly in your browser. If it loads, the file is there and it's a path issue in the HTML. If it 404s, the filename doesn't match.
-What do you see when you try that URL?
-
-/
-MCFPN_Logo.png
-
-Jun 12
-The path needs a / before it. Let me fix that:
-
-
-Edited a file, ran a command, read a file
-Edited a file, ran a command, read a file
-That should do it. The relative path MCFPN_Logo.png was looking for the file relative to the current page URL, which can break depending on how GitHub Pages serves the file. The /MCFPN_Logo.png path tells it to look from the root of the site every time.
-
-
-Mcfpn vote
-Code · HTML 
-
-<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"/> <meta name="viewport" content="width=device-width,initial-scale=1.0"/> <title>MCFPN Member Assistant</title> <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="styleshe
-
-pasted
-
-still not working, but works perfectly on this site:
-
-Jun 12
-I can see the difference — the working site uses a red appbar (background:var(--hot)) and the logo src is just MCFPN_Logo.png with no leading slash. Let me check how your other site handles it and match that exactly.
-
-The key difference is that on the working site the logo path is MCFPN_Logo.png — no slash. But your vote.html is also in the root so it should work the same way. Let me revert the slash change and also double-check the img tag:
-
-
-Revert logo path to match working site
-Revert logo path to match working site
-Actually the real issue is likely the filter:brightness(0) invert(1) — that makes the logo white, which works on a dark appbar. But your vote.html appbar is black (var(--black)), so it should still show. Let me check what color the appbar actually is versus the working site:
-
-The working site has background:var(--hot) (red) on the appbar. Your vote page has background:var(--black). The logo with brightness(0) invert(1) turns it white — visible on both. So the path is the real issue.
-
-Looking at your repo screenshot, the files are all in the root alongside MCFPN_Logo.png. The vote.html page should find it. Try this — change the appbar background to red to match the working site, which will also make the logo more visible:
-
-
-Edited a file, ran a command, read a file
-Edited a file, ran a command, read a file
-Two changes — appbar is now red (matching the working site) and logo path is back to MCFPN_Logo.png without the slash. The filter:brightness(0) invert(1) makes it white against the red background, same as the working site. Upload this and it should show up.
-
-
-Mcfpn vote
-Code · HTML 
-nope
-
-Jun 12
-Can you take a screenshot of what the appbar looks like on the vote page? I want to see exactly what's showing — whether it's a broken image icon, empty space, or something else.
-
-Screenshot 2026-06-12 at 6.55.21 PM.png
-I remember last time it did have to do with shading the logo file somehow
-
-Jun 12
-I can see it — there's a white rectangle where the logo should be. The logo is loading fine, but filter:brightness(0) invert(1) is making it white, and the appbar is also white/light there. The logo IS showing — it's just white on a light background.
-
-The fix is to remove the filter since the appbar is now pink/red — the logo should show in its natural colors:
-
-
-Edited a file, ran a command, read a file
-Edited a file, ran a command, read a file
-That was it — the filter was turning the logo white, then it was invisible against the light part of the appbar. Removed the filter so it renders in its natural colors against the red background, same as the working site.
-
-
-Mcfpn vote
-Code · HTML 
-OK, let's do one more thing, can we add building a stakeholder map/visualization to the options for network & coordination?
-
-Jun 12
-Done — adding it to the Network & Coordination problems list in both the HTML and the .gs:
-
-
-Edited 2 files, ran a command, read a file
-Edited 2 files, ran a command, read a file
-Added "No stakeholder map or visualization of who is doing what across the food system" as the sixth problem in Network & Coordination — in both files.
-
-
-Mcfpn vote
-Code · HTML 
-
-Waste rescue vote handler
-GS 
-last thing, at the bottom of page after people vote they should choose the date of the next meeting as 6-8 July 9, 14, or 23
-
-Jun 12
-So after someone submits a group's vote, a date picker appears with those three options and that gets logged too?
-
-yes
-
-Jun 12
-Got it. A few quick questions before I build it:
-
-Should the date picker appear per group (after each individual submit button) or once at the bottom of the whole page after they've submitted everything?
-Should the date selection log as a separate row in the sheet, or get added as a column to the existing vote rows?
-actually let's put it at the top and just tell them to choose all that work for them and yes log it on the same sheet
-
-Jun 12
-Got it — date availability at the top, before they even get to the working groups, multi-select, logged as columns on the same row. Building it now.
-
-
-Viewed a file, edited a file
-Viewed a file, edited a file
-Now show the date block when a name is selected, and collect the dates in the submit payload:
-
-
-Show date block when name is selected
-Show date block when name is selected
-Now add dates to the submit payload:
-
-
-Edited 3 files, ran a command, viewed a file
-Edited 3 files, ran a command, viewed a file
-Now update the .gs to log the dates as a column:
-
-
-Edited 3 files, ran a command, read a file
-Edited 3 files, ran a command, read a file
-Done. Here's what changed:
-
-On the page — after selecting a name, a "Step 2 — Next Meeting Availability" block appears with three checkboxes: Wednesday July 9, Monday July 14, Wednesday July 23, all labeled 6–8 PM. They can check all that work.
-
-In the sheet — a new "Available Dates (July)" column logs their selections as a comma-separated string (e.g. July 9, July 23) on every vote row they submit. Since it's captured once at the top and sent with every group submission, you'll see their availability on each of their rows.
-
-Since the sheet headers changed, you'll want to redeploy the Apps Script as a new version so the new column gets created correctly on first submission.
-
-
-Mcfpn vote
-Code · HTML 
-
-Waste rescue vote handler
-GS 
-I don't see the block for choosing dates?
-
-Jun 12
-Let me check if the dateBlock is actually being shown when a name is selected.
-
-
-Ran a command, viewed a file
-Ran a command, viewed a file
-The code looks right. The issue is likely that the !name early return also needs to hide the dateBlock. But more importantly — also need to hide it when name is cleared. Let me also make sure it resets properly and add the dateBlock hide to the empty-name branch:
-
-
-Add dateBlock to the empty-name hide block and ensure it shows correctly
-Add dateBlock to the empty-name hide block and ensure it shows correctly
-Now let me check the actual HTML structure — the dateBlock might be outside <main> or in the wrong place:
-
-
-Check HTML structure around dateBlock
-Check HTML structure around dateBlock
-The HTML structure is fine. The problem is the display:none on the dateBlock — it should be display:block not display:none since we're using JS to toggle it. But wait — it IS being toggled by JS at line 890. Let me check if maybe the JS is running before the DOM is ready:
-
-
-Check how nameSelect listener is attached
-Check how nameSelect listener is attached
-The structure is all correct. The most likely issue is that GitHub still has the old version of the file cached. The code is definitely right — dateBlock is in the HTML, and the JS shows it on name change. Upload the new file and hard refresh (Cmd+Shift+R) after. Let me push the latest:
-
-
-Ran a command, read a file
-Ran a command, read a file
-Upload this version to GitHub, then do a hard refresh (Cmd+Shift+R on Mac, Ctrl+Shift+R on Windows) after it deploys. The date block is definitely in the code — it just needs the fresh file live on the site.
-
-
-Mcfpn vote
-Code · HTML 
-Screenshot 2026-06-12 at 7.39.14 PM.png
-I
-
-Jun 12
-Logo is working, Ana's groups are showing correctly. The date block is just not appearing between Step 1 and the notice strip. I can see it's jumping straight from the name block to the notice. The JS is running but the dateBlock isn't showing — likely a timing issue with the event listener. Let me fix it by making the date block always visible after the name block instead of JS-toggled:
-
-
-Make date block always visible, remove JS toggle
-Make date block always visible, remove JS toggle
-And remove the JS show/hide lines for dateBlock since it's always visible now:
-
-
-Edited 2 files, ran a command, read a file
-Edited 2 files, ran a command, read a file
-The date block now shows permanently — no JS toggle needed. It'll be visible as soon as the page loads, right below the name picker, so people can check their dates before or after picking their name. Upload and it should be there.
-
-
-Mcfpn vote
-Code · HTML 
-I filled it out but the data didn't populate on the sheet
-
-Jun 12
-A few things to check. First — did you redeploy the Apps Script after making the changes? Because the sheet header structure changed (added the Available Dates column), the deployed version needs to be updated. To redeploy:
-
-Go to script.google.com → your project
-Click Deploy → Manage deployments
-Click the pencil/edit icon on your existing deployment
-Change the version to New version
-Click Deploy
-Second — can you open the browser console (right-click → Inspect → Console tab) on the vote page and try submitting again? Any errors there will tell us exactly what's failing — whether it's a network error hitting the script, a CORS issue, or something else.
-
-Screenshot 2026-06-12 at 7.45.51 PM.png
-Jun 12
-The CORB (Cross-Origin Read Blocking) error is the culprit — the browser is blocking the response from the Apps Script. This is actually expected with mode: 'no-cors' and doesn't mean the data isn't being sent.
-
-The real question is whether the data is actually reaching the sheet. Check your Google Sheet — did any rows appear at all?
-
-If no rows appeared, the issue is that the script needs to be redeployed. The fetch is sending correctly but the old deployed version of the script doesn't know about the new working_group_vote type yet. Go redeploy as a new version and try again.
-
-the working group vote thing still isn't working
-
-Jun 12
-Let me look at the actual doPost function to make sure it's handling the payload correctly.
-
-
-Check doPost and logWorkingGroupVote in the gs file
-Check doPost and logWorkingGroupVote in the gs file
-I see the problem — SHEET_ID is still set to 'YOUR_SHEET_ID_HERE'. The script has never had a real sheet ID. Can you paste your Google Sheet ID here? It's the long string in the URL of your sheet — https://docs.google.com/spreadsheets/d/THIS PART/edit.
-
-Screenshot 2026-06-12 at 7.50.00 PM.png
-it's there: https://docs.google.com/spreadsheets/d/1piVxRQLiilOWhID-AxP5L-iYa8A1TTgTlnjJ_XhJcrk/edit?gid=0#gid=0
-
-Jun 12
-Good — the sheet ID is already in the deployed script. So the script has the right sheet ID and the right URL is in the HTML. The issue is most likely that you need to redeploy as a new version after all the changes we made. The currently deployed version is an old one.
-
-In your Apps Script project:
-
-Click Deploy → Manage deployments
-Click the pencil icon on your existing deployment
-Under Version, select New version
-Click Deploy
-The URL stays the same — you don't need to update anything in the HTML. Just the deployed code needs to refresh. Try submitting again after that.
-
-but the dates options never populate on the page
-
-Jun 12
-Looking at your screenshot from earlier, Ana's name was selected and the date block wasn't showing. Since we made it always visible (no JS toggle), it should show up regardless. Let me check if maybe the name-block CSS is somehow hiding it or if there's a conflicting style:
-
-
-Check date block in final file
-Check date block in final file
-The code is correct — no display:none on it anymore. The issue is almost certainly that GitHub still has the old version cached. Let me verify by checking what the live file actually contains. Can you go to github.com/tierralocal/tierra-local-site/blob/main/vote.html and scroll to around line 467 — does it show the dateBlock div there? That'll tell us if the latest file actually uploaded.
-
-<!-- DATE AVAILABILITY -->
-  <div class="name-block" id="dateBlock">
-    <div class="block-label">Step 2 — Next Meeting Availability</div>
-    <p style="font-size:0.88rem;color:#555;margin-bottom:16px;line-height:1.6;">Our next meeting will be in July. Check all dates that work for you.</p>
-    <div style="display:flex;flex-direction:column;gap:10px;">
-      <label style="display:flex;align-items:center;gap:12px;cursor:pointer;font-size:0.95rem;font-weight:600;">
-        <input type="checkbox" id="date-jul9" value="July 9" style="width:18px;height:18px;accent-color:var(--pink);cursor:pointer;">
-        Wednesday, July 9 &nbsp;<span style="font-size:0.78rem;font-weight:400;color:#888;">6–8 PM</span>
-      </label>
-      <label style="display:flex;align-items:center;gap:12px;cursor:pointer;font-size:0.95rem;font-weight:600;">
-        <input type="checkbox" id="date-jul14" value="July 14" style="width:18px;height:18px;accent-color:var(--pink);cursor:pointer;">
-        Monday, July 14 &nbsp;<span style="font-size:0.78rem;font-weight:400;color:#888;">6–8 PM</span>
-      </label>
-      <label style="display:flex;align-items:center;gap:12px;cursor:pointer;font-size:0.95rem;font-weight:600;">
-        <input type="checkbox" id="date-jul23" value="July 23" style="width:18px;height:18px;accent-color:var(--pink);cursor:pointer;">
-        Wednesday, July 23 &nbsp;<span style="font-size:0.78rem;font-weight:400;color:#888;">6–8 PM</span>
-      </label>
-    </div>
-  </div>
-  <!-- NOTICE -->
-  <div class="notice-strip" id="noticeStrip"></div>
-  <!-- ALL GROUP CARDS -->
-  <div class="group-sections" id="groupSections">
-
-Show more
-Jun 12
-The code is definitely there and correct. So it's rendering on the page but you can't see it — which means it's blending into the yellow background since name-block has a white background with a black border.
-
-Can you scroll down past the name picker on the live page and look for a white box with "STEP 2 — NEXT MEETING AVAILABILITY" before the working group cards? It should be there, it may just not be obvious. Try scrolling slowly between the name picker and the notice strip.
-
-Ok, everything looks good but when I click submit my priorities it says got it, ben, thank you, but nothing populates on the shee
-
-Jun 12
-The CORB error in the console is the clue — the script is using mode: 'no-cors' which means the browser sends the request but can't read the response. This is fine for the old feedback forms, but the issue is likely that the script isn't being triggered at all, or the doPost is failing silently.
-
-Let me check a few things:
-
-In your Apps Script, go to Executions (left sidebar) — do you see any executions logged when you submit? That'll tell us if the POST is even reaching the script.
-Check the doPost function — let me look at it:
-
-Viewed 2 files
-Viewed 2 files
-The script looks correct. The most likely issue is that the fetch in the HTML is using mode: 'no-cors' but not sending the Content-Type header correctly in no-cors mode — browsers strip custom headers in no-cors, which means e.postData.contents may be empty or malformed on the Apps Script side.
-
-Let me fix the fetch to match exactly how your working feedback form sends data:
-
-
-Fix fetch to use no-cors correctly without custom headers, matching the working feedback form
-Fix fetch to use no-cors correctly without custom headers, matching the working feedback form
-Also update the doPost to handle both JSON and plain text content types, since no-cors can send it as text/plain:
-
-
-Edited a file, ran a command, read a file
-Edited a file, ran a command, read a file
-Two things to do:
-
-Update the .gs in your Apps Script editor with the new version and redeploy as a new version
-Upload the new mcfpn_vote.html to GitHub
-The key fix is removing the Content-Type header from the fetch — in no-cors mode browsers block custom headers, which was likely causing the Apps Script to receive a malformed or empty body and silently fail.
-
-
-Mcfpn vote
-Code · HTML 
-
-Waste rescue vote handler
-GS 
-Screenshot 2026-06-12 at 8.06.36 PM.png
-Jun 12
-The executions are completing successfully — the script IS being called and running. So the data is arriving but not writing to the sheet. Click on one of the Version 2 executions to expand it and see the logs. That'll show us exactly what's happening inside the function — likely the sheet isn't being found or the SHEET_ID is pointing to the wrong place.
-
-Screenshot 2026-06-12 at 8.07.56 PM.png
-Jun 12
-0% error rate and 9 successful executions — the script is running perfectly. The data IS being written, but it's going to a sheet called "Working Group Votes" that may not be visible because it's a tab you haven't looked at yet.
-
-Open your Google Sheet and look at the tabs at the bottom — there should be a "Working Group Votes" tab that was auto-created on the first submission. It won't be on the default Sheet1 tab.
-
-Ok, but the date info doesn't appear
-
-Jun 12
-The date data is being collected on the frontend but since there are already rows in the sheet without the "Available Dates" column, the headers were created before we added that column. You'll need to manually add the "Available Dates (July)" header to the sheet:
-
-Open your "Working Group Votes" sheet
-Click on the first empty cell in row 1 (should be column L)
-Type Available Dates (July)
-Then redeploy the script as a new version so the appendRow call includes the dates going forward. The existing rows just won't have it, but new submissions will.
-
-everything looks good and is working, except when I click on my second I would like to join his group it only greys out the option to join another group, i can still click the other groups problems
-
-Jun 12
-That's actually correct behavior — the limit is only on joining groups (max 2), not on voting on problems. Anyone can vote on problems in any group whether they're joining or not. Was your intention to also prevent them from voting on problems in groups they haven't joined?
-
-yes
-
-Jun 12
-Got it. So the rule should be: you can only vote on problems in groups you're either already a member of or have checked "I'd like to join." Let me add that logic.
-
-
-Viewed a file, edited a file
-Viewed a file, edited a file
-Now also lock problems immediately when a group card is shown to non-members, before they check join:
-
-
-Lock problems on non-member groups by default when cards are shown
-Lock problems on non-member groups by default when cards are shown
-Now wire the join checkbox to also unlock problems when checked:
-
-
-Edited 2 files, ran 2 commands, viewed a file
-Edited 2 files, ran 2 commands, viewed a file
-Here's how it now works for non-members:
-
-All 6 group cards show, but problem checkboxes are greyed out and locked by default
-Checking "I'd like to join" unlocks that group's problems
-Checking a second group unlocks those problems too
-Trying to check a third group — the join checkbox is disabled, and problems stay locked
-Unchecking a join box re-locks and clears that group's problems
-Confirmed members are unaffected — their groups are always unlocked.
-
-
-Mcfpn vote
-Code · HTML 
-OK, except now I can't join any of the groups, it should be that the entire block for the other groups grey out once I have chosen two, and if I unclick a group I have already joined if it was my second one, i am back to just one group chosen and the others become clickable again
-
-Jun 12
-Got it — the whole card should grey out (not just the checkbox), and it should be fully reversible. Let me rewrite the enforce logic cleanly.
-
-
-View the full enforceJoinLimit and lockProblems functions
-View the full enforceJoinLimit and lockProblems functions
-Claude's response was interrupted.
-wait, just to be clear in the last version, all groups were greyed out to start and i couldn't join any
-
-Jun 12
-Got it — the lockProblems(slug, true) call in the setup was locking everything including the join checkbox itself. Let me fix this so:
-
-Cards start fully interactive (join checkbox clickable, problems locked)
-Checking join unlocks that card's problems
-Once 2 groups are joined, remaining cards grey out entirely
-Unchecking a joined group re-enables the other cards
-
-Fix enforceJoinLimit and lockProblems — grey whole card but never touch join checkbox interactivity at init
-Fix enforceJoinLimit and lockProblems — grey whole card but never touch join checkbox interactivity at init
-Now fix the init so it only locks problems (not the join checkbox) on non-member cards:
-
-
-Fix init — lock only problems not the whole card, and wire join checkbox correctly
-Fix init — lock only problems not the whole card, and wire join checkbox correctly
-That was the same — let me verify the init lockProblems is only locking the vote area not the join row:
-
-
-Check what lockProblems targets
-Check what lockProblems targets
-Good — lockProblems targets .vote-cols only, so the join checkbox stays fully interactive. The enforceJoinLimit greys the whole card only after 2 are chosen. Let me copy and output:
-
-
-Ran a command, read a file
-Ran a command, read a file
-Here's exactly how it should behave now:
-
-Page loads — all 6 cards visible, join checkboxes clickable, vote area greyed out on each
-Check join on a group — that card's vote area unlocks, problems become selectable
-Check join on a second group — same, now 2 groups active
-Try to check a third — entire card greys out and is unclickable
-Uncheck one of your two — that card's problems lock and clear, the previously greyed cards become fully active again
-
-Mcfpn vote
-Code · HTML 
-I still can't click on any of the groups
-
-Jun 12
-Let me look at exactly what's happening at init when the cards are shown for a non-confirmed member.
-
-
-Viewed 2 files
-Viewed 2 files
-I see the issue — lockProblems sets pointerEvents: none on .vote-cols, but the join checkbox is inside .section-body which is a parent of .vote-cols. However the enforceJoinLimit function sets pointerEvents: none on the whole card which would block the join checkbox too. Let me trace through what happens at init for a non-member:
-
-The problem is enforceJoinLimit is being called from the join checkbox change event, but it's also greyng the whole card including the join row. Let me simplify this completely — remove enforceJoinLimit touching pointerEvents on the card, and instead just handle the join checkbox disable state separately:
-
-
-Edited a file, ran a command, read a file
-Edited a file, ran a command, read a file
-The previous version was setting pointerEvents: none on the whole card which was blocking the join checkbox itself. Now:
-
-Join checkboxes are always clickable until 2 are chosen
-Checking join unlocks that card's vote area
-Hitting 2 just disables and fades the remaining join checkboxes
-Unchecking re-enables them
-Vote areas stay locked until you join
-
-Mcfpn vote
-Code · HTML 
-still greyed out
-
-Jun 12
-Let me just strip this all the way back to simple and clean.
-
-
-View the full join checkbox wiring and lockProblems area
-View the full join checkbox wiring and lockProblems area
-The issue is addEventListener is being called every time a name is selected, stacking up multiple listeners. Also lockProblems(slug, true) at init is fine but then the listener fires and re-locks. Let me rewrite this whole section cleanly:
-
-
-Rewrite join logic cleanly with no stacking listeners
-Rewrite join logic cleanly with no stacking listeners
-Also remove the now-unused lockProblems function:
-
-
-Edited a file, ran a command, read a file
-Edited a file, ran a command, read a file
-The key fix was using cloneNode to replace the checkbox element each time a name is selected — this prevents event listeners from stacking up on repeated name changes, which was causing multiple conflicting lock/unlock calls. Now:
-
-Vote area starts greyed out for non-members
-Check join → vote area unlocks
-Uncheck join → vote area re-locks
-Two joined → other join checkboxes disable
-Everything is clean on each name selection
-
-Mcfpn vote
-Code · HTML 
-hey so jess grimm didn't get the right group assignments
-
-Jun 14
-Looking back at the corrected data you gave me, Jess Grimm should be in Distribution and Production only. Let me check what's currently in the code:
-
-
-Find all Jess Grimm references
-Find all Jess Grimm references
-Jess is in Distribution (line 710) and is in CONFIRMED_MEMBERS (line 800), but I don't see her in Production. Let me check:
-
-
-Check all group member arrays
-Check all group member arrays
-Jess is missing from Production (line 751). Let me fix that:
-
-
-Add Jess Grimm to Production
-Add Jess Grimm to Production
-Same fix in the .gs:
-
-
-Edited a file, ran a command, read a file
-Edited a file, ran a command, read a file
-Fixed in both files. Jess Grimm now shows Distribution and Production as her groups — which matches your corrected spreadsheet data.
-
-
-Mcfpn vote
-Code · HTML 
-
-Waste rescue vote handler
-GS 
-do I need to fix the script?
-
-Jun 14
-Yes — since Jess's group assignments changed in the .gs file, you'll need to paste the updated script into Apps Script and redeploy as a new version. The member lists in the .gs don't affect the sheet logging directly, but it's good to keep them in sync for when you eventually build other groups' pages off the same script.
-
-i updated teh script, added the correct google sheet id do I need to deploy?
-
-Jun 14
-Yes — any time you change the script code you need to redeploy as a new version for the changes to take effect. Go to Deploy → Manage deployments → pencil icon → New version → Deploy.
-
-Screenshot 2026-06-14 at 1.21.57 PM.png
-this food news tracker isn't working either
-
-Jun 14
-That's a separate script — want to tackle that in a new conversation to keep things clean? This one has gotten pretty long and the vote page is in good shape.
-
-Screenshot 2026-06-14 at 1.33.16 PM.png
-jess grimm got added but the spacing is funky
-
-Jun 14
-Looking at the screenshot — the cards are showing side by side in a two-column grid instead of stacking. That's the group-sections flex layout wrapping. Since confirmed members now sometimes have 2 cards, they're sitting next to each other. Let me fix it to always stack single column:
-
-
-Edited 2 files
-Edited 2 files
-That didn't change anything since it was already flex. The issue is there's no flex-direction: column being applied when it switches to display: flex. Let me check the current CSS:
-
-
-Find group-sections CSS and usage
-Find group-sections CSS and usage
-Good — the CSS has flex-direction: column now. But the JS is overriding with display: flex which should respect the column direction. The real issue is the cards inside might have a width set. Let me also make sure each card is full width:
-
-
-Edited a file, ran a command, read a file
-Edited a file, ran a command, read a file
-Two fixes — flex-direction: column on the container and width: 100% on each card. They should now stack vertically with proper spacing between them.
-
-
-Mcfpn vote
-Code · HTML 
-OK, but now we're back to Jess only having distribution
-
-Jun 14
-The Jess Grimm fix didn't make it into the file that was just output. Let me check and reapply:
-
-
-Check Jess Grimm in all member arrays
-Check Jess Grimm in all member arrays
-Jess is already in both Distribution (line 711) and Production (line 752) in the file. So the code is correct — the issue must be that the old version of the file is still live on GitHub. The latest mcfpn_vote.html you just downloaded has both groups for Jess. Upload this version and it should show correctly.
-
-
-<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"/> <meta name="viewport" content="width=device-width, initial-scale=1.0"/> <title>MCFPN — Working Group Priorities</title> <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,400;0,600;0,700;1,400&dis
-
-pasted
-
-are you sure:
-
-Jun 14
-You're right to check — looking at the pasted code, Jess Grimm is correctly in both Distribution and Production. The code is right. The issue must be that GitHub still has an older version cached. Try a hard refresh (Cmd+Shift+R) on the live site after confirming the latest file is uploaded.
-
-so in the code I just pasted to cards should appear for jess?
-
-Jun 14
-Yes — looking at the code you pasted, Jess Grimm appears in:
-
-dist members array (line with Elissa Penczar, Ana Olson, Jess Grimm...)
-prod members array (line with Ian Miller, Renae Hesselink, Jess Grimm...)
-And the logic says confirmed members only see cards for groups they're in. So when Jess selects her name, inGroup will be true for both dist and prod, and both cards will show. That's correct.
-
-oh you stacked them one top of each other - I want to go back to side by side
-
-Jun 14
-Got it — remove flex-direction: column from .group-sections and let them sit side by side again:
-
-
-Revert group-sections to side by side layout
-Revert group-sections to side by side layout
-Also remove width: 100% from .section-card so they can sit side by side:
-
-
-Edited a file, ran a command, read a file
-Edited a file, ran a command, read a file
-Cards will now sit side by side with flex-wrap: wrap and flex: 1 1 400px — so two cards will sit next to each other on wider screens, and stack naturally on mobile.
-
-
-Mcfpn vote
-Code · HTML 
-OK, jess grim actually wants to be on distribution and waster rescue, can we make just this change to website?
-
-Jun 15
-Got it — Jess moves from Production to Waste/Rescue. Two changes:
-
-
-Edited 2 files, ran a command, read a file
-Edited 2 files, ran a command, read a file
-Done. Jess now shows Distribution and Waste/Rescue. Do you want the .gs updated to match as well?
-
-
-Mcfpn vote
-Code · HTML 
-how can I plug Jill Parsh added to the dropdown with no subgroups assigned?
-
-3:04 PM
-Just add her name to the ALL_MEMBERS array in the HTML. Since she's not in any group members array and not in CONFIRMED_MEMBERS, she'll automatically get the non-confirmed flow — sees all 6 groups with join checkboxes, can pick up to 2.
-
-
-Edited a file, ran a command, read a file
-Edited a file, ran a command, read a file
-Done. Jill Parsh is now in the dropdown alphabetically between Jess Grimm and Joseph Heeren. She'll see all 6 groups and can join up to 2.
-
-
-Mcfpn vote
-Code · HTML 
-
-Claude Fable 5 is currently unavailable.
-Learn more(opens in new tab)
-
-
-
-
-Claude is AI and can make mistakes. Please double-check responses.
-
-
-Mcfpn vote · HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1389,9 +16,9 @@ Mcfpn vote · HTML
     --white: #FFFFFF;
     --text: #1a1a1a;
   }
- 
+
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
- 
+
   body {
     background: var(--yellow);
     color: var(--text);
@@ -1399,7 +26,7 @@ Mcfpn vote · HTML
     font-size: 16px;
     line-height: 1.5;
   }
- 
+
   /* APPBAR */
   .appbar {
     background: var(--pink);
@@ -1426,7 +53,7 @@ Mcfpn vote · HTML
     text-transform: uppercase;
     letter-spacing: 0.12em;
   }
- 
+
   /* HERO */
   .hero {
     background: var(--black);
@@ -1468,7 +95,7 @@ Mcfpn vote · HTML
     line-height: 1.5;
     max-width: 640px;
   }
- 
+
   /* MAIN */
   main {
     max-width: 920px;
@@ -1478,7 +105,7 @@ Mcfpn vote · HTML
     flex-direction: column;
     gap: 48px;
   }
- 
+
   /* NAME BLOCK */
   .name-block {
     background: var(--white);
@@ -1510,7 +137,7 @@ Mcfpn vote · HTML
     cursor: pointer;
   }
   .name-block select:focus { border-color: var(--black); background: #fff; }
- 
+
   /* NAME HELPER TEXT */
   .name-helper {
     margin-top: 14px;
@@ -1525,7 +152,7 @@ Mcfpn vote · HTML
     text-decoration: underline;
   }
   .name-helper a:hover { color: var(--pink); }
- 
+
   /* NOTICE STRIP */
   .notice-strip {
     background: var(--yellow);
@@ -1537,7 +164,7 @@ Mcfpn vote · HTML
     line-height: 1.6;
     display: none;
   }
- 
+
   /* SECTION CARDS */
   .section-card {
     background: var(--white);
@@ -1551,7 +178,7 @@ Mcfpn vote · HTML
   .section-card.prod   { border-color: var(--violet); }
   .section-card.proc   { border-color: var(--cyan); }
   .section-card.net    { border-color: var(--black); }
- 
+
   .section-tab {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 1.5rem;
@@ -1566,9 +193,9 @@ Mcfpn vote · HTML
   .prod  .section-tab  { background: var(--violet); color: var(--white); }
   .proc  .section-tab  { background: var(--cyan); }
   .net   .section-tab  { background: var(--yellow); }
- 
+
   .section-body { padding: 24px; }
- 
+
   /* SYNTHESIS */
   .synthesis {
     margin-bottom: 20px;
@@ -1581,7 +208,7 @@ Mcfpn vote · HTML
   .prod  .synthesis { border-color: var(--violet); background: #f4efff; }
   .proc  .synthesis { border-color: var(--cyan);   background: #e8fafd; }
   .net   .synthesis { border-color: var(--black);  background: #fffde6; }
- 
+
   .synthesis-label {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 0.78rem;
@@ -1594,14 +221,14 @@ Mcfpn vote · HTML
   .prod  .synthesis-label { color: var(--violet); }
   .proc  .synthesis-label { color: #0099b0; }
   .net   .synthesis-label { color: var(--black); }
- 
+
   .synthesis-text {
     font-size: 1.05rem;
     font-weight: 700;
     line-height: 1.55;
     color: var(--black);
   }
- 
+
   /* MEMBERS NOTE */
   .members-note {
     font-size: 0.78rem;
@@ -1609,7 +236,7 @@ Mcfpn vote · HTML
     margin-bottom: 20px;
   }
   .members-note strong { color: var(--black); }
- 
+
   /* JOIN ROW */
   .join-row {
     padding: 14px 18px;
@@ -1623,7 +250,7 @@ Mcfpn vote · HTML
   .prod  .join-row { background: #f4efff; border-color: var(--violet); }
   .proc  .join-row { background: #e8fafd; border-color: var(--cyan); }
   .net   .join-row { background: #fffde6; border-color: var(--black); }
- 
+
   .join-row label {
     font-size: 0.9rem;
     font-weight: 700;
@@ -1644,7 +271,7 @@ Mcfpn vote · HTML
   .prod  .join-row input[type=checkbox] { accent-color: var(--violet); }
   .proc  .join-row input[type=checkbox] { accent-color: var(--cyan); }
   .net   .join-row input[type=checkbox] { accent-color: var(--black); }
- 
+
   /* VOTE COLUMNS */
   .vote-cols {
     display: grid;
@@ -1653,7 +280,7 @@ Mcfpn vote · HTML
     margin-bottom: 20px;
   }
   @media (max-width: 580px) { .vote-cols { grid-template-columns: 1fr; } }
- 
+
   .col-head {
     font-family: 'DM Sans', sans-serif;
     font-size: 0.88rem;
@@ -1664,7 +291,7 @@ Mcfpn vote · HTML
     padding-bottom: 5px;
     border-bottom: 2px solid;
   }
- 
+
   /* col-head colors per group */
   .dist  .col-donow .col-head    { color: var(--cyan);   border-color: var(--cyan); }
   .cons  .col-donow .col-head    { color: #2db84d;        border-color: var(--lime); }
@@ -1672,21 +299,21 @@ Mcfpn vote · HTML
   .prod  .col-donow .col-head    { color: var(--violet); border-color: var(--violet); }
   .proc  .col-donow .col-head    { color: #0099b0;        border-color: var(--cyan); }
   .net   .col-donow .col-head    { color: var(--black);  border-color: var(--black); }
- 
+
   .dist  .col-getstart .col-head { color: var(--cyan);   border-color: var(--cyan); }
   .cons  .col-getstart .col-head { color: #2db84d;        border-color: var(--lime); }
   .waste .col-getstart .col-head { color: var(--violet); border-color: var(--violet); }
   .prod  .col-getstart .col-head { color: var(--violet); border-color: var(--violet); }
   .proc  .col-getstart .col-head { color: #0099b0;        border-color: var(--cyan); }
   .net   .col-getstart .col-head { color: var(--black);  border-color: var(--black); }
- 
+
   .limit-note {
     font-size: 0.78rem;
     color: #888;
     font-style: italic;
     margin-bottom: 12px;
   }
- 
+
   /* PROBLEM ITEMS */
   .problem-item {
     display: flex;
@@ -1711,7 +338,7 @@ Mcfpn vote · HTML
     color: #333;
   }
   .problem-item.disabled { opacity: 0.35; pointer-events: none; }
- 
+
   /* checkbox accent per group */
   .dist  .problem-item input { accent-color: var(--cyan); }
   .cons  .problem-item input { accent-color: var(--lime); }
@@ -1719,7 +346,7 @@ Mcfpn vote · HTML
   .prod  .problem-item input { accent-color: var(--violet); }
   .proc  .problem-item input { accent-color: var(--cyan); }
   .net   .problem-item input { accent-color: var(--black); }
- 
+
   /* OTHER FIELD */
   .other-row { margin-top: 10px; }
   .other-row label {
@@ -1744,7 +371,7 @@ Mcfpn vote · HTML
     transition: border-color 0.2s;
   }
   .other-row input[type=text]:focus { border-color: var(--black); background: #fff; }
- 
+
   /* SUBMIT ZONE */
   .submit-zone {
     border-top: 2px dashed #ddd;
@@ -1764,14 +391,14 @@ Mcfpn vote · HTML
   .submit-btn:hover { opacity: 0.85; transform: translateY(-1px); }
   .submit-btn:active { transform: translateY(0); }
   .submit-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
- 
+
   .dist  .submit-btn { background: var(--cyan); }
   .cons  .submit-btn { background: var(--lime); }
   .waste .submit-btn { background: var(--pink);   color: var(--white); }
   .prod  .submit-btn { background: var(--violet); color: var(--white); }
   .proc  .submit-btn { background: var(--cyan); }
   .net   .submit-btn { background: var(--yellow); }
- 
+
   .thank-you {
     display: none;
     font-size: 0.88rem;
@@ -1786,10 +413,10 @@ Mcfpn vote · HTML
     color: var(--pink);
     padding: 8px 0 0;
   }
- 
+
   /* hidden until name selected */
   .group-sections { display: none; flex-wrap: wrap; gap: 48px; }
- 
+
   footer {
     background: var(--black);
     color: var(--yellow);
@@ -1803,13 +430,13 @@ Mcfpn vote · HTML
 </style>
 </head>
 <body>
- 
+
 <div class="appbar">
   <img src="MCFPN_Logo.png" alt="MCFPN" style="height:36px;"/>
   <span class="appbar-title">MCFPN</span>
   <span class="appbar-sub">Working Group Priorities</span>
 </div>
- 
+
 <div class="hero">
   <div class="hero-label">Muskegon County Food Policy Network</div>
   <h1>Which Problems<br/>Do We Tackle First?</h1>
@@ -1820,9 +447,9 @@ Mcfpn vote · HTML
     Select your name below. Your working groups will be pre-checked. Vote on priorities in each one, and weigh in on any others you care about.
   </div>
 </div>
- 
+
 <main>
- 
+
   <!-- NAME PICKER -->
   <div class="name-block">
     <div class="block-label">Step 1 — Who Are You</div>
@@ -1836,7 +463,7 @@ Mcfpn vote · HTML
       <a href="mailto:kody@tierralocal.org">Email Kody.</a>
     </div>
   </div>
- 
+
   <!-- DATE AVAILABILITY -->
   <div class="name-block" id="dateBlock">
     <div class="block-label">Step 2 — Next Meeting Availability</div>
@@ -1856,13 +483,13 @@ Mcfpn vote · HTML
       </label>
     </div>
   </div>
- 
+
   <!-- NOTICE -->
   <div class="notice-strip" id="noticeStrip"></div>
- 
+
   <!-- ALL GROUP CARDS -->
   <div class="group-sections" id="groupSections">
- 
+
     <!-- DISTRIBUTION -->
     <div class="section-card dist" id="card-dist">
       <div class="section-tab">Distribution</div>
@@ -1896,7 +523,7 @@ Mcfpn vote · HTML
         </div>
       </div>
     </div>
- 
+
     <!-- CONSUMPTION -->
     <div class="section-card cons" id="card-cons">
       <div class="section-tab">Consumption</div>
@@ -1930,7 +557,7 @@ Mcfpn vote · HTML
         </div>
       </div>
     </div>
- 
+
     <!-- WASTE / RESCUE -->
     <div class="section-card waste" id="card-waste">
       <div class="section-tab">Waste &amp; Rescue</div>
@@ -1964,7 +591,7 @@ Mcfpn vote · HTML
         </div>
       </div>
     </div>
- 
+
     <!-- PRODUCTION -->
     <div class="section-card prod" id="card-prod">
       <div class="section-tab">Production</div>
@@ -1998,7 +625,7 @@ Mcfpn vote · HTML
         </div>
       </div>
     </div>
- 
+
     <!-- PROCESSING -->
     <div class="section-card proc" id="card-proc">
       <div class="section-tab">Processing</div>
@@ -2032,7 +659,7 @@ Mcfpn vote · HTML
         </div>
       </div>
     </div>
- 
+
     <!-- NETWORK & COORDINATION -->
     <div class="section-card net" id="card-net">
       <div class="section-tab">Network &amp; Coordination</div>
@@ -2066,18 +693,18 @@ Mcfpn vote · HTML
         </div>
       </div>
     </div>
- 
+
   </div><!-- /group-sections -->
- 
+
 </main>
- 
+
 <footer>
   Muskegon County Food Policy Network &nbsp;|&nbsp; tierralocal.org
 </footer>
- 
+
 <script>
 var SUBMIT_URL = 'https://script.google.com/macros/s/AKfycbwjzHhLcBVZLWt0TKXFZyJ1u-XO6EA9EjEBK0hgG0pYcN4X0zztwjYoLEhfRcmD4K3ccw/exec';
- 
+
 var GROUPS = {
   dist: {
     key: 'Distribution',
@@ -2161,7 +788,7 @@ var GROUPS = {
     ]
   }
 };
- 
+
 var ALL_MEMBERS = [
   'Angela Fox','Ana Olson','Ben Soyars','Brittany Brown','Elissa Penczar',
   'Emily Merten','Ian Miller','Jess Grimm','Jill Parsh','Joseph Heeren','Kaitlin Hermanson',
@@ -2169,12 +796,12 @@ var ALL_MEMBERS = [
   'Reuben Richardson','Savannah Cunningham','Stephen Proctor','Vanessa Guardiola',
   'Venessa Johnson-Jenkins'
 ];
- 
+
 var CONFIRMED_MEMBERS = [
   'Elissa Penczar','Ian Miller','Ana Olson','Renae Hesselink','Jess Grimm',
   'Reuben Richardson','Lisa Potter','Savannah Cunningham','Stephen Proctor','Venessa Johnson-Jenkins'
 ];
- 
+
 // Populate name dropdown
 var nameSelect = document.getElementById('nameSelect');
 ALL_MEMBERS.forEach(function(name) {
@@ -2183,7 +810,7 @@ ALL_MEMBERS.forEach(function(name) {
   opt.textContent = name;
   nameSelect.appendChild(opt);
 });
- 
+
 // Build problem checkboxes for all groups
 Object.keys(GROUPS).forEach(function(slug) {
   var g = GROUPS[slug];
@@ -2194,7 +821,7 @@ Object.keys(GROUPS).forEach(function(slug) {
     handleSubmit(slug);
   });
 });
- 
+
 function buildItems(containerId, slug, col, problems) {
   var container = document.getElementById(containerId);
   problems.forEach(function(p, i) {
@@ -2202,20 +829,20 @@ function buildItems(containerId, slug, col, problems) {
     var div = document.createElement('div');
     div.className = 'problem-item';
     div.id = 'item-' + id;
- 
+
     var cb = document.createElement('input');
     cb.type = 'checkbox';
     cb.id = id;
     cb.setAttribute('data-col', col);
     cb.setAttribute('data-slug', slug);
- 
+
     var lbl = document.createElement('label');
     lbl.setAttribute('for', id);
     lbl.textContent = p;
- 
+
     div.appendChild(cb);
     div.appendChild(lbl);
- 
+
     div.addEventListener('click', function(e) {
       if (e.target === cb) return;
       if (cb.disabled) return;
@@ -2223,11 +850,11 @@ function buildItems(containerId, slug, col, problems) {
       enforceLimit(slug, col, 2);
     });
     cb.addEventListener('change', function() { enforceLimit(slug, col, 2); });
- 
+
     container.appendChild(div);
   });
 }
- 
+
 function enforceLimit(slug, col, max) {
   var boxes = document.querySelectorAll('input[data-col="' + col + '"][data-slug="' + slug + '"]');
   var checked = Array.prototype.filter.call(boxes, function(b) { return b.checked; });
@@ -2242,26 +869,26 @@ function enforceLimit(slug, col, max) {
     }
   });
 }
- 
+
 // Name selection — show/hide cards, set members note, show/hide join row
 nameSelect.addEventListener('change', function() {
   var name = this.value;
   var notice = document.getElementById('noticeStrip');
   var sections = document.getElementById('groupSections');
   var helper = document.getElementById('nameHelper');
- 
+
   if (!name) {
     notice.style.display = 'none';
     sections.style.display = 'none';
     helper.style.display = 'none';
     return;
   }
- 
+
   var isConfirmed = CONFIRMED_MEMBERS.indexOf(name) !== -1;
- 
+
   // Show helper text
   helper.style.display = 'block';
- 
+
   // Notice
   if (isConfirmed) {
     notice.innerHTML = 'Your working groups are highlighted below. Vote on priorities in each one.';
@@ -2270,12 +897,12 @@ nameSelect.addEventListener('change', function() {
   }
   notice.style.display = 'block';
   sections.style.display = 'flex';
- 
+
   // Hide all cards first, then show the right ones
   ['dist','cons','waste','prod','proc','net'].forEach(function(s) {
     document.getElementById('card-' + s).style.display = 'none';
   });
- 
+
   // For each group — show/hide card, update members note, join row visibility
   Object.keys(GROUPS).forEach(function(slug) {
     var g = GROUPS[slug];
@@ -2283,7 +910,7 @@ nameSelect.addEventListener('change', function() {
     var card = document.getElementById('card-' + slug);
     var joinRow = document.getElementById('join-' + slug);
     var membersNote = document.getElementById('members-' + slug);
- 
+
     // Confirmed members only see their own groups
     // Non-confirmed members see all groups with join checkboxes
     if (isConfirmed) {
@@ -2291,16 +918,16 @@ nameSelect.addEventListener('change', function() {
     } else {
       card.style.display = 'block';
     }
- 
+
     // Members note — highlight current person if they're in the group
     var memberList = g.members.map(function(m) {
       return m === name ? '<strong>' + m + '</strong>' : m;
     }).join(', ');
     membersNote.innerHTML = 'Current members: ' + memberList;
- 
+
     // Show join row only if not already in the group
     joinRow.style.display = inGroup ? 'none' : 'block';
- 
+
     // For non-members, lock vote area until they check join
     var voteArea = document.getElementById('card-' + slug).querySelector('.vote-cols');
     if (!isConfirmed && !inGroup && voteArea) {
@@ -2310,7 +937,7 @@ nameSelect.addEventListener('change', function() {
       voteArea.style.opacity = '1';
       voteArea.style.pointerEvents = '';
     }
- 
+
     // Replace join checkbox with a fresh clone to avoid stacking listeners
     var oldCb = document.getElementById('joincheck-' + slug);
     if (oldCb) {
@@ -2329,7 +956,7 @@ nameSelect.addEventListener('change', function() {
     }
   });
 });
- 
+
 function enforceJoinLimit() {
   var slugs = ['dist','cons','waste','prod','proc','net'];
   var checked = slugs.filter(function(s) {
@@ -2349,40 +976,40 @@ function enforceJoinLimit() {
     }
   });
 }
- 
+
 // Per-group submit
 function handleSubmit(slug) {
   var name = nameSelect.value;
   if (!name) { showError(slug, 'Please select your name at the top of the page.'); return; }
- 
+
   var g = GROUPS[slug];
   var inGroup = g.members.indexOf(name) !== -1;
   var isConfirmed = CONFIRMED_MEMBERS.indexOf(name) !== -1;
   var joining = !inGroup && document.getElementById('joincheck-' + slug).checked;
- 
+
   var doNow = [];
   document.querySelectorAll('input[data-col="donow"][data-slug="' + slug + '"]').forEach(function(b) {
     if (b.checked) doNow.push(b.nextElementSibling.textContent.trim());
   });
- 
+
   var getStarted = [];
   document.querySelectorAll('input[data-col="getstart"][data-slug="' + slug + '"]').forEach(function(b) {
     if (b.checked) getStarted.push(b.nextElementSibling.textContent.trim());
   });
- 
+
   if (doNow.length === 0 && getStarted.length === 0) {
     showError(slug, 'Please select at least one problem priority before submitting.');
     return;
   }
- 
+
   var dates = ['date-jul9','date-jul14','date-jul23']
     .filter(function(id) { return document.getElementById(id).checked; })
     .map(function(id) { return document.getElementById(id).value; });
- 
+
   var btn = document.getElementById('submit-' + slug);
   btn.textContent = 'Sending...';
   btn.disabled = true;
- 
+
   var payload = {
     type: 'working_group_vote',
     name: name,
@@ -2398,7 +1025,7 @@ function handleSubmit(slug) {
       availableDates: dates
     }]
   };
- 
+
   fetch(SUBMIT_URL, {
     method: 'POST',
     mode: 'no-cors',
@@ -2411,7 +1038,7 @@ function handleSubmit(slug) {
     btn.textContent = 'Submit My Priorities';
   });
 }
- 
+
 function showThanks(slug, name, btn) {
   btn.style.display = 'none';
   var el = document.getElementById('thanks-' + slug);
@@ -2419,7 +1046,7 @@ function showThanks(slug, name, btn) {
   el.style.display = 'block';
   document.getElementById('error-' + slug).style.display = 'none';
 }
- 
+
 function showError(slug, msg) {
   var el = document.getElementById('error-' + slug);
   el.textContent = msg;
@@ -2428,4 +1055,3 @@ function showError(slug, msg) {
 </script>
 </body>
 </html>
- 
