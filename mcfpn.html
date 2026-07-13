@@ -23,7 +23,6 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family:'DM Sans',sans-serif;background:var(--yellow);color:#222;font-size:16px;min-height:100vh}
-
 /* ── APPBAR ── */
 .appbar{
   background:var(--hot);
@@ -38,7 +37,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--yellow);color:#222;font-s
 .appbar-sep{width:2px;height:32px;background:rgba(255,255,255,.3)}
 .appbar-titles h1{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.06em;color:var(--white);line-height:1.1}
 .appbar-titles p{font-size:10px;color:rgba(255,255,255,.7);letter-spacing:.12em;text-transform:uppercase;margin-top:1px}
-
 /* top doc buttons */
 .appbar-docs{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .appbar-doc{
@@ -53,7 +51,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--yellow);color:#222;font-s
 .ad-cyan:hover{background:#fff;color:#00506B;border-color:#fff}
 .ad-lime{background:var(--lime);color:#1A5C20;border-color:var(--lime)}
 .ad-lime:hover{background:#fff;color:#1A5C20;border-color:#fff}
-
 /* tierra link */
 .appbar-link{
   font-size:11px;font-weight:700;color:var(--yellow);text-decoration:none;
@@ -61,7 +58,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--yellow);color:#222;font-s
   transition:all .2s;letter-spacing:.05em;white-space:nowrap
 }
 .appbar-link:hover{background:var(--yellow);color:var(--hot)}
-
 /* ── HERO ── */
 .hero{
   background:var(--cyan);
@@ -91,7 +87,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--yellow);color:#222;font-s
 }
 .hero-headline em{color:var(--hot);font-style:normal;display:block}
 .hero-sub{font-size:15px;font-weight:400;color:rgba(0,48,64,.75);line-height:1.8;max-width:460px}
-
 /* hero doc strip */
 .hero-docs-label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(0,48,64,.5);margin-bottom:10px}
 .hero-doc{
@@ -108,7 +103,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--yellow);color:#222;font-s
 .hero-doc-name{font-size:13px;font-weight:700;color:#003040;line-height:1.3}
 .hero-doc-sub{font-size:11px;color:rgba(0,48,64,.5);margin-top:2px}
 .hero-doc-arr{color:var(--hot);font-size:14px;margin-left:auto;font-weight:700}
-
 /* ── CHAT SECTION ── */
 .chat-section{
   background:var(--violet);
@@ -120,7 +114,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--yellow);color:#222;font-s
   content:'';display:block;height:0
 }
 .chat-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:240px 1fr;gap:20px;align-items:start}
-
 /* Sidebar */
 .sidebar{display:flex;flex-direction:column;gap:14px;padding-bottom:32px}
 .side-card{background:var(--white);border-radius:18px;overflow:hidden;border:4px solid var(--white);outline:3px solid var(--yellow)}
@@ -136,7 +129,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--yellow);color:#222;font-s
 .tag-ip{background:var(--lime);color:#1A5C20}
 .tag-vt{background:var(--cyan);color:#00506B}
 .note-txt{font-size:12px;line-height:1.75;color:#555}
-
 /* Chat panel */
 .chat-panel{
   background:var(--white);border-radius:22px;
@@ -155,7 +147,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--yellow);color:#222;font-s
 }
 .chat-head-title h2{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.06em;color:var(--yellow)}
 .chat-head-title p{font-size:11px;color:rgba(255,249,230,.65);margin-top:1px}
-
 /* Chips */
 .chips-bar{padding:14px 20px;background:var(--yellow);border-bottom:3px solid var(--hot)}
 .chips-label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--hot);margin-bottom:9px}
@@ -169,7 +160,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--yellow);color:#222;font-s
 .chip:hover{background:var(--hot);color:var(--yellow);transform:translateY(-2px);box-shadow:0 3px 0 rgba(255,45,85,.4)}
 .chip.doc{background:var(--viollt);color:var(--violet);border-color:var(--violet)}
 .chip.doc:hover{background:var(--violet);color:var(--white)}
-
 /* Messages */
 .chat-msgs{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:14px;background:var(--cream)}
 .msg{display:flex;gap:10px;align-items:flex-start;animation:msgIn .22s ease}
@@ -184,13 +174,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--yellow);color:#222;font-s
 .msg-bub p{margin-bottom:8px}.msg-bub p:last-child{margin-bottom:0}
 .msg-bub ul{padding-left:18px;margin:6px 0}.msg-bub li{margin-bottom:4px}
 .msg-bub strong{font-weight:700;color:var(--hot)}
-
 .typing{display:flex;gap:5px;align-items:center;padding:3px 0}
 .tdot{width:8px;height:8px;background:var(--cyan);border-radius:50%;animation:tb 1.2s infinite}
 .tdot:nth-child(2){animation-delay:.2s;background:var(--hot)}
 .tdot:nth-child(3){animation-delay:.4s;background:var(--violet)}
 @keyframes tb{0%,60%,100%{transform:translateY(0);opacity:.4}30%{transform:translateY(-6px);opacity:1}}
-
 /* Input */
 .chat-input-row{padding:13px 17px;border-top:3px solid var(--yellow);display:flex;gap:10px;align-items:flex-end;background:var(--white)}
 .chat-input{flex:1;resize:none;border:3px solid var(--cyan);border-radius:12px;padding:10px 14px;font-family:'DM Sans',sans-serif;font-size:14px;color:#333;background:var(--skyblue);outline:none;transition:border-color .2s;min-height:46px;max-height:130px;line-height:1.5}
@@ -201,9 +189,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--yellow);color:#222;font-s
 .send-btn:disabled{background:rgba(200,200,200,.6);border-color:rgba(200,200,200,.6);box-shadow:none;cursor:not-allowed}
 .send-btn svg{color:#fff}
 .chat-note{padding:5px 18px 10px;font-size:10px;color:rgba(100,80,80,.6);text-align:center;background:var(--white);letter-spacing:.04em}
-
 </div>
-  
+ 
 /* ── RESOURCES ── */
 .res-section{
   background:var(--lime);
@@ -244,13 +231,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--yellow);color:#222;font-s
 .tm{background:var(--cyan);color:#00506B}
 .tp{background:var(--hot);color:var(--yellow)}
 .rc-org{font-size:11px;color:#888}
-
 /* FOOTER */
 footer{background:var(--hot);padding:20px 32px;display:flex;justify-content:space-between;align-items:center;border-top:5px solid var(--yellow)}
 footer .fl{font-size:12px;color:rgba(255,249,230,.6);font-weight:500}
 footer .fr a{font-size:12px;color:var(--yellow);text-decoration:none;font-weight:700}
 footer .fr a:hover{text-decoration:underline}
-
 @media(max-width:900px){
   .hero-inner{grid-template-columns:1fr}.hero-docs-col{display:none}
   .chat-inner{grid-template-columns:1fr}.sidebar{order:2}.chat-panel{order:1}
@@ -266,7 +251,6 @@ footer .fr a:hover{text-decoration:underline}
 </style>
 </head>
 <body>
-
 <!-- APPBAR -->
 <header class="appbar">
   <div class="appbar-left">
@@ -284,7 +268,6 @@ footer .fr a:hover{text-decoration:underline}
   </div>
   <a href="https://tierralocal.org" class="appbar-link">← Tierra Local</a>
 </header>
-
 <!-- HERO -->
 <div class="hero">
   <div class="hero-inner">
@@ -313,20 +296,16 @@ footer .fr a:hover{text-decoration:underline}
     </div>
   </div>
 </div>
-
 <!-- CHAT SECTION -->
 <div class="chat-section">
   <div class="chat-inner">
-
     <aside class="sidebar">
       <div class="side-card">
         <div class="side-head sh-hot">Upcoming Sessions</div>
         <div class="side-body">
-          <div class="mtg-row"><div class="mtg-date">Sunday, May 3</div><div class="mtg-desc">Session 2 — Understanding Local Food System Issues · 9 AM–5 PM</div><span class="mtg-tag tag-ip">In-Person</span></div>
-          <div class="mtg-row"><div class="mtg-date">Thursday, June 11</div><div class="mtg-desc">Session 3 — Moving Toward Action · 6–8 PM</div><span class="mtg-tag tag-vt">Virtual</span></div>
-          <div class="mtg-row"><div class="mtg-date">Thursday, Aug 20</div><div class="mtg-desc">Session 4 — Campaign Finalization · 6–8 PM</div><span class="mtg-tag tag-ip">In-Person</span></div>
-          <div class="mtg-row"><div class="mtg-date">Tuesday, Oct 13</div><div class="mtg-desc">Session 5 — Campaign Rollout · 6–8 PM</div><span class="mtg-tag tag-ip">In-Person</span></div>
-          <div class="mtg-row"><div class="mtg-date">Thursday, Dec 10</div><div class="mtg-desc">Session 6 — Public Presentation · 6–8 PM</div><span class="mtg-tag tag-ip">In-Person</span></div>
+          <div class="mtg-row"><div class="mtg-date">Thursday, July 23</div><div class="mtg-desc">Campaign Planning · 6–8 PM</div><span class="mtg-tag tag-ip">In-Person</span></div>
+          <div class="mtg-row"><div class="mtg-date">Thursday, Sept 24</div><div class="mtg-desc">Campaign Planning · 6–8 PM</div><span class="mtg-tag tag-ip">In-Person</span></div>
+          <div class="mtg-row"><div class="mtg-date">Thursday, Nov 19</div><div class="mtg-desc">Campaign Planning · 6–8 PM</div><span class="mtg-tag tag-ip">In-Person</span></div>
           <p style="font-size:10px;color:#888;margin-top:10px;letter-spacing:.06em;text-transform:uppercase">2026 Training &amp; Action Series</p>
         </div>
       </div>
@@ -338,7 +317,6 @@ footer .fr a:hover{text-decoration:underline}
         </div>
       </div>
     </aside>
-
     <div class="chat-panel">
       <div class="chat-head">
         <div class="chat-head-icon">🌽</div>
@@ -347,7 +325,6 @@ footer .fr a:hover{text-decoration:underline}
           <p>Ask about food policy, local food systems, or the network's work</p>
         </div>
       </div>
-
       <div class="chips-bar">
         <div class="chips-label">Try asking</div>
         <div class="chips-wrap">
@@ -360,7 +337,6 @@ footer .fr a:hover{text-decoration:underline}
           <button class="chip doc" onclick="usePrompt('What should I read first in the MCFPN documents?')">What should I read first?</button>
         </div>
       </div>
-
       <div class="chat-msgs" id="chat-msgs">
         <div class="msg assistant">
           <div class="msg-av">🌱</div>
@@ -371,7 +347,6 @@ footer .fr a:hover{text-decoration:underline}
           </div>
         </div>
       </div>
-
       <div class="chat-input-row">
         <textarea id="chat-input" class="chat-input" placeholder="Ask anything about food policy or the MCFPN..." rows="1"
           onkeydown="handleKeydown(event)" oninput="autoResize(this)"></textarea>
@@ -383,10 +358,9 @@ footer .fr a:hover{text-decoration:underline}
       </div>
       <div class="chat-note">Answers are AI-generated · Questions logged to improve this tool</div>
     </div>
-
   </div>
 </div>
-  
+ 
 <!-- BIAS QUESTIONS -->
 <div style="background:#FF2D55;padding:28px 32px;border-top:6px solid #00C8E0">
   <div style="max-width:1060px;margin:0 auto">
@@ -397,10 +371,10 @@ footer .fr a:hover{text-decoration:underline}
       <div style="background:#9B5FFF;border-radius:14px;padding:16px 18px;border-left:6px solid #FFD600"><div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#FFD600;margin-bottom:6px">Check the Source</div><div style="font-size:13px;color:#FFFEF9;line-height:1.65">Who designed the data collection and what was their motivation? Who was included vs. excluded? When was it collected?</div></div>
       <div style="background:#5EE06A;border-radius:14px;padding:16px 18px;border-left:6px solid #111111"><div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#111111;margin-bottom:6px">Check the Impact</div><div style="font-size:13px;color:#111111;line-height:1.65">How is this data going to inform decision-making? What questions does this raise? What feels left unanswered?</div></div>
     </div>
-    
+ 
   </div>
 </div>
-  
+ 
 <!-- RESOURCES -->
 <div style="background:#1A5C20;height:6px;border-top:6px solid #FFD600"></div>
 <div class="res-section" style="padding-top:36px;padding-bottom:60px">
@@ -422,15 +396,12 @@ footer .fr a:hover{text-decoration:underline}
     </div>
   </div>
 </div>
-
 <footer>
   <span class="fl">Muskegon County Food Policy Network · Supported by Tierra Local</span>
   <span class="fr"><a href="mailto:kody@tierralocal.org">kody@tierralocal.org</a></span>
 </footer>
-
 <script>
 const APPS_SCRIPT_URL='https://script.google.com/macros/s/AKfycbyXTNyoFfWhHTDTR2SLCY1oHSoUIOgr0FEcyk9hnX68VIIdsCW51Fn81g6DN2pDU3pV/exec';
-
 const DOCS=[
   {name:"MCFPN Advocacy Series — Session 1",org:"MCFPN",year:"2026",type:"network",url:"MCFPN%20Advocacy%20Session%201.pdf",desc:"Slides from Session 1 of the MCFPN Advocacy Series.",spot:"The '6 Shifts' slide (p.14) and the Session 2 Data Review prep section at the end are the most useful for understanding where the network is headed."},
   {name:"Community Health Needs Assessment",org:"Muskegon County",year:"2024",type:"muskegon",url:"https://drive.google.com/file/d/1HZCqbXTiRJP_oUt5kpZ0ChAQeFuR6I71/view",desc:"Health and food access data for Muskegon County.",spot:"The food access section shows which zip codes have the least access to healthy food."},
@@ -448,9 +419,7 @@ const DOCS=[
   {name:"Food Loss & Waste Reduction Toolkit",org:"Harvard FLPC",year:"—",type:"policy",url:"https://drive.google.com/file/d/13-yJ0cA8vGPpOLN5KJ9CzG0X0Dwrj0y-/view",desc:"Policy tools for reducing food waste from farm to table.",spot:"The local government section lists specific policies cities have used — useful for drafting resolutions."},
   {name:"Shared Vocabulary & Narrative Change",org:"Guide",year:"—",type:"policy",url:"https://docs.google.com/document/d/1EMrv5xrTS7hezJDcpRKtiNOWBiSUmhWO/edit",desc:"Why the words we use matter and how to shift food system narratives.",spot:"The word swap examples are immediately useful — small changes that make your message land better."},
 ];
-
 const TAGS={network:{label:'Network',cls:'tn'},muskegon:{label:'Muskegon',cls:'tm'},policy:{label:'Food Policy',cls:'tp'}};
-
 function renderRes(f){
   const g=document.getElementById('res-grid');g.innerHTML='';
   (f==='all'?DOCS:DOCS.filter(d=>d.type===f)).forEach(d=>{
@@ -465,10 +434,8 @@ function renderRes(f){
 }
 function filterRes(f,btn){document.querySelectorAll('.rf').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderRes(f);}
 renderRes('all');
-
 /* ── CHAT ── */
 let hist=[],busy=false;
-
 function sendMessage(){
   const inp=document.getElementById('chat-input');
   const q=inp.value.trim();
@@ -487,14 +454,12 @@ function sendMessage(){
   .catch(()=>{rmTyping(tid);addMsg('assistant','Could not connect. Please try again.');hist.pop();})
   .finally(()=>setBusy(false));
 }
-
 function addMsg(role,text){
   const c=document.getElementById('chat-msgs');
   const d=document.createElement('div');d.className='msg '+role;
   d.innerHTML='<div class="msg-av">'+(role==='user'?'You':'🌱')+'</div><div class="msg-bub">'+fmt(text)+'</div>';
   c.appendChild(d);c.scrollTop=c.scrollHeight;
 }
-
 function fmt(t){
   let h=t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
     .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
@@ -502,7 +467,6 @@ function fmt(t){
   h=h.replace(/(<li>[^]*?<\/li>\n?)+/g,m=>'<ul>'+m+'</ul>');
   return h.split(/\n\n+/).map(p=>p.trim().startsWith('<ul>')?p:'<p>'+p.replace(/\n/g,'<br>')+'</p>').join('');
 }
-
 function showTyping(){
   const c=document.getElementById('chat-msgs');const id='t'+Date.now();
   const d=document.createElement('div');d.className='msg assistant';d.id=id;
@@ -517,3 +481,4 @@ function autoResize(el){el.style.height='auto';el.style.height=Math.min(el.scrol
 </script>
 </body>
 </html>
+ 
