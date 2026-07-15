@@ -450,28 +450,7 @@
       &nbsp;&nbsp;Need to change which working groups you're in?
       <a href="mailto:kody@tierralocal.org">Email Kody.</a>
     </div>
-  </div>
-
-  <div class="name-block" id="dateBlock">
-    <div class="block-label">Step 2 — Next Meeting Availability</div>
-    <p style="font-size:0.88rem;color:#555;margin-bottom:16px;line-height:1.6;">Our next meeting will be in July. Check all dates that work for you.</p>
-    <div style="display:flex;flex-direction:column;gap:10px;">
-      <label style="display:flex;align-items:center;gap:12px;cursor:pointer;font-size:0.95rem;font-weight:600;">
-        <input type="checkbox" id="date-jul8" value="July 8" style="width:18px;height:18px;accent-color:var(--pink);cursor:pointer;">
-        Wednesday, July 8 &nbsp;<span style="font-size:0.78rem;font-weight:400;color:#888;">6–8 PM</span>
-      </label>
-      <label style="display:flex;align-items:center;gap:12px;cursor:pointer;font-size:0.95rem;font-weight:600;">
-        <input type="checkbox" id="date-jul13" value="July 13" style="width:18px;height:18px;accent-color:var(--pink);cursor:pointer;">
-        Monday, July 13 &nbsp;<span style="font-size:0.78rem;font-weight:400;color:#888;">6–8 PM</span>
-      </label>
-      <label style="display:flex;align-items:center;gap:12px;cursor:pointer;font-size:0.95rem;font-weight:600;">
-        <input type="checkbox" id="date-jul22" value="July 22" style="width:18px;height:18px;accent-color:var(--pink);cursor:pointer;">
-        Wednesday, July 22 &nbsp;<span style="font-size:0.78rem;font-weight:400;color:#888;">6–8 PM</span>
-      </label>
-    </div>
-  </div>
-
-  <div class="notice-strip" id="noticeStrip"></div>
+  </div>  <div class="notice-strip" id="noticeStrip"></div>
 
   <div class="group-sections" id="groupSections">
 
@@ -965,10 +944,6 @@ function handleSubmit(slug) {
     return;
   }
 
-  var dates = ['date-jul8','date-jul13','date-jul22']
-    .filter(function(id) { return document.getElementById(id).checked; })
-    .map(function(id) { return document.getElementById(id).value; });
-
   var btn = document.getElementById('submit-' + slug);
   btn.textContent = 'Sending...';
   btn.disabled = true;
@@ -984,8 +959,7 @@ function handleSubmit(slug) {
       doNow: doNow,
       getStarted: getStarted,
       otherDoNow: document.getElementById('other-donow-' + slug).value || '',
-      otherGetStarted: document.getElementById('other-getstart-' + slug).value || '',
-      availableDates: dates
+      otherGetStarted: document.getElementById('other-getstart-' + slug).value || ''
     }]
   };
 
