@@ -138,7 +138,6 @@
   }
   .name-block select:focus { border-color: var(--black); background: #fff; }
 
-  /* NAME HELPER TEXT */
   .name-helper {
     margin-top: 14px;
     font-size: 0.82rem;
@@ -196,7 +195,6 @@
 
   .section-body { padding: 24px; }
 
-  /* SYNTHESIS */
   .synthesis {
     margin-bottom: 20px;
     padding: 18px 22px;
@@ -229,7 +227,6 @@
     color: var(--black);
   }
 
-  /* MEMBERS NOTE */
   .members-note {
     font-size: 0.78rem;
     color: #888;
@@ -237,7 +234,6 @@
   }
   .members-note strong { color: var(--black); }
 
-  /* JOIN ROW */
   .join-row {
     padding: 14px 18px;
     margin-bottom: 20px;
@@ -272,7 +268,6 @@
   .proc  .join-row input[type=checkbox] { accent-color: var(--cyan); }
   .net   .join-row input[type=checkbox] { accent-color: var(--black); }
 
-  /* VOTE COLUMNS */
   .vote-cols {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -292,7 +287,6 @@
     border-bottom: 2px solid;
   }
 
-  /* col-head colors per group */
   .dist  .col-donow .col-head    { color: var(--cyan);   border-color: var(--cyan); }
   .cons  .col-donow .col-head    { color: #2db84d;        border-color: var(--lime); }
   .waste .col-donow .col-head    { color: var(--pink);   border-color: var(--pink); }
@@ -314,7 +308,6 @@
     margin-bottom: 12px;
   }
 
-  /* PROBLEM ITEMS */
   .problem-item {
     display: flex;
     align-items: flex-start;
@@ -339,7 +332,6 @@
   }
   .problem-item.disabled { opacity: 0.35; pointer-events: none; }
 
-  /* checkbox accent per group */
   .dist  .problem-item input { accent-color: var(--cyan); }
   .cons  .problem-item input { accent-color: var(--lime); }
   .waste .problem-item input { accent-color: var(--pink); }
@@ -347,7 +339,6 @@
   .proc  .problem-item input { accent-color: var(--cyan); }
   .net   .problem-item input { accent-color: var(--black); }
 
-  /* OTHER FIELD */
   .other-row { margin-top: 10px; }
   .other-row label {
     font-size: 0.7rem;
@@ -372,7 +363,6 @@
   }
   .other-row input[type=text]:focus { border-color: var(--black); background: #fff; }
 
-  /* SUBMIT ZONE */
   .submit-zone {
     border-top: 2px dashed #ddd;
     padding-top: 20px;
@@ -414,7 +404,6 @@
     padding: 8px 0 0;
   }
 
-  /* hidden until name selected */
   .group-sections { display: none; flex-wrap: wrap; gap: 48px; }
 
   footer {
@@ -450,7 +439,6 @@
 
 <main>
 
-  <!-- NAME PICKER -->
   <div class="name-block">
     <div class="block-label">Step 1 — Who Are You</div>
     <select id="nameSelect">
@@ -464,7 +452,6 @@
     </div>
   </div>
 
-  <!-- DATE AVAILABILITY -->
   <div class="name-block" id="dateBlock">
     <div class="block-label">Step 2 — Next Meeting Availability</div>
     <p style="font-size:0.88rem;color:#555;margin-bottom:16px;line-height:1.6;">Our next meeting will be in July. Check all dates that work for you.</p>
@@ -484,13 +471,10 @@
     </div>
   </div>
 
-  <!-- NOTICE -->
   <div class="notice-strip" id="noticeStrip"></div>
 
-  <!-- ALL GROUP CARDS -->
   <div class="group-sections" id="groupSections">
 
-    <!-- DISTRIBUTION -->
     <div class="section-card dist" id="card-dist">
       <div class="section-tab">Distribution</div>
       <div class="section-body">
@@ -524,7 +508,6 @@
       </div>
     </div>
 
-    <!-- CONSUMPTION -->
     <div class="section-card cons" id="card-cons">
       <div class="section-tab">Consumption</div>
       <div class="section-body">
@@ -558,7 +541,6 @@
       </div>
     </div>
 
-    <!-- WASTE / RESCUE -->
     <div class="section-card waste" id="card-waste">
       <div class="section-tab">Waste &amp; Rescue</div>
       <div class="section-body">
@@ -592,7 +574,6 @@
       </div>
     </div>
 
-    <!-- PRODUCTION -->
     <div class="section-card prod" id="card-prod">
       <div class="section-tab">Production</div>
       <div class="section-body">
@@ -626,7 +607,6 @@
       </div>
     </div>
 
-    <!-- PROCESSING -->
     <div class="section-card proc" id="card-proc">
       <div class="section-tab">Processing</div>
       <div class="section-body">
@@ -660,7 +640,6 @@
       </div>
     </div>
 
-    <!-- NETWORK & COORDINATION -->
     <div class="section-card net" id="card-net">
       <div class="section-tab">Network &amp; Coordination</div>
       <div class="section-body">
@@ -694,7 +673,7 @@
       </div>
     </div>
 
-  </div><!-- /group-sections -->
+  </div>
 
 </main>
 
@@ -790,7 +769,7 @@ var GROUPS = {
 };
 
 var ALL_MEMBERS = [
-  'Angela Fox','Ana Olson','Ben Soyars','Brittany Brown','Elissa Penczar',
+  'Angela Fox','Ana Olson','Ben Soyars','Bridget Larson','Brittany Brown','Elissa Penczar',
   'Emily Merten','Ian Miller','Jess Grimm','Jill Parsh','Joseph Heeren','Kaitlin Hermanson',
   'Kaitlyn Sutton','Larry Williams','Lisa Potter','Nick Tushek','Renae Hesselink',
   'Reuben Richardson','Savannah Cunningham','Stephen Proctor','Vanessa Guardiola',
@@ -802,7 +781,6 @@ var CONFIRMED_MEMBERS = [
   'Reuben Richardson','Lisa Potter','Savannah Cunningham','Stephen Proctor','Venessa Johnson-Jenkins'
 ];
 
-// Populate name dropdown
 var nameSelect = document.getElementById('nameSelect');
 ALL_MEMBERS.forEach(function(name) {
   var opt = document.createElement('option');
@@ -811,12 +789,10 @@ ALL_MEMBERS.forEach(function(name) {
   nameSelect.appendChild(opt);
 });
 
-// Build problem checkboxes for all groups
 Object.keys(GROUPS).forEach(function(slug) {
   var g = GROUPS[slug];
   buildItems('donow-' + slug, slug, 'donow', g.problems);
   buildItems('getstart-' + slug, slug, 'getstart', g.problems);
-  // Wire submit button
   document.getElementById('submit-' + slug).addEventListener('click', function() {
     handleSubmit(slug);
   });
@@ -870,7 +846,6 @@ function enforceLimit(slug, col, max) {
   });
 }
 
-// Name selection — show/hide cards, set members note, show/hide join row
 nameSelect.addEventListener('change', function() {
   var name = this.value;
   var notice = document.getElementById('noticeStrip');
@@ -886,10 +861,8 @@ nameSelect.addEventListener('change', function() {
 
   var isConfirmed = CONFIRMED_MEMBERS.indexOf(name) !== -1;
 
-  // Show helper text
   helper.style.display = 'block';
 
-  // Notice
   if (isConfirmed) {
     notice.innerHTML = 'Your working groups are highlighted below. Vote on priorities in each one.';
   } else {
@@ -898,12 +871,10 @@ nameSelect.addEventListener('change', function() {
   notice.style.display = 'block';
   sections.style.display = 'flex';
 
-  // Hide all cards first, then show the right ones
   ['dist','cons','waste','prod','proc','net'].forEach(function(s) {
     document.getElementById('card-' + s).style.display = 'none';
   });
 
-  // For each group — show/hide card, update members note, join row visibility
   Object.keys(GROUPS).forEach(function(slug) {
     var g = GROUPS[slug];
     var inGroup = g.members.indexOf(name) !== -1;
@@ -911,24 +882,19 @@ nameSelect.addEventListener('change', function() {
     var joinRow = document.getElementById('join-' + slug);
     var membersNote = document.getElementById('members-' + slug);
 
-    // Confirmed members only see their own groups
-    // Non-confirmed members see all groups with join checkboxes
     if (isConfirmed) {
       card.style.display = inGroup ? 'block' : 'none';
     } else {
       card.style.display = 'block';
     }
 
-    // Members note — highlight current person if they're in the group
     var memberList = g.members.map(function(m) {
       return m === name ? '<strong>' + m + '</strong>' : m;
     }).join(', ');
     membersNote.innerHTML = 'Current members: ' + memberList;
 
-    // Show join row only if not already in the group
     joinRow.style.display = inGroup ? 'none' : 'block';
 
-    // For non-members, lock vote area until they check join
     var voteArea = document.getElementById('card-' + slug).querySelector('.vote-cols');
     if (!isConfirmed && !inGroup && voteArea) {
       voteArea.style.opacity = '0.4';
@@ -938,7 +904,6 @@ nameSelect.addEventListener('change', function() {
       voteArea.style.pointerEvents = '';
     }
 
-    // Replace join checkbox with a fresh clone to avoid stacking listeners
     var oldCb = document.getElementById('joincheck-' + slug);
     if (oldCb) {
       var newCb = oldCb.cloneNode(true);
@@ -977,14 +942,12 @@ function enforceJoinLimit() {
   });
 }
 
-// Per-group submit
 function handleSubmit(slug) {
   var name = nameSelect.value;
   if (!name) { showError(slug, 'Please select your name at the top of the page.'); return; }
 
   var g = GROUPS[slug];
   var inGroup = g.members.indexOf(name) !== -1;
-  var isConfirmed = CONFIRMED_MEMBERS.indexOf(name) !== -1;
   var joining = !inGroup && document.getElementById('joincheck-' + slug).checked;
 
   var doNow = [];
@@ -1013,7 +976,7 @@ function handleSubmit(slug) {
   var payload = {
     type: 'working_group_vote',
     name: name,
-    isNewMember: !isConfirmed,
+    isNewMember: CONFIRMED_MEMBERS.indexOf(name) === -1,
     timestamp: new Date().toISOString(),
     votes: [{
       group: g.key,
