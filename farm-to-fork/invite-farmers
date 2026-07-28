@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Farm to Fork Exchange — Invitation for Farmers & Food Producers</title>
+<meta name="description" content="Farmers & food producers: join the Farm to Fork Exchange on September 22 in Muskegon. Meet local buyers, taste the evening's menu, and receive $75 in Farmers Market tokens for attending.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="topband">A Muskegon Farmers Market Initiative · Sponsored by the <span>Muskegon County Food Policy Network</span></div>
+
+<header class="hero wrap">
+  <img class="hero-logo" src="assets/farm-to-fork-logo.png" alt="Farm to Fork Exchange logo">
+  <span class="eyebrow">Farmers &amp; Food Producers</span>
+  <h1>Grow Your Business.<br>Build New Markets.</h1>
+  <p class="sub">You're invited to the first Farm to Fork Exchange.</p>
+
+  <div class="detail-strip">
+    <div class="detail-chip"><span class="ic">📅</span>Tuesday, September 22</div>
+    <div class="detail-chip"><span class="ic">🕕</span>6:00 – 8:00 p.m.</div>
+    <div class="detail-chip"><span class="ic">📍</span>Muskegon Farmers Market</div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="section">
+    <div class="card">
+      <p class="lede">Have you ever wondered how to get your products onto the menus of local restaurants, schools, hospitals, caterers, or other food businesses? The Farm to Fork Exchange is built specifically to connect farmers and food producers directly with the chefs and buyers who are looking for more locally sourced products.</p>
+      <p>Join us for an evening of great food, meaningful conversations, and new business opportunities — enjoying a menu prepared by local chefs using local ingredients while meeting the buyers who want to purchase more fresh, local products throughout the year.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">During the evening, you'll</h2>
+    <div class="benefit-grid">
+      <div class="benefit"><span class="ic">🌱</span><p>Meet chefs, restaurants, caterers, schools, and institutional buyers</p></div>
+      <div class="benefit"><span class="ic">🥕</span><p>Learn exactly what products local buyers are looking for</p></div>
+      <div class="benefit"><span class="ic">📈</span><p>Discover how to prepare your business for wholesale opportunities</p></div>
+      <div class="benefit"><span class="ic">💬</span><p>Share your products, growing practices, and seasonal availability</p></div>
+      <div class="benefit"><span class="ic">🛒</span><p>Learn about the new Farmish system, making it easier to connect with buyers year-round</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="token-block">
+      <div class="token" aria-hidden="true">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="100" r="94" fill="#dca958"/>
+          <circle cx="100" cy="100" r="94" fill="none" stroke="#293d26" stroke-width="4" stroke-dasharray="4 7"/>
+          <circle cx="100" cy="100" r="76" fill="none" stroke="#293d26" stroke-width="2.5"/>
+          <text x="100" y="90" text-anchor="middle" font-family="Fraunces, serif" font-weight="700" font-size="40" fill="#293d26">$75</text>
+          <text x="100" y="118" text-anchor="middle" font-family="DM Sans, sans-serif" font-weight="700" font-size="12" letter-spacing="1" fill="#293d26">FARMERS MARKET</text>
+          <text x="100" y="133" text-anchor="middle" font-family="DM Sans, sans-serif" font-weight="700" font-size="12" letter-spacing="1" fill="#293d26">TOKEN</text>
+        </svg>
+      </div>
+      <div>
+        <h3>Attend, and take home $75 in Farmers Market tokens.</h3>
+        <p>Every farmer or food producer who attends the September 22 Farm to Fork Exchange farm-to-table meal receives $75 in Muskegon Farmers Market tokens — our thank-you for taking an evening to invest in these relationships.</p>
+        <span class="fine">Tokens are provided on-site at check-in the evening of the event.</span>
+      </div>
+    </div>
+
+    <div class="seats">🎟️ Only 10 seats available for farmers &amp; food producers — RSVP to reserve yours</div>
+  </section>
+
+  <section class="section">
+    <p class="quote">"Whether you're an established farm, a specialty food producer, or a value-added business, this event is an opportunity to expand your customer base and build lasting business relationships."</p>
+    <p>Together, we're creating new opportunities to keep more local food on local tables.</p>
+  </section>
+
+  <section class="cta-box">
+    <a class="btn" href="mailto:muskfarmermkt@shorelinecity.com?subject=RSVP%20-%20Farm%20to%20Fork%20Exchange%20(Farmer%2FProducer)">RSVP to Reserve Your Seat</a>
+    <p class="rsvp-meta">
+      <a href="mailto:muskfarmermkt@shorelinecity.com">muskfarmermkt@shorelinecity.com</a> &nbsp;·&nbsp; <a href="tel:+12317223251">(231) 722-3251</a>
+    </p>
+  </section>
+
+</main>
+
+<footer>
+  <span class="foot-logo">Farm to Fork Exchange</span>
+  A Muskegon Farmers Market Initiative, sponsored by the Muskegon County Food Policy Network.
+</footer>
+
+</body>
+</html>
