@@ -1,96 +1,97 @@
-
-Index · HTML
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Farm to Fork Exchange</title>
+<title>Farm to Fork Exchange | Muskegon Farmers Market</title>
 <link rel="stylesheet" href="style.css">
 <style>
-  .split-hero{
-    display:grid;
-    grid-template-columns:1.15fr 0.85fr;
-    gap:48px;
-    align-items:center;
-    padding:56px 0 40px;
+  .masthead{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    text-align:left;
+    padding:44px 0 8px;
   }
-  .split-hero .copy{text-align:left;}
-  .split-hero .copy h1{font-size:clamp(34px,4.6vw,52px); line-height:1.04;}
-  .split-hero .copy .sub{
-    margin-top:14px; font-size:19px; color:var(--olive);
-    font-style:italic; font-family:'Fraunces',serif;
-  }
-  .split-hero .detail-strip{justify-content:flex-start; margin-left:0;}
-  .split-hero .logo-side{
-    display:flex; justify-content:center; align-items:center;
-  }
-  .split-hero .logo-side img{
-    width:100%;
-    max-width:380px;
-    height:auto;
+  .masthead img{
+    width:220px;
+    height:220px;
     display:block;
+    margin-bottom:14px;
   }
-  @media (max-width:760px){
-    .split-hero{grid-template-columns:1fr; gap:28px; text-align:center;}
-    .split-hero .copy{text-align:center;}
-    .split-hero .detail-strip{justify-content:center;}
-    .split-hero .logo-side{order:-1;}
-    .split-hero .logo-side img{max-width:220px;}
+  .masthead h1{
+    font-size:clamp(22px,2.6vw,30px);
+    line-height:1.15;
+    letter-spacing:.01em;
   }
- 
-  .nav-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:14px;}
+  .masthead .sub{
+    margin-top:6px;
+    font-size:16px;
+    color:var(--olive);
+    font-style:italic;
+    font-family:'Fraunces',serif;
+  }
+
+  .info-block{padding:14px 0 40px; text-align:left;}
+  .info-block .detail-strip{justify-content:flex-start; margin-left:0;}
+
+  .nav-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:22px;}
   .nav-card{background:var(--paper);border:1px solid rgba(115,127,61,.25);border-radius:16px;padding:24px;text-align:center;text-decoration:none;box-shadow:0 8px 24px -14px rgba(41,61,38,.35);transition:transform .15s;}
   .nav-card:hover{transform:translateY(-3px);}
   .nav-card .ic{font-size:30px;display:block;margin-bottom:10px;}
   .nav-card h3{color:var(--deep-green);font-size:19px;margin-bottom:4px;}
   .nav-card p{color:var(--olive);font-size:14px;margin:0;}
+
+  @media (max-width:600px){
+    .masthead{align-items:center; text-align:center;}
+    .masthead img{width:170px; height:170px;}
+    .info-block{text-align:center;}
+    .info-block .detail-strip{justify-content:center;}
+  }
 </style>
 </head>
 <body>
- 
+
 <div class="topband">A Muskegon Farmers Market Initiative · Sponsored by the <span>Muskegon County Food Policy Network</span></div>
- 
+
 <header class="wrap">
-  <div class="split-hero">
-    <div class="copy">
-      <h1>Farm to Fork Exchange</h1>
-      <p class="sub">Connecting Local Farms with Local Tables</p>
-      <div class="detail-strip">
-        <div class="detail-chip"><span class="ic">📅</span>Tuesday, September 22</div>
-        <div class="detail-chip"><span class="ic">🕕</span>6:00 – 8:00 p.m.</div>
-        <div class="detail-chip"><span class="ic">📍</span>Muskegon Farmers Market</div>
-      </div>
- 
-      <div class="nav-grid">
-        <a class="nav-card" href="invite-farmers.html">
-          <span class="ic">🌱</span>
-          <h3>Farmers &amp; Producers</h3>
-          <p>RSVP invitation · $75 token · 10 seats</p>
-        </a>
-        <a class="nav-card" href="invite-chefs-buyers.html">
-          <span class="ic">🍅</span>
-          <h3>Chefs, Restaurants &amp; Buyers</h3>
-          <p>RSVP invitation · $75 token · 10 seats</p>
-        </a>
-        <a class="nav-card" href="feedback.html">
-          <span class="ic">📋</span>
-          <h3>Feedback &amp; Survey</h3>
-          <p>Tell us what you need</p>
-        </a>
-      </div>
+  <div class="masthead">
+    <img src="assets/farm-to-fork-logo.png" alt="Farm to Fork Exchange logo">
+    <h1>Farm to Fork Exchange</h1>
+    <p class="sub">Connecting Local Farms with Local Tables</p>
+  </div>
+
+  <div class="info-block">
+    <div class="detail-strip">
+      <div class="detail-chip"><span class="ic">📅</span>Tuesday, September 22</div>
+      <div class="detail-chip"><span class="ic">🕕</span>6:00 – 8:00 p.m.</div>
+      <div class="detail-chip"><span class="ic">📍</span>Muskegon Farmers Market</div>
     </div>
- 
-    <div class="logo-side">
-      <img src="assets/farm-to-fork-logo.png" alt="Farm to Fork Exchange logo">
+
+    <div class="nav-grid">
+      <a class="nav-card" href="invite-farmers.html">
+        <span class="ic">🌱</span>
+        <h3>Farmers &amp; Producers</h3>
+        <p>RSVP invitation · $75 token · 10 seats</p>
+      </a>
+      <a class="nav-card" href="invite-chefs-buyers.html">
+        <span class="ic">🍅</span>
+        <h3>Chefs, Restaurants &amp; Buyers</h3>
+        <p>RSVP invitation · $75 token · 10 seats</p>
+      </a>
+      <a class="nav-card" href="feedback.html">
+        <span class="ic">📋</span>
+        <h3>Feedback &amp; Survey</h3>
+        <p>Tell us what you need</p>
+      </a>
     </div>
   </div>
 </header>
- 
+
 <footer>
   <span class="foot-logo">Farm to Fork Exchange</span>
   A Muskegon Farmers Market Initiative, sponsored by the Muskegon County Food Policy Network.
 </footer>
- 
+
 </body>
 </html>
