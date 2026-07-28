@@ -6,319 +6,54 @@
 <title>Farm to Fork Exchange — Feedback & Survey</title>
 <meta name="description" content="Share your feedback and sourcing needs to help shape the Muskegon Farm to Fork Exchange program.">
 <link rel="stylesheet" href="style.css">
+<style>
+  .form-embed-wrap{
+    background:var(--paper);
+    border:1px solid rgba(115,127,61,0.25);
+    border-radius:18px;
+    padding:8px;
+    box-shadow:0 8px 24px -14px rgba(41,61,38,0.35);
+    overflow:hidden;
+  }
+  .form-embed-wrap iframe{
+    width:100%;
+    border:none;
+    display:block;
+    min-height:2400px;
+  }
+</style>
 </head>
 <body>
-
+ 
 <div class="topband">A Muskegon Farmers Market Initiative · Sponsored by the <span>Muskegon County Food Policy Network</span></div>
-
+ 
 <header class="hero wrap">
   <img class="hero-logo" src="assets/farm-to-fork-logo.png" alt="Farm to Fork Exchange logo">
   <span class="eyebrow">Feedback &amp; Survey</span>
   <h1>Help Shape the<br>Farm to Fork Exchange</h1>
   <p class="sub">A few minutes of your time helps us build a program that actually works for you.</p>
 </header>
-
+ 
 <main class="wrap">
-
+ 
   <section class="section">
     <div class="card">
       <p class="lede">Whether or not you were able to join us on September 22, your answers below help the Muskegon Farmers Market and the Muskegon County Food Policy Network shape a Farm to Fork Exchange program — and future online marketplace — that fits how you actually buy and sell local food.</p>
     </div>
   </section>
-
-  <!--
-    NOTE FOR SITE OWNER: This is a static HTML form. GitHub Pages cannot process
-    form submissions on its own. Point the <form action> at a form backend such as
-    Formspree, Google Forms, or your existing Apps Script endpoint, or swap this
-    markup into a Google Form embed. Until then, submissions will not go anywhere.
-  -->
-  <form class="survey" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-
-    <fieldset>
-      <legend>I'm responding as a…</legend>
-      <div class="opts role-toggle" role="group" aria-label="Attendee type">
-        <label class="opt"><input type="radio" name="role" value="Farmer/Producer" required><span>🟢 Farmer / Food Producer</span></label>
-        <label class="opt"><input type="radio" name="role" value="Chef/Restaurant"><span>🟠 Chef / Restaurant</span></label>
-        <label class="opt"><input type="radio" name="role" value="Institutional Buyer"><span>🟣 Institutional Buyer</span></label>
-        <label class="opt"><input type="radio" name="role" value="Grocery/Retail Buyer"><span>🟡 Grocery / Retail Buyer</span></label>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <legend>About Your Business</legend>
-
-      <div class="q">
-        <label class="qlabel" for="bizname">What is the name of your business? <span style="font-weight:400;">(optional)</span></label>
-        <input type="text" id="bizname" name="business_name">
-      </div>
-
-      <div class="q">
-        <span class="qlabel">What type of operation are you?</span>
-        <div class="opts">
-          <label class="opt"><input type="radio" name="operation_type" value="Full-service restaurant"><span>Full-service restaurant</span></label>
-          <label class="opt"><input type="radio" name="operation_type" value="Fast casual"><span>Fast casual</span></label>
-          <label class="opt"><input type="radio" name="operation_type" value="Cafe / coffee shop"><span>Café / coffee shop</span></label>
-          <label class="opt"><input type="radio" name="operation_type" value="Catering"><span>Catering</span></label>
-          <label class="opt"><input type="radio" name="operation_type" value="Food truck"><span>Food truck</span></label>
-          <label class="opt"><input type="radio" name="operation_type" value="Farm/Producer"><span>Farm / food producer</span></label>
-          <label class="opt"><input type="radio" name="operation_type" value="Institution"><span>School / healthcare / institution</span></label>
-        </div>
-        <input type="text" name="operation_type_other" placeholder="Other (please specify)" style="margin-top:8px;">
-      </div>
-
-      <div class="q">
-        <span class="qlabel">Approximately how many meals do you serve, or how much product do you move, weekly?</span>
-        <div class="opts">
-          <label class="opt"><input type="radio" name="weekly_volume" value="Under 200"><span>Under 200</span></label>
-          <label class="opt"><input type="radio" name="weekly_volume" value="200-500"><span>200–500</span></label>
-          <label class="opt"><input type="radio" name="weekly_volume" value="500-1000"><span>500–1,000</span></label>
-          <label class="opt"><input type="radio" name="weekly_volume" value="1000+"><span>1,000+</span></label>
-        </div>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <legend>Current Local Sourcing</legend>
-
-      <div class="q">
-        <span class="qlabel">Do you currently purchase or sell locally sourced food?</span>
-        <div class="opts">
-          <label class="opt"><input type="radio" name="sources_local" value="Yes, regularly"><span>Yes, regularly</span></label>
-          <label class="opt"><input type="radio" name="sources_local" value="Occasionally"><span>Occasionally</span></label>
-          <label class="opt"><input type="radio" name="sources_local" value="Rarely"><span>Rarely</span></label>
-          <label class="opt"><input type="radio" name="sources_local" value="Not currently"><span>Not currently</span></label>
-        </div>
-      </div>
-
-      <div class="q">
-        <span class="qlabel">If yes, what types of products? (check all that apply)</span>
-        <div class="opts">
-          <label class="opt"><input type="checkbox" name="product_types" value="Produce"><span>Produce</span></label>
-          <label class="opt"><input type="checkbox" name="product_types" value="Meat/poultry"><span>Meat / poultry</span></label>
-          <label class="opt"><input type="checkbox" name="product_types" value="Dairy/eggs"><span>Dairy / eggs</span></label>
-          <label class="opt"><input type="checkbox" name="product_types" value="Baked goods"><span>Baked goods</span></label>
-          <label class="opt"><input type="checkbox" name="product_types" value="Value-added"><span>Value-added (jams, sauces, etc.)</span></label>
-        </div>
-        <input type="text" name="product_types_other" placeholder="Other (please specify)" style="margin-top:8px;">
-      </div>
-
-      <div class="q">
-        <span class="qlabel">Where do you currently source from / sell through?</span>
-        <div class="opts">
-          <label class="opt"><input type="checkbox" name="source_channel" value="Farmers markets"><span>Farmers markets</span></label>
-          <label class="opt"><input type="checkbox" name="source_channel" value="Direct from farms"><span>Direct from farms</span></label>
-          <label class="opt"><input type="checkbox" name="source_channel" value="Distributors"><span>Distributors</span></label>
-        </div>
-        <input type="text" name="source_channel_other" placeholder="Other (please specify)" style="margin-top:8px;">
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <legend>Interest in Expanding Local Purchasing</legend>
-
-      <div class="q">
-        <span class="qlabel">Would you be interested in increasing your local buying or selling?</span>
-        <div class="opts">
-          <label class="opt"><input type="radio" name="expand_interest" value="Yes"><span>Yes</span></label>
-          <label class="opt"><input type="radio" name="expand_interest" value="Maybe"><span>Maybe</span></label>
-          <label class="opt"><input type="radio" name="expand_interest" value="No"><span>No</span></label>
-        </div>
-      </div>
-
-      <div class="q">
-        <span class="qlabel">What are your biggest barriers? (choose up to 3)</span>
-        <div class="opts">
-          <label class="opt"><input type="checkbox" name="barriers" value="Pricing"><span>Pricing</span></label>
-          <label class="opt"><input type="checkbox" name="barriers" value="Inconsistent supply"><span>Inconsistent supply</span></label>
-          <label class="opt"><input type="checkbox" name="barriers" value="Ordering/logistics"><span>Ordering / logistics</span></label>
-          <label class="opt"><input type="checkbox" name="barriers" value="Delivery challenges"><span>Delivery challenges</span></label>
-          <label class="opt"><input type="checkbox" name="barriers" value="Limited product availability"><span>Limited product availability</span></label>
-          <label class="opt"><input type="checkbox" name="barriers" value="Time constraints"><span>Time constraints</span></label>
-          <label class="opt"><input type="checkbox" name="barriers" value="Lack of communication"><span>Lack of communication with buyers/farmers</span></label>
-        </div>
-        <input type="text" name="barriers_other" placeholder="Other (please specify)" style="margin-top:8px;">
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <legend>Product Needs &amp; Priorities</legend>
-
-      <div class="q">
-        <span class="qlabel">What local products would you most like better access to (or a market for)?</span>
-        <div class="opts">
-          <label class="opt"><input type="checkbox" name="product_needs" value="Seasonal produce"><span>Seasonal produce</span></label>
-          <label class="opt"><input type="checkbox" name="product_needs" value="Year-round produce"><span>Year-round produce (greenhouse/storage)</span></label>
-          <label class="opt"><input type="checkbox" name="product_needs" value="Meat/poultry"><span>Meat / poultry</span></label>
-          <label class="opt"><input type="checkbox" name="product_needs" value="Dairy/eggs"><span>Dairy / eggs</span></label>
-          <label class="opt"><input type="checkbox" name="product_needs" value="Specialty ingredients"><span>Specialty / local ingredients</span></label>
-          <label class="opt"><input type="checkbox" name="product_needs" value="Value-added items"><span>Prepared / value-added items</span></label>
-        </div>
-        <input type="text" name="product_needs_other" placeholder="Other (please specify)" style="margin-top:8px;">
-      </div>
-
-      <div class="q">
-        <span class="qlabel">How important are the following when sourcing or selling local? (1 = not important, 5 = essential)</span>
-        <div style="display:grid; gap:12px; margin-top:10px;">
-          <div>
-            <div class="hint" style="margin-bottom:4px;">Consistent supply</div>
-            <div class="opts scale">
-              <label class="opt"><input type="radio" name="rate_supply" value="1"><span>1</span></label>
-              <label class="opt"><input type="radio" name="rate_supply" value="2"><span>2</span></label>
-              <label class="opt"><input type="radio" name="rate_supply" value="3"><span>3</span></label>
-              <label class="opt"><input type="radio" name="rate_supply" value="4"><span>4</span></label>
-              <label class="opt"><input type="radio" name="rate_supply" value="5"><span>5</span></label>
-            </div>
-          </div>
-          <div>
-            <div class="hint" style="margin-bottom:4px;">Competitive pricing</div>
-            <div class="opts scale">
-              <label class="opt"><input type="radio" name="rate_pricing" value="1"><span>1</span></label>
-              <label class="opt"><input type="radio" name="rate_pricing" value="2"><span>2</span></label>
-              <label class="opt"><input type="radio" name="rate_pricing" value="3"><span>3</span></label>
-              <label class="opt"><input type="radio" name="rate_pricing" value="4"><span>4</span></label>
-              <label class="opt"><input type="radio" name="rate_pricing" value="5"><span>5</span></label>
-            </div>
-          </div>
-          <div>
-            <div class="hint" style="margin-bottom:4px;">Easy ordering system</div>
-            <div class="opts scale">
-              <label class="opt"><input type="radio" name="rate_ordering" value="1"><span>1</span></label>
-              <label class="opt"><input type="radio" name="rate_ordering" value="2"><span>2</span></label>
-              <label class="opt"><input type="radio" name="rate_ordering" value="3"><span>3</span></label>
-              <label class="opt"><input type="radio" name="rate_ordering" value="4"><span>4</span></label>
-              <label class="opt"><input type="radio" name="rate_ordering" value="5"><span>5</span></label>
-            </div>
-          </div>
-          <div>
-            <div class="hint" style="margin-bottom:4px;">Farm / producer transparency &amp; story</div>
-            <div class="opts scale">
-              <label class="opt"><input type="radio" name="rate_story" value="1"><span>1</span></label>
-              <label class="opt"><input type="radio" name="rate_story" value="2"><span>2</span></label>
-              <label class="opt"><input type="radio" name="rate_story" value="3"><span>3</span></label>
-              <label class="opt"><input type="radio" name="rate_story" value="4"><span>4</span></label>
-              <label class="opt"><input type="radio" name="rate_story" value="5"><span>5</span></label>
-            </div>
-          </div>
-        </div>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <legend>Ordering &amp; Logistics</legend>
-
-      <div class="two-col">
-        <div class="q">
-          <span class="qlabel">Preferred ordering method</span>
-          <select name="ordering_method">
-            <option value="">Select one…</option>
-            <option>Online ordering platform</option>
-            <option>Direct communication with farmers/buyers</option>
-            <option>Through a market coordinator</option>
-            <option>Wholesale distributor model</option>
-          </select>
-        </div>
-        <div class="q">
-          <span class="qlabel">Preferred delivery / pick-up</span>
-          <select name="delivery_method">
-            <option value="">Select one…</option>
-            <option>Delivery to business</option>
-            <option>Pick up at market</option>
-            <option>Centralized hub pickup</option>
-            <option>Flexible / depends</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="q">
-        <span class="qlabel">How often would you ideally place orders?</span>
-        <div class="opts">
-          <label class="opt"><input type="radio" name="order_frequency" value="Multiple times per week"><span>Multiple times/week</span></label>
-          <label class="opt"><input type="radio" name="order_frequency" value="Weekly"><span>Weekly</span></label>
-          <label class="opt"><input type="radio" name="order_frequency" value="Bi-weekly"><span>Bi-weekly</span></label>
-          <label class="opt"><input type="radio" name="order_frequency" value="As needed"><span>As needed</span></label>
-        </div>
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <legend>Farm to Fork Exchange Program</legend>
-
-      <div class="q">
-        <span class="qlabel">Would you participate in an ongoing Farm to Fork Exchange program?</span>
-        <div class="opts">
-          <label class="opt"><input type="radio" name="program_interest" value="Yes"><span>Yes</span></label>
-          <label class="opt"><input type="radio" name="program_interest" value="Maybe - need more info"><span>Maybe — need more info</span></label>
-          <label class="opt"><input type="radio" name="program_interest" value="No"><span>No</span></label>
-        </div>
-      </div>
-
-      <div class="q">
-        <label class="qlabel" for="valuable">What would make this program most valuable to you?</label>
-        <textarea id="valuable" name="most_valuable"></textarea>
-      </div>
-
-      <div class="q">
-        <span class="qlabel">What additional support would help your business?</span>
-        <div class="opts">
-          <label class="opt"><input type="checkbox" name="support_needed" value="Menu planning support"><span>Menu planning support</span></label>
-          <label class="opt"><input type="checkbox" name="support_needed" value="Seasonal availability guides"><span>Seasonal availability guides</span></label>
-          <label class="opt"><input type="checkbox" name="support_needed" value="Networking"><span>Networking with farmers/buyers</span></label>
-          <label class="opt"><input type="checkbox" name="support_needed" value="Aggregated ordering system"><span>Aggregated ordering system</span></label>
-          <label class="opt"><input type="checkbox" name="support_needed" value="Marketing/promotion"><span>Marketing / promotion for local sourcing</span></label>
-        </div>
-        <input type="text" name="support_needed_other" placeholder="Other (please specify)" style="margin-top:8px;">
-      </div>
-    </fieldset>
-
-    <fieldset>
-      <legend>Final Thoughts</legend>
-
-      <div class="q">
-        <label class="qlabel" for="one-thing">What's one thing that would make sourcing (or selling) local easier for you?</label>
-        <textarea id="one-thing" name="one_thing"></textarea>
-      </div>
-
-      <div class="q">
-        <span class="qlabel">Would you like to be contacted about pilot programs or future opportunities?</span>
-        <div class="opts">
-          <label class="opt"><input type="radio" name="contact_ok" value="Yes"><span>Yes</span></label>
-          <label class="opt"><input type="radio" name="contact_ok" value="No"><span>No</span></label>
-        </div>
-      </div>
-
-      <div class="two-col" style="margin-top:14px;">
-        <div class="q">
-          <label class="qlabel" for="cname">Your name</label>
-          <input type="text" id="cname" name="contact_name">
-        </div>
-        <div class="q">
-          <label class="qlabel" for="cemail">Email</label>
-          <input type="email" id="cemail" name="contact_email">
-        </div>
-      </div>
-
-      <div class="q">
-        <span class="qlabel">Interested in being featured in promotions about local sourcing?</span>
-        <div class="opts">
-          <label class="opt"><input type="radio" name="feature_interest" value="Yes"><span>Yes</span></label>
-          <label class="opt"><input type="radio" name="feature_interest" value="Maybe"><span>Maybe</span></label>
-          <label class="opt"><input type="radio" name="feature_interest" value="No"><span>No</span></label>
-        </div>
-      </div>
-    </fieldset>
-
-    <div class="submit-row">
-      <button class="btn" type="submit">Submit Feedback</button>
-      <p class="hint">Thank you for helping shape the Farm to Fork Exchange.</p>
+ 
+  <section class="section">
+    <div class="form-embed-wrap">
+      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScBocMTDFom4fKzb1NFrH3wdH7Y2nwSlf48YhJOgjadIGJyPw/viewform?embedded=true" title="Farm to Fork Exchange Feedback & Survey">Loading…</iframe>
     </div>
-  </form>
-
+  </section>
+ 
 </main>
-
+ 
 <footer>
   <span class="foot-logo">Farm to Fork Exchange</span>
   A Muskegon Farmers Market Initiative, sponsored by the Muskegon County Food Policy Network.
 </footer>
-
+ 
 </body>
 </html>
