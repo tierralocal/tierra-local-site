@@ -341,4 +341,155 @@ footer .fr a:hover{text-decoration:underline}
           <button class="chip" onclick="usePrompt('What do food policy councils do?')">What do food policy councils do?</button>
           <button class="chip" onclick="usePrompt('What kind of policies help local farmers?')">Policies that help local farmers?</button>
           <button class="chip" onclick="usePrompt('What is my role as a member?')">What is my role as a member?</button>
-          <button class="chip" onclick="usePrompt('How do organizations fight hunge
+          <button class="chip" onclick="usePrompt('How do organizations fight hunger in Muskegon?')">Fighting hunger in Muskegon?</button>
+          <button class="chip" onclick="usePrompt('How does MCFPN work to close gaps in food access across Muskegon County, and who is most affected?')">Closing food access gaps?</button>
+          <button class="chip" onclick="usePrompt('How can a food council get more food to local markets?')">Food council &amp; local markets?</button>
+          <button class="chip" onclick="usePrompt('What is a food club?')">What is a food club?</button>
+          <button class="chip doc" onclick="usePrompt('What should I read first in the MCFPN documents?')">What should I read first?</button>
+        </div>
+      </div>
+      <div class="chat-msgs" id="chat-msgs">
+        <div class="msg assistant">
+          <div class="msg-av">🌱</div>
+          <div class="msg-bub">
+            <p><strong>Welcome to the MCFPN Member Assistant!</strong></p>
+            <p>I'm here to help you understand food policy and the network's work in Muskegon County, in plain, simple language.</p>
+            <p>New here? Click one of the questions above, or type your own below!</p>
+          </div>
+        </div>
+      </div>
+      <div class="chat-input-row">
+        <textarea id="chat-input" class="chat-input" placeholder="Ask anything about food policy or the MCFPN..." rows="1"
+          onkeydown="handleKeydown(event)" oninput="autoResize(this)"></textarea>
+        <button class="send-btn" id="send-btn" onclick="sendMessage()" title="Send">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+          </svg>
+        </button>
+      </div>
+      <div class="chat-note">Answers are AI-generated · Questions logged to improve this tool</div>
+    </div>
+  </div>
+</div>
+ 
+<!-- BIAS QUESTIONS -->
+<div style="background:#FF2D55;padding:28px 32px;border-top:6px solid #00C8E0">
+  <div style="max-width:1060px;margin:0 auto">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:.04em;color:#FFFEF9;margin-bottom:10px">Questions to ask as you review the data</div>
+    <p style="font-size:14px;color:#FFFEF9;line-height:1.7;max-width:680px;margin-bottom:20px">Averages can hide who is being left behind. Use these questions to spot disparities by race, income, and neighborhood, and to make sure every community in Muskegon County shows up in the story the data tells.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px">
+      <div style="background:#FFD600;border-radius:14px;padding:16px 18px;border-left:6px solid #111111"><div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#FF2D55;margin-bottom:6px">Check Yourself</div><div style="font-size:13px;color:#111111;line-height:1.65">What preconceived notions or perspectives do I bring into this analysis? Am I looking to confirm something I already believe?</div></div>
+      <div style="background:#00C8E0;border-radius:14px;padding:16px 18px;border-left:6px solid #111111"><div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#111111;margin-bottom:6px">Check the Data</div><div style="font-size:13px;color:#111111;line-height:1.65">Is correlation being confused with causation? Does there appear to be data missing that would help form a more complete picture?</div></div>
+      <div style="background:#9B5FFF;border-radius:14px;padding:16px 18px;border-left:6px solid #FFD600"><div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#FFD600;margin-bottom:6px">Check the Source</div><div style="font-size:13px;color:#FFFEF9;line-height:1.65">Who designed the data collection and what was their motivation? Who was included vs. excluded? When was it collected?</div></div>
+      <div style="background:#5EE06A;border-radius:14px;padding:16px 18px;border-left:6px solid #111111"><div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#111111;margin-bottom:6px">Check the Impact</div><div style="font-size:13px;color:#111111;line-height:1.65">How is this data going to inform decision-making? What questions does this raise? What feels left unanswered?</div></div>
+    </div>
+ 
+  </div>
+</div>
+ 
+<!-- RESOURCES -->
+<div style="background:#1A5C20;height:6px;border-top:6px solid #FFD600"></div>
+<div class="res-section" style="padding-top:36px;padding-bottom:60px">
+  <div class="res-inner" style="padding-top:12px">
+    <div class="res-panel">
+      <div class="res-panel-head">
+        <h3>Network Resource Library</h3>
+        <span>Click any card to open</span>
+      </div>
+      <div class="res-panel-body">
+        <div class="res-filters">
+          <button class="rf on" onclick="filterRes('all',this)">All resources</button>
+          <button class="rf" onclick="filterRes('network',this)">Network</button>
+          <button class="rf" onclick="filterRes('muskegon',this)">Muskegon</button>
+          <button class="rf" onclick="filterRes('policy',this)">Food Policy</button>
+        </div>
+        <div class="res-grid" id="res-grid"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer>
+  <span class="fl">Muskegon County Food Policy Network · Supported by Tierra Local</span>
+  <span class="fr"><a href="mailto:kody@tierralocal.org">kody@tierralocal.org</a></span>
+</footer>
+<script>
+const APPS_SCRIPT_URL='https://script.google.com/macros/s/AKfycbyXTNyoFfWhHTDTR2SLCY1oHSoUIOgr0FEcyk9hnX68VIIdsCW51Fn81g6DN2pDU3pV/exec';
+const DOCS=[
+  {name:"MCFPN Advocacy Series — Session 1",org:"MCFPN",year:"2026",type:"network",url:"MCFPN%20Advocacy%20Session%201.pdf",desc:"Slides from Session 1 of the MCFPN Advocacy Series.",spot:"The '6 Shifts' slide (p.14) and the Session 2 Data Review prep section at the end are the most useful for understanding where the network is headed."},
+  {name:"Community Health Needs Assessment",org:"Muskegon County",year:"2024",type:"muskegon",url:"https://drive.google.com/file/d/1HZCqbXTiRJP_oUt5kpZ0ChAQeFuR6I71/view",desc:"Health and food access data for Muskegon County.",spot:"The food access section shows which zip codes have the least access to healthy food."},
+  {name:"Muskegon Food Club Feasibility Study",org:"New Venture Advisors",year:"2024",type:"muskegon",url:"https://docs.google.com/document/d/1NnBtA1HxqUtHQLMu1ZVjGRTosywKf5Emqe_MJs6196U/edit?usp=sharing",desc:"Needs assessment and food club model for Muskegon County.",spot:"Slide 27 has the full model and summary of what a food club would look like."},
+  {name:"Agriculture Cluster Impact Analysis",org:"West Michigan Shoreline",year:"2026",type:"muskegon",url:"https://drive.google.com/file/d/1DRO5e3aLohfYDxmgqk1-SNlZ-n-uAUq4/view",desc:"Economic value of local farming and food production in Muskegon.",spot:"The summary page has total impact numbers — great for conversations with officials and funders."},
+  {name:"West Michigan Ag Cluster (Combined)",org:"West Michigan Shoreline",year:"—",type:"muskegon",url:"https://drive.google.com/file/d/1OH86JY4Cnrc3_TKUmE-YZJeyHbj0oWYe/view",desc:"Regional farming economic footprint across West Michigan.",spot:"Compare Muskegon's numbers to the region — shows where there is room to grow."},
+  {name:"MSU Case Study: Lakeshore Flavor",org:"MSU",year:"—",type:"muskegon",url:"https://drive.google.com/file/d/14tZXez9DK7wVCcObdBRsRV9lss_e2cCH/view",desc:"Equitable access to local food along Michigan's lakeshore.",spot:"The equity findings show barriers keeping local food out of reach for lower-income families."},
+  {name:"Feeding Michigan Families",org:"State of Michigan",year:"2024",type:"muskegon",url:"https://drive.google.com/file/d/1_Wgh0sRc9ieC8SeYYESQHef8hn2MokGU/view",desc:"Statewide food insecurity data and program gaps.",spot:"The program gaps section shows where policy can fill holes existing programs miss."},
+  {name:"Feeding America West Michigan Annual Report",org:"Feeding America",year:"2023",type:"muskegon",url:"https://drive.google.com/file/d/15J0EnkRZKyCpSDcD_MAvnXSnPQR99JBR/view",desc:"Regional food bank report — 28M pounds distributed in 2023.",spot:"Impact by County page: Muskegon had 37 active partners and an 11.8% food insecurity rate."},
+  {name:"Food Policy Council Census Results",org:"Johns Hopkins",year:"2023",type:"policy",url:"https://drive.google.com/file/d/1MpDCxIdwYnck2ok-cGRveDDTS3qnAg4Z/view",desc:"National survey of how food policy councils are structured and what they accomplish.",spot:"The accomplishments section shows the most common FPC wins and how long they take."},
+  {name:"Characteristics of Regional FPCs in the US",org:"Research",year:"—",type:"policy",url:"https://drive.google.com/file/d/1DEfy7s4Lh4bm2twMK0YCdOlupp7UGMiG/view",desc:"What makes regional food policy councils effective.",spot:"The governance models section identifies what the most successful FPCs do differently."},
+  {name:"Advocacy for FPCs Toolkit",org:"Harvard / JHU",year:"2019",type:"policy",url:"https://drive.google.com/file/d/1v6JgUt3_Kn8BQJXKBpzFLPKel5dON3dG/view",desc:"How food policy councils can legally influence government policy.",spot:"Read pages 1-4 first — a plain-language breakdown of what you CAN do as a member."},
+  {name:"Kent County FPC Food Plan",org:"Kent County",year:"—",type:"policy",url:"https://drive.google.com/file/d/1z-8LICRn-4LMou9ib8Ahta8BsgwaxRsH/view",desc:"A model food plan from the Grand Rapids area.",spot:"Skim the priority areas — a good template for how MCFPN might structure its own plan."},
+  {name:"GARE Racial Equity Action Plans",org:"GARE",year:"—",type:"policy",url:"https://drive.google.com/file/d/18mkrDnLVY88615JTrS1FDlNRno-xPRoA/view",desc:"Building racial equity into organizational policies and decisions.",spot:"The action planning framework gives a step-by-step process any organization can use."},
+  {name:"Food Loss & Waste Reduction Toolkit",org:"Harvard FLPC",year:"—",type:"policy",url:"https://drive.google.com/file/d/13-yJ0cA8vGPpOLN5KJ9CzG0X0Dwrj0y-/view",desc:"Policy tools for reducing food waste from farm to table.",spot:"The local government section lists specific policies cities have used — useful for drafting resolutions."},
+  {name:"Shared Vocabulary & Narrative Change",org:"Guide",year:"—",type:"policy",url:"https://docs.google.com/document/d/1EMrv5xrTS7hezJDcpRKtiNOWBiSUmhWO/edit",desc:"Why the words we use matter and how to shift food system narratives.",spot:"The word swap examples are immediately useful — small changes that make your message land better."},
+];
+const TAGS={network:{label:'Network',cls:'tn'},muskegon:{label:'Muskegon',cls:'tm'},policy:{label:'Food Policy',cls:'tp'}};
+function renderRes(f){
+  const g=document.getElementById('res-grid');g.innerHTML='';
+  (f==='all'?DOCS:DOCS.filter(d=>d.type===f)).forEach(d=>{
+    const t=TAGS[d.type];const a=document.createElement('a');
+    a.href=d.url;a.target='_blank';a.className='rc';
+    a.innerHTML='<div class="rc-top"><span class="rc-name">'+d.name+'</span><span class="rc-year">'+d.year+'</span></div>'+
+      '<p class="rc-desc">'+d.desc+'</p>'+
+      '<div class="rc-spot"><div class="rc-spot-lbl">★ Worth noting</div><p>'+d.spot+'</p></div>'+
+      '<div class="rc-foot"><span class="rc-tag '+t.cls+'">'+t.label+'</span><span class="rc-org">'+d.org+'</span></div>';
+    g.appendChild(a);
+  });
+}
+function filterRes(f,btn){document.querySelectorAll('.rf').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderRes(f);}
+renderRes('all');
+/* ── CHAT ── */
+let hist=[],busy=false;
+function sendMessage(){
+  const inp=document.getElementById('chat-input');
+  const q=inp.value.trim();
+  if(!q||busy)return;
+  addMsg('user',q);inp.value='';autoResize(inp);
+  const snap=hist.slice();
+  hist.push({question:q,answer:''});
+  const tid=showTyping();setBusy(true);
+  fetch(APPS_SCRIPT_URL,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({action:'chat',question:q,history:snap})})
+  .then(r=>r.json())
+  .then(d=>{
+    rmTyping(tid);
+    if(d.ok){hist[hist.length-1].answer=d.answer;addMsg('assistant',d.answer);}
+    else{addMsg('assistant','Sorry, something went wrong. Please try again.');hist.pop();}
+  })
+  .catch(()=>{rmTyping(tid);addMsg('assistant','Could not connect. Please try again.');hist.pop();})
+  .finally(()=>setBusy(false));
+}
+function addMsg(role,text){
+  const c=document.getElementById('chat-msgs');
+  const d=document.createElement('div');d.className='msg '+role;
+  d.innerHTML='<div class="msg-av">'+(role==='user'?'You':'🌱')+'</div><div class="msg-bub">'+fmt(text)+'</div>';
+  c.appendChild(d);c.scrollTop=c.scrollHeight;
+}
+function fmt(t){
+  let h=t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+    .replace(/^[-•] (.+)$/gm,'<li>$1</li>');
+  h=h.replace(/(<li>[^]*?<\/li>\n?)+/g,m=>'<ul>'+m+'</ul>');
+  return h.split(/\n\n+/).map(p=>p.trim().startsWith('<ul>')?p:'<p>'+p.replace(/\n/g,'<br>')+'</p>').join('');
+}
+function showTyping(){
+  const c=document.getElementById('chat-msgs');const id='t'+Date.now();
+  const d=document.createElement('div');d.className='msg assistant';d.id=id;
+  d.innerHTML='<div class="msg-av">🌱</div><div class="msg-bub" style="background:var(--hot);border-color:var(--hot);color:var(--yellow);font-family:\'Bebas Neue\',sans-serif;font-size:18px;letter-spacing:.06em;display:flex;align-items:center;gap:12px;">⚡ WORKING ON IT...<div class="typing" style="margin:0"><div class="tdot"></div><div class="tdot"></div><div class="tdot"></div></div></div>';
+  c.appendChild(d);c.scrollTop=c.scrollHeight;return id;
+}
+function rmTyping(id){const e=document.getElementById(id);if(e)e.remove();}
+function setBusy(s){busy=s;document.getElementById('send-btn').disabled=s;}
+function usePrompt(text){const i=document.getElementById('chat-input');i.value=text;autoResize(i);sendMessage();}
+function handleKeydown(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage();}}
+function autoResize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,130)+'px';}
+</script>
+</body>
+</html>
