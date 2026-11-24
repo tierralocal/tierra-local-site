@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Harvest Gathering: Share Feedback and Connect</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --forest: #1a3328;
+      --pine:   #2e6b50;
+      --sage:   #5a8f72;
+      --mist:   #adbfb6;
+      --pale:   #d4e4de;
+      --cream:  #f5f0e8;
+      --white:  #ffffff;
+      --tan:    #e2dbd0;
+      --red:    #b3261e;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--forest);
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    header {
+      background: var(--forest);
+      padding: 14px 20px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    header img { height: 48px; border-radius: 6px; background: #fff; padding: 2px; }
+    .logo-div { width: 1px; height: 36px; background: rgba(255,255,255,0.2); }
+    header h1 { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: #fff; line-height: 1.3; }
+    header p { font-size: 11px; color: var(--mist); font-weight: 300; margin-top: 2px; }
+
+    .hero { background: var(--pine); padding: 28px 20px; text-align: center; }
+    .hero h2 { font-family: 'Fraunces', serif; font-size: 26px; font-weight: 700; color: #fff; line-height: 1.25; }
+    .hero p { font-size: 15px; color: rgba(255,255,255,0.8); margin: 8px auto 0; max-width: 560px; }
+
+    main { max-width: 860px; margin: 0 auto; padding: 24px 16px 56px; display: flex; flex-direction: column; gap: 22px; }
+
+    .card { background: #fff; border: 1px solid var(--tan); border-radius: 12px; overflow: hidden; }
+    .card-head { background: var(--forest); padding: 12px 18px; font-family: 'Fraunces', serif; font-size: 16px; font-weight: 700; color: #fff; }
+    .card-head small { display: block; font-family: 'DM Sans', sans-serif; font-weight: 300; font-size: 12px; color: var(--mist); margin-top: 2px; }
+    .card-body { padding: 18px; display: flex; flex-direction: column; gap: 16px; }
+
+    label.field { display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 700; }
+    label.field span.hint { font-weight: 400; color: #666; font-size: 12px; }
+    input[type=text], input[type=email], textarea {
+      font-family: 'DM Sans', sans-serif; font-size: 15px; color: var(--forest);
+      border: 1.5px solid var(--pale); border-radius: 10px; padding: 11px 14px;
+      background: #faf8f4; outline: none; width: 100%;
+    }
+    input[type=text]:focus, input[type=email]:focus, textarea:focus { border-color: var(--pine); background: #fff; }
+    textarea { min-height: 90px; resize: vertical; line-height: 1.5; }
+
+    .two { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    @media (min-width: 640px) { .two { grid-template-columns: 1fr 1fr; } }
+
+    .rate { display: flex; flex-wrap: wrap; gap: 8px; }
+    .rate label {
+      border: 1.5px solid var(--pale); border-radius: 100px; padding: 8px 16px;
+      font-size: 14px; font-weight: 500; cursor: pointer; background: #fff; transition: all 0.15s;
+    }
+    .rate input { position: absolute; opacity: 0; pointer-events: none; }
+    .rate label:has(input:checked) { background: var(--forest); color: #fff; border-color: var(--forest); }
+    .rate label:has(input:focus-visible) { outline: 2px solid var(--pine); outline-offset: 2px; }
+
+    .intro { font-size: 14px; color: #444; line-height: 1.7; }
+
+    .group-title { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; color: var(--pine); margin-top: 4px; }
+    .options { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    @media (min-width: 700px) { .options { grid-template-columns: 1fr 1fr; } }
+
+    .opt {
+      position: relative; display: flex; gap: 12px; align-items: flex-start;
+      background: #faf8f4; border: 1.5px solid var(--tan); border-radius: 12px;
+      padding: 14px 16px; cursor: pointer; transition: border-color 0.15s, background 0.15s;
+    }
+    .opt:hover { border-color: var(--sage); }
+    .opt input { margin-top: 4px; width: 18px; height: 18px; accent-color: var(--pine); flex-shrink: 0; cursor: pointer; }
+    .opt:has(input:checked) { border-color: var(--pine); background: #eaf4ef; }
+    .opt-name { font-family: 'Fraunces', serif; font-size: 15px; font-weight: 700; line-height: 1.3; }
+    .opt-who { font-size: 12px; font-weight: 700; color: var(--pine); margin-top: 3px; }
+    .opt-blurb { font-size: 13px; color: #444; margin-top: 6px; line-height: 1.6; }
+
+    .count { font-size: 13px; color: #666; }
+
+    .check { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; cursor: pointer; }
+    .check input { margin-top: 3px; width: 18px; height: 18px; accent-color: var(--pine); flex-shrink: 0; }
+
+    .privacy { font-size: 12px; color: #666; background: #f3efe5; border-radius: 8px; padding: 10px 12px; }
+
+    .submit {
+      font-family: 'Fraunces', serif; font-size: 16px; font-weight: 700;
+      background: var(--pine); color: #fff; border: none; border-radius: 10px;
+      padding: 14px 28px; cursor: pointer; align-self: flex-start; transition: background 0.15s;
+    }
+    .submit:hover { background: var(--forest); }
+    .submit:disabled { background: var(--mist); cursor: not-allowed; }
+    .error { display: none; color: var(--red); font-size: 14px; font-weight: 700; }
+    .thanks { display: none; padding: 28px 22px; text-align: center; }
+    .thanks h3 { font-family: 'Fraunces', serif; font-size: 22px; color: var(--forest); margin-bottom: 8px; }
+    .thanks p { font-size: 15px; color: #444; }
+
+    footer { background: #0f2119; padding: 16px 24px; font-size: 12px; color: rgba(255,255,255,0.45); text-align: center; }
+    footer a { color: var(--mist); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+<header>
+  <img src="MCFPN_Logo.png" alt="MCFPN" onerror="this.style.display='none'">
+  <div class="logo-div"></div>
+  <img src="logo.png" alt="Tierra Local" onerror="this.style.display='none'">
+  <div>
+    <h1>Muskegon County Food Policy Network</h1>
+    <p>First Annual Food Policy Harvest Gathering</p>
+  </div>
+</header>
+
+<div class="hero">
+  <h2>Thanks for coming. Let's stay connected.</h2>
+  <p>Tell us how the gathering went, then pick anyone you want to connect with. It takes about three minutes.</p>
+</div>
+
+<main>
+  <div id="formWrap" style="display:flex;flex-direction:column;gap:22px;">
+
+    <!-- ABOUT YOU -->
+    <div class="card">
+      <div class="card-head">About You</div>
+      <div class="card-body">
+        <div class="two">
+          <label class="field">Your name
+            <input type="text" id="name" autocomplete="name" placeholder="First and last name">
+          </label>
+          <label class="field">Your email
+            <input type="email" id="email" autocomplete="email" placeholder="you@example.com">
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- FEEDBACK -->
+    <div class="card">
+      <div class="card-head">How Did It Go?</div>
+      <div class="card-body">
+        <div>
+          <div style="font-size:14px;font-weight:700;margin-bottom:8px;">Overall, how was the gathering?</div>
+          <div class="rate" id="rate">
+            <label><input type="radio" name="rating" value="Great"> Great</label>
+            <label><input type="radio" name="rating" value="Good"> Good</label>
+            <label><input type="radio" name="rating" value="Okay"> Okay</label>
+            <label><input type="radio" name="rating" value="Needs work"> Needs work</label>
+          </div>
+        </div>
+        <label class="field">What was most useful or interesting?
+          <span class="hint">A sentence or two is plenty.</span>
+          <textarea id="useful"></textarea>
+        </label>
+        <label class="field">What would you change or add next time?
+          <textarea id="improve"></textarea>
+        </label>
+      </div>
+    </div>
+
+    <!-- CONNECT -->
+    <div class="card">
+      <div class="card-head">Who Do You Want to Connect With?
+        <small>Check anyone you'd like an introduction to. Skip this if you just want to share feedback.</small>
+      </div>
+      <div class="card-body">
+        <p class="intro">Here is who shared at the gathering. We will introduce you by email to everyone you check.</p>
+
+        <div class="group-title">Organizations that presented</div>
+        <div class="options" id="orgOptions"></div>
+
+        <div class="group-title">Chefs and farmers</div>
+        <div class="options" id="peopleOptions"></div>
+
+        <div class="count" id="count">Nothing selected yet.</div>
+      </div>
+    </div>
+
+    <!-- EXTRAS + SUBMIT -->
+    <div class="card">
+      <div class="card-head">One Last Thing</div>
+      <div class="card-body">
+        <label class="check"><input type="checkbox" id="joinNetwork"> I'd like to hear more about getting involved with the Muskegon County Food Policy Network.</label>
+        <label class="field">Anyone we missed? Anything else?
+          <span class="hint">Optional. Tell us who else we should invite or connect you with.</span>
+          <textarea id="other"></textarea>
+        </label>
+        <div class="privacy">We only share your name and email with the people and organizations you check above. Nobody else sees them.</div>
+        <div class="error" id="error"></div>
+        <button class="submit" id="submitBtn" type="button">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card thanks" id="thanks">
+    <h3 id="thanksTitle">Thank you.</h3>
+    <p id="thanksText">We got your response.</p>
+  </div>
+</main>
+
+<footer>
+  Muskegon County Food Policy Network &nbsp;&middot;&nbsp; Supported by Tierra Local &nbsp;&middot;&nbsp;
+  <a href="mailto:kody@tierralocal.org">kody@tierralocal.org</a>
+</footer>
+
+<script>
+  // PASTE the web app URL from your Apps Script deployment here.
+  var SUBMIT_URL = 'PASTE_YOUR_WEB_APP_URL_HERE';
+
+  // EDIT THESE to change the write ups. Each one shows as a card.
+  var ORGS = [
+    {
+      name: 'Trinity Health Muskegon: McLaughlin Grows',
+      who: 'Kaitlin Hermanson, Manager of Farm Programs',
+      blurb: 'A one and a half acre urban farm in the City of Muskegon and the newest site of The Farm at Trinity Health. Grows food and cut flowers and runs community food programs and outdoor classes focused on health equity.'
+    },
+    {
+      name: 'Muskegon Intermediate School District',
+      who: 'Elissa Penczar, CTE Food Systems Coordinator',
+      blurb: 'Leads food systems career and technical education for Muskegon schools and works on healthy food across the county.'
+    },
+    {
+      name: 'MSU Extension / FARM',
+      who: 'Clarence Rudat, MSU Product Center, FARM Manager',
+      blurb: 'FARM is a food processing accelerator with space and co-manufacturing for startups and producers. Its Food Hub sells wholesale produce and value-added products to institutions across the region.'
+    },
+    {
+      name: 'Muskegon Farmers Market / Field to Fork',
+      who: 'Renae Hesselink, Manager of Kitchen 242',
+      blurb: 'Runs Kitchen 242, a commercial kitchen for food startups, and helps oversee the market. Field to Fork Exchange connects local producers with chefs, restaurants, and institutional buyers.'
+    },
+    {
+      name: 'Muskegon County Food Club Collective',
+      who: 'Jen Barangan (Access Health), Bridget Larson (The Salvation Army), Chauncy Williams (MCEC I AM Academy)',
+      blurb: 'Working to line up the county\'s charitable food system and build a food club, an affordable way for families to get nutritious food with dignity.'
+    },
+    {
+      name: 'Green Michigan',
+      who: 'Angela Fox, Director of Sustainability Strategy',
+      blurb: 'West Michigan nonprofit that helps people, businesses, and communities set and reach sustainability goals through online resources, workshops, and affordable consulting.'
+    },
+    {
+      name: 'West Michigan Agri-Cluster Coalition',
+      who: 'Annika Ga\u010Dnik, Coalition Coordinator',
+      blurb: 'Brings together farmers, food businesses, and support groups to grow the regional farm economy. Leads a USDA-funded project supporting agribusiness growth across 13 West Michigan counties.'
+    },
+    {
+      name: 'Muskegon County Food Policy Council',
+      who: 'Muskegon County Food Policy Network',
+      blurb: 'A coalition of farmers, pantries, health systems, food businesses, and neighbors working on the root causes of food system gaps in Muskegon County.'
+    },
+    {
+      name: 'City of Muskegon',
+      who: 'City staff who presented at the gathering',
+      blurb: 'Local government partner for food access, land use, and city planning that touches the food system.'
+    }
+  ];
+
+  var PEOPLE = [
+    {
+      name: 'Lynette Moore',
+      who: 'Local food partner',
+      blurb: 'Add a short description here.'
+    },
+    {
+      name: 'Sporety Mushrooms',
+      who: 'Local grower',
+      blurb: 'Add a short description here.'
+    },
+    {
+      name: 'Egeler Family Farms',
+      who: 'Eric and Allison Egeler',
+      blurb: 'Local family farm. Add a short description here.'
+    },
+    {
+      name: 'Chef Jack Page',
+      who: 'Muskegon Career Tech Center',
+      blurb: 'Chef and instructor at the Muskegon Career Tech Center.'
+    },
+    {
+      name: 'Jessica Scharmer',
+      who: 'Love In A Loaf',
+      blurb: 'Local food business owner. Add a short description here.'
+    },
+    {
+      name: 'Chef Felipe Soto',
+      who: 'Walkers',
+      blurb: 'Chef at Walkers.'
+    },
+    {
+      name: 'HW Farms',
+      who: 'Larry Williams, Manager',
+      blurb: 'Organic vegetable farm in Muskegon Heights focused on soil health and fresh food access in an area with few healthy options.'
+    }
+  ];
+
+  function render(list, containerId, prefix) {
+    var box = document.getElementById(containerId);
+    list.forEach(function(item, i) {
+      var label = document.createElement('label');
+      label.className = 'opt';
+      var cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.value = item.name;
+      cb.className = 'connect-cb';
+      cb.id = prefix + i;
+      cb.addEventListener('change', updateCount);
+      var wrap = document.createElement('div');
+      var n = document.createElement('div'); n.className = 'opt-name'; n.textContent = item.name;
+      var w = document.createElement('div'); w.className = 'opt-who'; w.textContent = item.who;
+      var b = document.createElement('div'); b.className = 'opt-blurb'; b.textContent = item.blurb;
+      wrap.appendChild(n); wrap.appendChild(w); wrap.appendChild(b);
+      label.appendChild(cb); label.appendChild(wrap);
+      box.appendChild(label);
+    });
+  }
+
+  function selected() {
+    var out = [];
+    document.querySelectorAll('.connect-cb').forEach(function(cb) { if (cb.checked) out.push(cb.value); });
+    return out;
+  }
+
+  function updateCount() {
+    var n = selected().length;
+    document.getElementById('count').textContent =
+      n === 0 ? 'Nothing selected yet.' : n + (n === 1 ? ' connection selected.' : ' connections selected.');
+  }
+
+  function showError(msg) {
+    var el = document.getElementById('error');
+    el.textContent = msg;
+    el.style.display = 'block';
+  }
+
+  render(ORGS, 'orgOptions', 'org');
+  render(PEOPLE, 'peopleOptions', 'ppl');
+
+  document.getElementById('submitBtn').addEventListener('click', function() {
+    var name = document.getElementById('name').value.trim();
+    var email = document.getElementById('email').value.trim();
+    var errEl = document.getElementById('error');
+    errEl.style.display = 'none';
+
+    if (!name) { showError('Please add your name.'); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError('Please add a valid email.'); return; }
+    if (SUBMIT_URL.indexOf('PASTE_') === 0) { showError('This form is not connected yet. Please email kody@tierralocal.org.'); return; }
+
+    var ratingEl = document.querySelector('input[name="rating"]:checked');
+    var connections = selected();
+
+    var payload = {
+      type: 'harvest_gathering_connect',
+      timestamp: new Date().toISOString(),
+      name: name,
+      email: email,
+      rating: ratingEl ? ratingEl.value : '',
+      useful: document.getElementById('useful').value.trim(),
+      improve: document.getElementById('improve').value.trim(),
+      connections: connections,
+      joinNetwork: document.getElementById('joinNetwork').checked,
+      other: document.getElementById('other').value.trim()
+    };
+
+    var btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+
+    fetch(SUBMIT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify(payload)
+    })
+    .then(function() {
+      document.getElementById('formWrap').style.display = 'none';
+      document.getElementById('thanksTitle').textContent = 'Thank you, ' + name.split(' ')[0] + '.';
+      document.getElementById('thanksText').textContent = connections.length
+        ? 'We will email you soon to make your introductions.'
+        : 'Your feedback helps us plan the next gathering.';
+      document.getElementById('thanks').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    })
+    .catch(function() {
+      showError('Something went wrong. Please try again.');
+      btn.disabled = false;
+      btn.textContent = 'Send';
+    });
+  });
+</script>
+</body>
+</html>
