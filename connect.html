@@ -52,8 +52,7 @@
   .block-label { font-family: 'Bebas Neue', sans-serif; font-size: 0.82rem; letter-spacing: 0.2em; color: #888; padding-bottom: 5px; border-bottom: 2px solid #e0e0e0; }
 
   /* DOWNLOADS */
-  .dl-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
-  @media (min-width: 640px) { .dl-grid { grid-template-columns: 1fr 1fr; } }
+  .dl-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; }
   .dl { display: block; text-decoration: none; color: var(--black); background: #e8fafd; border-left: 5px solid var(--cyan); padding: 16px 18px; transition: transform 0.1s, background 0.15s; }
   .dl:hover { background: #d4f4fa; transform: translateY(-1px); }
   .dl-name { font-weight: 700; font-size: 1.02rem; }
@@ -142,15 +141,20 @@
     <div class="tab">Downloads</div>
     <div class="body">
       <div class="dl-grid">
-        <a class="dl" href="harvest-gathering-slides.pdf" download>
+        <a class="dl" href="https://drive.google.com/file/d/1beKuCw1ZFzg1wKG-FJKxAitzcDqBwZ5B/view?usp=sharing" target="_blank" rel="noopener">
           <div class="dl-name">Harvest Gathering Slides</div>
-          <div class="dl-sub">Every presentation from the gathering (PDF)</div>
-          <div class="dl-go">DOWNLOAD</div>
+          <div class="dl-sub">Every presentation from the gathering</div>
+          <div class="dl-go">OPEN OR DOWNLOAD</div>
         </a>
-        <a class="dl" href="farm-to-family-2026-listening-tour-report.pdf" download>
+        <a class="dl" href="https://drive.google.com/file/d/1beKuCw1ZFzg1wKG-FJKxAitzcDqBwZ5B/view?usp=sharing" target="_blank" rel="noopener">
           <div class="dl-name">Farm to Family 2026 Listening Tour Report</div>
-          <div class="dl-sub">What we heard from farmers and families (PDF)</div>
-          <div class="dl-go">DOWNLOAD</div>
+          <div class="dl-sub">What we heard from farmers and families</div>
+          <div class="dl-go">OPEN OR DOWNLOAD</div>
+        </a>
+        <a class="dl" href="https://drive.google.com/drive/folders/1GVn-HEHxiXbvD-ioX0AIHGS9ZCUrYKTy" target="_blank" rel="noopener">
+          <div class="dl-name">Event Photos</div>
+          <div class="dl-sub">Pictures from the Harvest Gathering</div>
+          <div class="dl-go">VIEW PHOTOS</div>
         </a>
       </div>
     </div>
